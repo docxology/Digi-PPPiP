@@ -1,0 +1,80 @@
+# Digi-PPPiP Project Configuration
+# Self-contained: all runtime + dev dependencies are declared below, so the
+# project runs and tests standalone with `uv run` from this directory. The paper
+# is rendered separately by the docxology/template pipeline (see RENDERING.md);
+# the template's root pyproject is only involved at render time, not for the
+# standalone test/figure gates. Structurally mirrors the template_code_project
+# exemplar in docxology/template.
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digi_ppppip"
+version = "0.1.0"
+description = "DigiPPPiP: a composable, fully-tested computational companion to the Digital Partner Pen Play in Parallel framework"
+authors = [
+    {name = "DigiPPPiP Research Author", email = "digippppip@research-template.org"}
+]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "matplotlib>=3.7.0",
+    "pyyaml>=6.0",
+]
+
+[dependency-groups]
+# Dev toolchain (PEP 735). uv installs the `dev` group BY DEFAULT on
+# `uv run` / `uv sync`, so the documented `uv run pytest|ruff|mypy` commands
+# work in a fresh clone with NO extra flags and NO globally-installed tools.
+# (Declaring them only under [project.optional-dependencies] would NOT be
+# installed by default — a clone-correctness trap.)
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.6.0",
+    "mypy>=1.8.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short --strict-markers"
+
+[tool.mypy]
+mypy_path = "src"
+explicit_package_bases = true
+
+[tool.coverage.run]
+# Coverage is calculated only for the pure primitive layer (src/). The
+# rendering workflow module src/figures.py is exercised by artifact tests, not
+# the 90% gate — it contains NO numeric authority (every metric it writes is
+# produced by the tested src/metrics.py primitive). Mirrors the exemplar
+# omitting analysis.py / dashboard.py.
+source = ["src"]
+branch = true
+omit = [
+    "tests/*",
+    "*/__init__.py",
+    "*/test_*.py",
+    "src/figures.py",
+]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+precision = 2
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]
+
+[tool.uv]
+# No workspace coupling: dependencies above are self-contained for standalone
+# `uv run`. When rendered as a sidecar under docxology/template, the template
+# workspace governs the render environment.

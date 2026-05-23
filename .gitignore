@@ -1,0 +1,46 @@
+# Generated, disposable outputs (regeneratable by figures/variables scripts and
+# the docxology/template render pipeline)
+output/
+**/output/
+
+# Python caches / build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Testing / coverage / benchmarks
+.coverage
+.coverage.*
+coverage.xml
+coverage*.xml
+coverage.json
+htmlcov/
+.pytest_cache/
+.hypothesis/
+.benchmarks/
+
+# Type / lint caches
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+.DS_Store?
+._*
