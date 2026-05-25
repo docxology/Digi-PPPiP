@@ -33,6 +33,7 @@ prerender, and a successful template PDF/HTML render.
 - Use Pandoc citekeys, figure labels, equation labels, and section labels.
 - Do not hard-code numbered references; use labels for figures, equations, and sections.
 - Keep manuscript-bound scalar values on the tested path: `src/metrics.py` -> `output/data/digippppip_metrics.json` -> `src/manuscript_variables.py` -> `output/data/manuscript_variables.json`.
+- Pipeline and render callers (`src/manuscript_outputs.py`, `scripts/z_generate_manuscript_variables.py` without `--allow-draft`) pass `require_metrics=True` so result-derived tokens fail instead of falling back to `"N/A"`.
 - Add external scholarship only after verifying title, author, year, venue, and DOI or stable URL.
 - Treat web-search and Perplexity output as discovery leads only; verify DOI/title pairs through a DOI resolver, publisher page, Crossref, DataCite, PubMed, or arXiv before editing `references.bib`.
 - Add recurring evidence claims to `src/claim_ledger.py` when they become manuscript-level claims, not only to prose.

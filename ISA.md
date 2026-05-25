@@ -4,11 +4,11 @@ slug: 20260519-035901_digi-ppppip-manuscript-figures
 project: Digi-PPPiP
 effort: E4
 effort_source: context-override
-phase: verify
-progress: 153/153 (build) + 16/28 (review+publish)
+phase: complete
+progress: 153/153 (build) + 28/28 (review+publish)
 mode: interactive
 started: 2026-05-19T03:59:01Z
-updated: 2026-05-23T13:18:00Z
+updated: 2026-05-23T13:35:00Z
 ---
 
 # ISA — Digi-PPPiP
