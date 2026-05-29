@@ -84,11 +84,15 @@ EXPECTED_SECTION_TITLES = {
         "Discussion: Limits, Failure Modes, and Future Replacement",
         "discussion",
     ),
-    "16_conclusions.md": (
+    "16_casestudies.md": (
+        "Case Studies: Dementia Care as a Stress Test",
+        "casestudies",
+    ),
+    "17_conclusions.md": (
         "Conclusions: Study-Ready Without Overclaiming",
         "conclusions",
     ),
-    "17_formalisms_appendix.md": (
+    "18_formalisms_appendix.md": (
         "Appendix: Free-Energy and Active-Inference Formalisms",
         "formalisms_appendix",
     ),
@@ -176,16 +180,16 @@ def test_section_titles_labels_and_syntax_registry_are_consistent():
 
     assert headings == EXPECTED_SECTION_TITLES
     assert syntax_rows == EXPECTED_SECTION_TITLES
-    assert len(headings) == 19
+    assert len(headings) == 20
 
 
 def test_formalisms_appendix_owns_equations_and_model_figures():
-    appendix = (PROJECT_ROOT / "manuscript" / "17_formalisms_appendix.md").read_text()
+    appendix = (PROJECT_ROOT / "manuscript" / "18_formalisms_appendix.md").read_text()
     active_inference_main = (PROJECT_ROOT / "manuscript" / "04_active_inference.md").read_text()
     main_text = "\n".join(
         path.read_text()
         for path in sorted((PROJECT_ROOT / "manuscript").glob("[0-9][0-9]_*.md"))
-        if path.name < "17_formalisms_appendix.md"
+        if path.name < "18_formalisms_appendix.md"
     )
     syntax_equations = _syntax_equation_registry()
 
@@ -195,7 +199,7 @@ def test_formalisms_appendix_owns_equations_and_model_figures():
     assert "{#eq:" not in active_inference_main
     assert "@sec:formalisms_appendix" in active_inference_main
     assert {label: syntax_equations[label] for label in FORMALISM_EQUATION_LABELS} == {
-        label: "17_formalisms_appendix.md" for label in FORMALISM_EQUATION_LABELS
+        label: "18_formalisms_appendix.md" for label in FORMALISM_EQUATION_LABELS
     }
 
     specs_by_label = {spec.label.removeprefix("fig:"): spec for spec in figure_specs()}

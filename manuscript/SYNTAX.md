@@ -22,11 +22,11 @@ results are discovery leads, not bibliography authority.
 
 | Label | Equation | Source file |
 |---|---|---|
-| `{#eq:vfe}` | Gaussian variational free energy | `17_formalisms_appendix.md` |
-| `{#eq:posterior}` | Precision-weighted posterior mean | `17_formalisms_appendix.md` |
-| `{#eq:forman_ricci}` | $\mathrm{Fr}(uv)=4-\deg u-\deg v$ | `17_formalisms_appendix.md` |
-| `{#eq:shannon}` | Stroke-sequence Shannon entropy | `17_formalisms_appendix.md` |
-| `{#eq:epistemic_arc}` | Expected-information-gain arc | `17_formalisms_appendix.md` |
+| `{#eq:vfe}` | Gaussian variational free energy | `18_formalisms_appendix.md` |
+| `{#eq:posterior}` | Precision-weighted posterior mean | `18_formalisms_appendix.md` |
+| `{#eq:forman_ricci}` | $\mathrm{Fr}(uv)=4-\deg u-\deg v$ | `18_formalisms_appendix.md` |
+| `{#eq:shannon}` | Stroke-sequence Shannon entropy | `18_formalisms_appendix.md` |
+| `{#eq:epistemic_arc}` | Expected-information-gain arc | `18_formalisms_appendix.md` |
 
 ## Table label registry
 
@@ -100,7 +100,7 @@ sidecars under `output/figures/long_descriptions/`.
 | `13_research_agenda.md` | Research Agenda: From Feasibility to Evidence | `{#sec:agenda}` |
 | `14_integrative_model.md` | Integrative Model: The Human-Human DigiPPPiP Kernel | `{#sec:integrative}` |
 | `15_discussion.md` | Discussion: Limits, Failure Modes, and Future Replacement | `{#sec:discussion}` |
-| `16_casestudies.md` | Case Studies: Dementia and __ | `{#sec:casestudies}` |
+| `16_casestudies.md` | Case Studies: Dementia Care as a Stress Test | `{#sec:casestudies}` |
 | `17_conclusions.md` | Conclusions: Study-Ready Without Overclaiming | `{#sec:conclusions}` |
 | `18_formalisms_appendix.md` | Appendix: Free-Energy and Active-Inference Formalisms | `{#sec:formalisms_appendix}` |
 | `99_references.md` | References | `{#sec:references}` |
