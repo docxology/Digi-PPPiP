@@ -10,11 +10,12 @@ paper:
   date: ""
 
 authors:
-  - name: "DigiPPPiP Research Author"
-    orcid: "0000-0000-0000-0000"
-    email: "digippppip@research-template.org"
-    affiliation: "Research Template Institute"
+  - name: "Daniel Ari Friedman"
+    affiliation: "Active Inference Institute"
     corresponding: true
+  - name: "Mikhailova"
+  - name: "Sidcode"
+  - name: "Evelyn"
 
 publication:
   # Leave blank until a real archive or journal DOI is minted.
