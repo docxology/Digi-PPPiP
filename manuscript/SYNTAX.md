@@ -100,8 +100,9 @@ sidecars under `output/figures/long_descriptions/`.
 | `13_research_agenda.md` | Research Agenda: From Feasibility to Evidence | `{#sec:agenda}` |
 | `14_integrative_model.md` | Integrative Model: The Human-Human DigiPPPiP Kernel | `{#sec:integrative}` |
 | `15_discussion.md` | Discussion: Limits, Failure Modes, and Future Replacement | `{#sec:discussion}` |
-| `16_conclusions.md` | Conclusions: Study-Ready Without Overclaiming | `{#sec:conclusions}` |
-| `17_formalisms_appendix.md` | Appendix: Free-Energy and Active-Inference Formalisms | `{#sec:formalisms_appendix}` |
+| `16_casestudies.md` | Case Studies: Dementia and __ | `{#sec:casestudies}` |
+| `17_conclusions.md` | Conclusions: Study-Ready Without Overclaiming | `{#sec:conclusions}` |
+| `18_formalisms_appendix.md` | Appendix: Free-Energy and Active-Inference Formalisms | `{#sec:formalisms_appendix}` |
 | `99_references.md` | References | `{#sec:references}` |
 
 ## Variable-token contract
