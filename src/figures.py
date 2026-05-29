@@ -401,14 +401,18 @@ def generate_evolution_timeline(out_dir: Path) -> Path:
     labels = ["paper", "screen", "hybrid", "brain", "story", "place"]
     years = [2018, 2020, 2023, 2025, 2026, 2026.5]
     y = np.array([1, 1.4, 1.1, 1.7, 1.35, 1.55])
-    fig, ax = plt.subplots(figsize=(8.2, 2.8))
+    fig, ax = plt.subplots(figsize=(8.2, 3.2))
     ax.plot(years, y, color=PALETTE["blue"], linewidth=2.5)
     ax.scatter(years, y, s=120, color=list(PALETTE.values())[: len(years)], zorder=3)
     for x, yy, label in zip(years, y, labels):
-        ax.text(x, yy + 0.08, label, ha="center", va="bottom", weight="bold")
+        ax.text(x, yy + 0.07, label, ha="center", va="bottom", weight="bold")
     ax.set_yticks([])
+    ax.set_ylim(0.82, 2.05)
     ax.set_xlabel("conceptual timeline")
-    ax.set_title("DigiPPPiP extends PPPiP from paper practice to cyberphysical research program")
+    ax.set_title(
+        "DigiPPPiP extends PPPiP from paper practice to cyberphysical research program",
+        pad=12,
+    )
     ax.set_xlim(2017.6, 2027)
     return _save(
         fig,
