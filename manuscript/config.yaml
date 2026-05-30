@@ -10,12 +10,24 @@ paper:
   date: ""
 
 authors:
+  - name: "Siddhant Shrivastava"
+    affiliation: "PhD Student (AI and Robotics), Singapore University of Technology and Design, Singapore"
+    email: "siddhant_shrivastava@mymail.sutd.edu.sg"
+    orcid: "0000-0002-9688-4730"
+    corresponding: true
+  - name: "Evelyn C. Goh"
+    affiliations:
+      - "PhD Student, Biomedical Engineering, National University of Singapore College of Design and Engineering"
+      - "National University of Singapore Saw Swee Hock School of Public Health"
+    email: "e0983111@u.nus.edu"
+    orcid: "0000-0001-7182-3950"
+  - name: "Alexandra Mikhailova"
+    affiliation: "Active Inference Institute"
+    email: "alexandra@activeinference.institute"
   - name: "Daniel Ari Friedman"
     affiliation: "Active Inference Institute"
-    corresponding: true
-  - name: "Mikhailova"
-  - name: "Sidcode"
-  - name: "Evelyn"
+    email: "daniel@activeinference.institute"
+    orcid: "0000-0001-6232-9096"
 
 publication:
   # Leave blank until a real archive or journal DOI is minted.
