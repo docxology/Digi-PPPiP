@@ -1,3 +1,5 @@
+import pytest
+
 from figure_catalog import (
     FIGURE_CLAIM_STATUSES,
     FIGURE_PLACEMENTS,
@@ -5,6 +7,8 @@ from figure_catalog import (
     figure_count,
     figure_generator_names,
     figure_long_description_map,
+    figure_spec_by_filename,
+    figure_spec_by_generator,
     figure_specs,
     missing_figure_specs,
 )
@@ -75,3 +79,17 @@ def test_figure_long_description_map_has_one_sidecar_per_spec():
     assert all("Reading order:" in text for text in descriptions.values())
     assert all("Caveat:" in text for text in descriptions.values())
     assert all("Evidence boundary:" in text for text in descriptions.values())
+
+
+def test_figure_spec_by_generator_roundtrips_every_spec_and_rejects_unknown():
+    for spec in figure_specs():
+        assert figure_spec_by_generator(spec.generator) is spec
+    with pytest.raises(KeyError):
+        figure_spec_by_generator("no_such_generator")
+
+
+def test_figure_spec_by_filename_roundtrips_every_spec_and_rejects_unknown():
+    for spec in figure_specs():
+        assert figure_spec_by_filename(spec.filename) is spec
+    with pytest.raises(KeyError):
+        figure_spec_by_filename("no_such_figure.png")

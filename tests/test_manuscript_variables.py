@@ -84,3 +84,37 @@ def test_generate_manuscript_outputs_writes_governance_artifacts():
     assert result.provenance_manifest_path.exists()
     assert json.loads(result.source_ledger_path.read_text())["score"] == 1.0
     assert json.loads(result.study_audit_path.read_text())["score"] == 1.0
+
+
+def test_generate_variables_falls_back_when_config_and_metrics_absent(tmp_path):
+    # No manuscript/config.yaml and no metrics artifact: the defensive fallbacks
+    # (_load_config -> {}, _load_metrics -> {}, _config_hash -> "N/A") must hold
+    # so a bare project root still yields a usable, placeholder-free variable set.
+    variables = generate_variables(tmp_path)
+    assert variables["CONFIG_HASH"] == "N/A"
+    assert variables["CONFIG_TITLE"] == "DigiPPPiP"
+    assert variables["CONFIG_NUM_DIMENSIONS"] == "N/A"
+    assert "GENERATION_TIMESTAMP" in variables
+    assert all("{{" not in v and "}}" not in v for v in variables.values())
+
+
+def test_generate_variables_rejects_present_but_incomplete_metrics(tmp_path):
+    # Metrics artifact exists but is missing required RESULT_KEYS: render mode must
+    # raise KeyError (distinct from the FileNotFoundError raised when it is absent).
+    manuscript_dir = tmp_path / "manuscript"
+    manuscript_dir.mkdir()
+    (manuscript_dir / "config.yaml").write_text("paper:\n  title: DigiPPPiP\nexperiment: {}\n")
+    data_dir = tmp_path / "output" / "data"
+    data_dir.mkdir(parents=True)
+    (data_dir / "digippppip_metrics.json").write_text("{}")
+    with pytest.raises(KeyError):
+        generate_variables(tmp_path, require_metrics=True)
+
+
+def test_stringify_normalizes_none_list_and_float():
+    from manuscript_variables import _stringify
+
+    assert _stringify(None) == "N/A"
+    assert _stringify(["a", "b"]) == "a, b"
+    assert _stringify(1.5) == "1.5"
+    assert _stringify(3) == "3"

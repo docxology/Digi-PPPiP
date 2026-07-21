@@ -5,10 +5,10 @@ project: Digi-PPPiP
 effort: E4
 effort_source: context-override
 phase: complete
-progress: 153/153 (build) + 28/28 (review+publish)
+progress: 153/153 (build) + 28/28 (review+publish) + 12/12 (deep-review 2026-07-20)
 mode: interactive
 started: 2026-05-19T03:59:01Z
-updated: 2026-05-23T13:35:00Z
+updated: 2026-07-20T00:00:00Z
 ---
 
 # ISA — Digi-PPPiP
@@ -361,6 +361,25 @@ Anti-criteria (must NOT happen):
 - [x] ISC-R26: Anti: any OTHER private project's files (an unrelated sibling project, etc.) are included in the export. → leak scan clean.
 - [x] ISC-R27: Anti: a machine-specific absolute local path is shipped as a required string in tracked code or docs. → test no longer requires it; clone grep empty.
 
+### Group S — Deep-review pass & coverage hardening (task 3, 2026-07-20)
+
+> New task: deep review of the freshly-cloned repo, confirm it renders correctly
+> end-to-end via the `docxology/template` sidecar, and make scoped improvements.
+> All prior gates re-run on disk (not inherited from ISA history per R8).
+
+- [x] ISC-S1: full `pytest --cov=src --cov-branch` green on disk this session (exit 0, ≥90%).
+- [x] ISC-S2: `ruff check src tests scripts` and `mypy src tests scripts` clean this session.
+- [x] ISC-S3: figures regenerate (35 PNGs == 35 registry entries) and variables hydrate (0 unresolved).
+- [x] ISC-S4: template sidecar prerender passes (no render-blocking pitfalls / undefined citations).
+- [x] ISC-S5: template render produces `digi-pppip_combined.pdf` on disk (56 pp, 9.3 MB) via `scripts/03_render_pdf.py`.
+- [x] ISC-S6: rendered PDF is macro-clean — 0 leaked `{{TOKEN}}`, 0 `??` unresolved refs, 0 raw `\cite`/`\ref`/`[@` (full-text scan).
+- [x] ISC-S7: formalisms-appendix pages (44–47) raster-verified — eqs 1–4, Forman–Ricci, Shannon entropy typeset correctly (not pdftotext alone).
+- [x] ISC-S8: `figure_catalog.figure_spec_by_filename` / `figure_spec_by_generator` covered by roundtrip+reject tests (module 80%→100%).
+- [x] ISC-S9: `manuscript_variables` defensive fallback branches covered — bare-root fallbacks, incomplete-metrics KeyError, `_stringify` None/list/float (module 83.56%→100%).
+- [x] ISC-S10: negative-control — total coverage moved 94.31%→95.44%, test count 111→116 (additions non-vacuous).
+- [x] ISC-S11: doc baseline snapshots (README/RENDERING/AGENTS) trued up from stale `111 tests, 94.19%` to the on-disk `116 tests, 95.44%`.
+- [x] ISC-S12: Anti: no source/behavior change — additions are test files + doc snapshots only; `src/` primitives untouched.
+
 ## Test Strategy
 
 | ISC range | type | check | threshold | tool |
@@ -450,6 +469,28 @@ Anti-criteria (must NOT happen):
   invoked; its adversarial function is served by (1) Forge cross-vendor audit of the export
   pre-push, (2) the FirstPrinciples challenge of the sidecar-publish requirement, and (3) the
   fresh-clone-and-run clone-correctness gate. Soft delegation floor (≥2) met by Forge + Cato.
+
+- 2026-07-20T00:00:00Z — Task 3 (deep review + render-verify + scoped hardening,
+  E3). All authoritative gates re-run on disk this session (R8, not inherited from
+  ISA history): pytest 111→116 passed, coverage 94.31%→95.44% (both figures above
+  the prior recorded 94.19% — the delta is the two new coverage-closing test sets,
+  not platform drift; the baseline was independently 94.31% before additions), ruff
+  clean, mypy clean (49 files), 35 PNGs == 35 registry entries, variables hydrated
+  0-unresolved. Sidecar render via `scripts/03_render_pdf.py --project working/digi-pppip`
+  produced `digi-pppip_combined.pdf` (56 pp, 9.3 MB); full-text scan found 0 leaked
+  tokens / 0 `??` / 0 raw LaTeX macros, and the formalisms appendix (pp. 44–47) was
+  raster-read (not pdftotext) to confirm eqs 1–4 + Forman–Ricci + Shannon entropy
+  typeset correctly (memory: theorem-block-math-pdftotext-hides). The project was
+  already in excellent shape; the only scoped improvements were closing the two
+  lowest-coverage modules (`figure_catalog` 80→100%, `manuscript_variables`
+  83.56→100%) with real no-mocks tests and truing the stale doc snapshot.
+- 2026-07-20T00:00:00Z — Delegation show-my-math (E3 soft floor ≥2 relaxed): the
+  review core is primary-agent raster inspection of the rendered PDF (inherently
+  non-delegable), and the additions are ~5 trivial pure-function no-mocks tests
+  where a Forge/Anvil producer adds noise, not signal. No subagent spawned; primary
+  performed all writes (repo policy: subagent Edit/Write denied). Confidentiality
+  boundary held — ISC-137/R23 unchanged: no stage/commit/push without explicit user
+  approval; this clone lives local-only under the template `projects/working/` sidecar.
 
 ## Changelog
 

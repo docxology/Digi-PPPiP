@@ -14,9 +14,9 @@ which this project plugs into as a **sidecar** (place it at
 `template/projects/Digi-PPPiP`, then run the template's render). Full,
 copy-paste sidecar instructions are in **[`RENDERING.md`](RENDERING.md)**.
 
-Validation baseline (re-verified 2026-05-23, standalone): **35 registered
-figures, 111 tests, ≥94% line+branch coverage** on the non-omitted `src/`
-primitives (94.19% with the pinned dev toolchain), with a green template
+Validation baseline (re-verified 2026-07-20, standalone): **35 registered
+figures, 116 tests, ≥95% line+branch coverage** on the non-omitted `src/`
+primitives (95.44% with the pinned dev toolchain), with a green template
 prerender and a successful template PDF/HTML render.
 
 > All computational illustrations are **deterministic conceptual models**, not
