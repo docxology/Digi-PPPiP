@@ -48,6 +48,16 @@ manuscript may claim regardless of anything listed here.
    - Suggested fix: acceptable as-is (integration test guards it); optionally
      generate SYNTAX.md rows from the typed catalogs to remove the duplication.
 
+3. **Four BibTeX citekeys don't match their first author / year** (reviewer
+   noted `luo2022cooperative`→Czeszumski, `stephens2024narrativeinfo`→Schulz,
+   `bolis2023secondperson` year is 2024, `digital2025relationship`→Kernová).
+   - Why it matters: key→author intuition breaks; citation-tool reconciliation
+     is harder. Cosmetic; keys are internally consistent and all resolve.
+   - Fix: rename keys + update every `[@…]` in manuscript and src/ reference
+     lists (evidence.py, claim_ledger.py, systems_governance.py, study_readiness.py,
+     figure_methods.py). Deliberately deferred: high churn across many files for
+     cosmetic benefit; do as a dedicated commit if desired.
+
 ### Minor
 
 1. **`src/evidence.py` `is_acyclic()` is only exercised through the acyclic
@@ -68,7 +78,16 @@ manuscript may claim regardless of anything listed here.
    - Why it matters: a refactor of `index.js` could break relay behaviour with
      no gate catching it.
    - Suggested fix: add a minimal Node test (e.g. `node:test` + socket.io-client)
-     asserting connect/broadcast/disconnect, plus payload-cap and CORS behaviour.
+     asserting connect/broadcast/disconnect, plus payload-cap, rate-limit, and
+     CORS behaviour.
+4. **`pyproject.toml` version `0.1.0` vs `manuscript/config.yaml` `paper.version:
+   "1.0"`** — reviewer flagged the mismatch. These are intentionally separate
+   versioning domains (Python package version vs manuscript draft version), so
+   no change is warranted; noted here so the distinction is explicit.
+5. **`mikhailova2018pppip` title "PPPiParadigm"** — reviewer flagged as a typo.
+   Verified against Crossref DOI `10.3390/arts7030039`: the published title IS
+   "A New PPPiParadigm for Relationship Improvement". **No change** — the bib
+   entry is correct as published.
 
 ## Completed / Closed (from the 2026-07-31 red-team pass)
 
@@ -82,7 +101,10 @@ manuscript may claim regardless of anything listed here.
   `"*"`; per-event payload size cap (64 KiB) on `draw_path`/`undo_stroke`/
   `cursor_move`; connection cap (`MAX_CONNECTIONS`) with a `server_full` event;
   connection counter replaced with a Set (cannot drift negative on reconnect);
-  graceful SIGTERM/SIGINT shutdown added.
+  per-socket token-bucket rate limit (`RATE_LIMIT`, default 240 events/sec) to
+  throttle broadcast amplification; `maxHttpBufferSize` pinned to 64 KiB;
+  graceful SIGTERM/SIGINT shutdown added. `web-app/server/README.md` documents
+  the tuning knobs.
 - **`src/metrics.py`**: `METRIC_SPECS["NUM_FIGURES"]` corrected from `"figures"`
   (a coverage-omitted module) to `"figure_catalog"` (the real covered source).
   `compute_all_metrics` now validates config (non-negative seed, positive

@@ -31,4 +31,14 @@ node index.js
 ### Production Deployment
 The server binds to port `3001` by default, but it will respect the `PORT` environment variable if provided by a cloud hosting provider (e.g., Render, Railway, or Heroku). 
 
-Make sure your server instance supports WebSockets. If deploying to production, ensure CORS policies within `index.js` are updated to strictly match the domain hosting your Vite client.
+The following environment variables tune the server's hardening knobs:
+
+- `CORS_ORIGIN` — comma-separated allowed origins (default: `http://localhost:3000`). Set this to the explicit origin hosting your Vite client before any non-local deployment.
+- `MAX_CONNECTIONS` — hard cap on concurrent sockets (default: `100`). When exceeded, new clients receive a `server_full` event and are disconnected.
+- `RATE_LIMIT` — per-socket broadcast allowance per second via a token bucket (default: `240` events/sec). `RATE_LIMIT_ENABLED=false` disables throttling for trusted/private networks.
+- `PORT` — listening port (default: `3001`).
+
+The server accepts no drawing data by default: `draw_path`, `undo_stroke`, and
+`cursor_move` payloads are size-capped at 64 KiB, and Socket.IO's
+`maxHttpBufferSize` is pinned to the same 64 KiB to bound per-frame memory.
+
