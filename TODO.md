@@ -48,25 +48,21 @@ manuscript may claim regardless of anything listed here.
    - Suggested fix: acceptable as-is (integration test guards it); optionally
      generate SYNTAX.md rows from the typed catalogs to remove the duplication.
 
-3. **Four BibTeX citekeys don't match their first author / year** (reviewer
-   noted `luo2022cooperative`→Czeszumski, `stephens2024narrativeinfo`→Schulz,
-   `bolis2023secondperson` year is 2024, `digital2025relationship`→Kernová).
-   - Why it matters: key→author intuition breaks; citation-tool reconciliation
-     is harder. Cosmetic; keys are internally consistent and all resolve.
-   - Fix: rename keys + update every `[@…]` in manuscript and src/ reference
-     lists (evidence.py, claim_ledger.py, systems_governance.py, study_readiness.py,
-     figure_methods.py). Deliberately deferred: high churn across many files for
-     cosmetic benefit; do as a dedicated commit if desired.
+3. **Four BibTeX citekeys don't match their first author / year** — **RESOLVED
+   2026-07-31.** Renamed across manuscript + src/ + tests:
+   - `luo2022cooperative` → `czeszumski2022cooperative` (first author Czeszumski)
+   - `stephens2024narrativeinfo` → `schulz2024narrativeinfo` (first author Schulz)
+   - `bolis2023secondperson` → `bolis2024secondperson` (entry year is 2024)
+   - `digital2025relationship` → `kernova2025relationship` (first author Kernová)
+   Verified: zero old keys remain; every in-prose citation still resolves to a
+   bib entry.
 
 ### Minor
 
-1. **`src/evidence.py` `is_acyclic()` is only exercised through the acyclic
-   construction, never with a cycle** — a regression that introduces a cycle
-   would be caught by `domain_dimension_edges` (edge validation) but not by the
-   cycle check itself.
-   - Suggested fix: add a unit test that feeds a synthetic cyclic edge list to
-     confirm `is_acyclic()` returns False (it currently reads a module-level
-     constant, so this needs a small refactor to accept an edge argument).
+1. **`src/evidence.py` `is_acyclic()` cycle-detection** — **RESOLVED 2026-07-31.**
+   `is_acyclic()` now accepts an explicit `edges` argument, and a new
+   `test_is_acyclic_detects_a_cycle` verifies a synthetic two-node cycle returns
+   False while the real edge layer stays acyclic.
 2. **`src/manuscript_variables.py` `_stringify` uses `%g` float formatting** —
    lossy for very small/large manuscript-bound scalars.
    - Why it matters: manuscript prose shows `0.0001` where `0.000100` was
@@ -138,5 +134,15 @@ manuscript may claim regardless of anything listed here.
   test count 116 → **126**. Every src/ module is now ≥ 90% individually
   (was: `figure_artifact_audit` 85.71%, `hyperscanning` 88.51%,
   `neuroergonomics` 87.76%, `session_events` 88.76%).
-- **Gates green**: 126 passed, 0 failed; ruff clean; mypy clean; figure + token
+- **Citekey renames (S1)**: four BibTeX keys aligned with first-author/year
+  across manuscript + src/ + tests (`luo2022cooperative`→`czeszumski2022cooperative`,
+  `stephens2024narrativeinfo`→`schulz2024narrativeinfo`,
+  `bolis2023secondperson`→`bolis2024secondperson`,
+  `digital2025relationship`→`kernova2025relationship`); zero old keys remain,
+  every citation resolves. 127 tests now pass.
+- **`is_acyclic` cycle-detection**: `evidence.is_acyclic()` accepts an explicit
+  `edges` list; new test proves a synthetic cycle is detected while the real
+  edge layer stays acyclic. `figure_method_counts` test strengthened with pinned
+  exact counts so it is no longer tautological.
+- **Gates green**: 127 passed, 0 failed; ruff clean; mypy clean; figure + token
   regeneration scripts run clean.

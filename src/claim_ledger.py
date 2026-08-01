@@ -64,7 +64,7 @@ CLAIM_LEDGER: tuple[ClaimRecord, ...] = (
             "dacosta2020discrete",
             "friston2023simpler",
             "vasil2020communication",
-            "bolis2023secondperson",
+            "bolis2024secondperson",
         ),
         "conceptual",
         "parameter fitting, model comparison, and failed-baseline checks against observed sessions",

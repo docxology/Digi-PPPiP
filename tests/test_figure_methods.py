@@ -138,13 +138,21 @@ def test_figure_method_source_families_are_mapped_to_citekeys():
 
 def test_figure_method_counts_are_single_source():
     counts = figure_method_counts()
+    # Pin exact expected counts as an independent ground truth so the test is
+    # not merely tautological (i.e. it does not just echo len() of the same
+    # accessors it asserts against).
     assert counts == {
-        "generation_stages": len(figure_generation_stages()),
-        "audit_criteria": len(figure_audit_criteria()),
-        "visual_roles": len(visual_encoding_channels()),
-        "aesthetic_roles": len(aesthetic_grammar_rules()),
-        "composition_archetypes": len(composition_archetypes()),
-        "contrast_requirements": len(contrast_requirements()),
-        "method_source_families": len(figure_method_source_families()),
-        "caption_contract_items": len(caption_contract_items()),
+        "generation_stages": 9,
+        "audit_criteria": 13,
+        "visual_roles": 7,
+        "aesthetic_roles": 7,
+        "composition_archetypes": 5,
+        "contrast_requirements": 5,
+        "method_source_families": 5,
+        "caption_contract_items": 8,
     }
+    # Cross-check against the live accessors (defends a mismatched rename).
+    assert counts["generation_stages"] == len(figure_generation_stages())
+    assert counts["audit_criteria"] == len(figure_audit_criteria())
+    assert counts["visual_roles"] == len(visual_encoding_channels())
+    assert counts["caption_contract_items"] == len(caption_contract_items())

@@ -45,3 +45,11 @@ def test_adjacency_is_square_symmetric():
     matrix = adjacency()
     assert matrix.shape[0] == matrix.shape[1]
     np.testing.assert_allclose(matrix, matrix.T)
+
+
+def test_is_acyclic_detects_a_cycle():
+    # A cycle among two real nodes must be detected as cyclic.
+    cyclic = [("art_therapy", "accessibility"), ("accessibility", "art_therapy")]
+    assert is_acyclic(cyclic) is False
+    # The real module edge layer remains acyclic.
+    assert is_acyclic() is True

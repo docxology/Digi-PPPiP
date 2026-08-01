@@ -13,7 +13,7 @@ import numpy as np
 # Original PPPiP evidence domains and their citation keys.
 DOMAINS: dict[str, list[str]] = {
     "art_therapy": ["mikhailova2018pppip"],
-    "neural_synchrony": ["czeszumski2020hyperscanning", "luo2022cooperative", "azhari2025online"],
+    "neural_synchrony": ["czeszumski2020hyperscanning", "czeszumski2022cooperative", "azhari2025online"],
     "partner_improvisation": ["mikhailova2018pppip"],
     "controlled_novelty": ["mikhailova2018pppip"],
     "free_energy_principle": ["friston2010fep", "friston2023simpler"],
@@ -52,7 +52,7 @@ DIMENSIONS: dict[str, list[str]] = {
         "vasil2020communication",
         "schilbach2013secondperson",
         "redcay2019secondperson",
-        "bolis2023secondperson",
+        "bolis2024secondperson",
         "bouizegarene2024narrative",
     ],
     "neuroergonomics": [
@@ -106,7 +106,7 @@ DIMENSIONS: dict[str, list[str]] = {
         "wilson2024dyadichealth",
         "benmessaoud2023dyadicmodule",
         "blair2024remoteddp",
-        "digital2025relationship",
+        "kernova2025relationship",
         "hassenzahl2012love",
         "neustaedter2012intimacy",
         "vetere2005mediating",
@@ -154,7 +154,7 @@ DIMENSIONS: dict[str, list[str]] = {
         "forman2003bochner",
         "weber2016forman",
     ],
-    "narrative_information": ["stephens2024narrativeinfo", "shannon1948mathematical"],
+    "narrative_information": ["schulz2024narrativeinfo", "shannon1948mathematical"],
     "figure_methods": [
         "wilkinson2005grammar",
         "cleveland1984graphical",
@@ -245,18 +245,23 @@ def citation_keys() -> set[str]:
     return keys
 
 
-def is_acyclic() -> bool:
-    """True iff the domain→dimension edge layer is acyclic (Kahn's algorithm)."""
+def is_acyclic(edges: list[tuple[str, str]] | None = None) -> bool:
+    """True iff the domain→dimension edge layer is acyclic (Kahn's algorithm).
+
+    ``edges`` defaults to the module-level ``_EDGES`` layer; pass an explicit
+    edge list to test arbitrary (including cyclic) graphs.
+    """
+    edge_list = _EDGES if edges is None else edges
     nodes = list(DOMAINS) + list(DIMENSIONS)
     indeg = {n: 0 for n in nodes}
-    for _, dst in _EDGES:
+    for _, dst in edge_list:
         indeg[dst] += 1
     queue = [n for n in nodes if indeg[n] == 0]
     visited = 0
     while queue:
         n = queue.pop()
         visited += 1
-        for src, dst in _EDGES:
+        for src, dst in edge_list:
             if src == n:
                 indeg[dst] -= 1
                 if indeg[dst] == 0:

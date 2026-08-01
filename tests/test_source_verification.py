@@ -99,7 +99,7 @@ def test_source_verification_prioritizes_recent_preprint_ai_digital_health_and_g
 
     assert OFFICIAL_SOURCE_KEYS <= prioritized
     assert {"azhari2025online", "won2026venus", "hinrichs2025geometric"} <= prioritized
-    assert {"digital2025relationship", "reitere2024telehealth", "canelas2025placemaking"} <= prioritized
+    assert {"kernova2025relationship", "reitere2024telehealth", "canelas2025placemaking"} <= prioritized
     assert NEW_SCHOLARSHIP_KEYS <= prioritized
     assert {"pendse2024consentforward", "lebaron2025remoteviz", "hancock2020aimediatedcommunication"} <= prioritized
     assert {"hhs2025cfr46", "wma2024helsinki", "nist2023airmf", "europeanunion2024aiact"} <= prioritized
