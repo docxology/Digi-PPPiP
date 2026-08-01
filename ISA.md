@@ -5,10 +5,10 @@ project: Digi-PPPiP
 effort: E4
 effort_source: context-override
 phase: complete
-progress: 153/153 (build) + 28/28 (review+publish) + 12/12 (deep-review 2026-07-20)
+progress: 153/153 (build) + 28/28 (review+publish) + 12/12 (deep-review 2026-07-20) + 22/22 (red-team deep-review 2026-07-31)
 mode: interactive
 started: 2026-05-19T03:59:01Z
-updated: 2026-07-20T00:00:00Z
+updated: 2026-07-31T00:00:00Z
 ---
 
 # ISA — Digi-PPPiP

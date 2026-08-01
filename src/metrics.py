@@ -82,7 +82,7 @@ METRIC_SPECS: dict[str, str] = {
     "NUM_FIGURE_METHOD_SOURCE_FAMILIES": "figure_methods",
     "NUM_CAPTION_CONTRACT_ITEMS": "figure_methods",
     "FIGURE_METHOD_SCORE": "figure_methods",
-    "NUM_FIGURES": "figures",
+    "NUM_FIGURES": "figure_catalog",
 }
 
 NUM_FIGURES = figure_count()
@@ -113,6 +113,13 @@ def compute_all_metrics(config: dict[str, Any] | None = None) -> dict[str, float
     if config:
         cfg.update({k: v for k, v in config.items() if k in cfg})
     seed = int(cfg["random_seed"])
+    if seed < 0:
+        raise ValueError("random_seed must be non-negative")
+    for key, minimum in (("dyadic_steps", 1), ("session_steps", 1), ("network_nodes", 2)):
+        if int(cfg[key]) < minimum:
+            raise ValueError(f"{key} must be >= {minimum}")
+    if float(cfg["likelihood_precision"]) <= 0 or float(cfg["prior_precision"]) <= 0:
+        raise ValueError("precisions must be positive")
 
     # --- taxonomy ---
     modalities = build_taxonomy()

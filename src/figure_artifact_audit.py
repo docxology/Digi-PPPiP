@@ -54,8 +54,10 @@ def _figure_path(figure_dir: Path, png: str) -> Path:
 
 def _sidecar_path(figure_dir: Path, sidecar: str) -> Path:
     path = Path(sidecar)
+    # Reject absolute paths: sidecar references must stay inside the figure
+    # output tree to avoid silently reading/writing outside the project.
     if path.is_absolute():
-        return path
+        raise ValueError(f"sidecar path must be relative, got {sidecar!r}")
     if path.parts[:2] == ("output", "figures"):
         return figure_dir / Path(*path.parts[2:])
     return figure_dir / path.name

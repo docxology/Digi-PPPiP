@@ -64,17 +64,24 @@ def session_duration(events: list[SessionEvent]) -> float:
     return float(ordered[-1].timestamp_s - ordered[0].timestamp_s)
 
 
-def turn_balance(events: list[SessionEvent]) -> float:
+def turn_balance(events: list[SessionEvent], partner_actors: set[str] | None = None) -> float:
     """Return a dyadic balance score in ``[0, 1]``.
 
     The value is one when the two most active actors contribute equally and
-    approaches zero as one actor dominates. Extra actors, such as an AI prompt
-    source, are ignored for the dyadic balance denominator.
+    approaches zero as one actor dominates. Pass ``partner_actors`` (the two
+    human dyad members) so that extra actors — an AI prompt source, a
+    facilitator, a third cue — are excluded from the balance denominator, as
+    the module documents. When ``partner_actors`` is omitted, the top two most
+    active actors overall are used (legacy behavior).
     """
     ordered = validate_events(events)
     counts: dict[str, int] = {}
     for event in ordered:
+        if partner_actors is not None and event.actor not in partner_actors:
+            continue
         counts[event.actor] = counts.get(event.actor, 0) + 1
+    if partner_actors is not None:
+        counts = {actor: counts.get(actor, 0) for actor in partner_actors}
     top_two = sorted(counts.values(), reverse=True)[:2]
     if len(top_two) < 2:
         return 0.0

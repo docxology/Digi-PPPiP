@@ -1,4 +1,17 @@
-"""Executable source-verification ledger for DigiPPPiP governance."""
+"""Executable source-verification ledger for DigiPPPiP governance.
+
+This module builds a machine-checked ledger of the locators (DOI/stable URL),
+bibliographic metadata, tiers, and recheck triggers for every governed citekey.
+
+Transparency note: ``locator_status`` reflects that a DOI or stable URL was
+derived from the local BibTeX entry (or an authoritative ``url`` field), NOT
+that an independent external resolver was queried at generation time. External
+DOI/URL resolution and per-source human verification are a separate, manual,
+reviewed step that AGENTS.md requires before new scholarship is added. As such
+the ledger's ``metadata_source`` is always ``local_bibtex`` and ``locator_status``
+is ``local_derived`` — the value intentionally avoids implying live network
+validation that this deterministic, offline pipeline does not perform.
+"""
 
 from __future__ import annotations
 
@@ -89,17 +102,70 @@ class SourceVerificationSummary:
 
 
 def parse_bib_entries(bib_text: str) -> dict[str, str]:
-    """Return BibTeX entries keyed by citekey."""
+    """Return BibTeX entries keyed by citekey (brace-aware).
+
+    Entries are split on ``@type{`` markers at column zero with brace-depth
+    tracking, so a ``note``/``abstract`` field containing a real ``@`` or an
+    entry containing nested braces cannot truncate the entry.
+    """
     entries: dict[str, str] = {}
-    for match in re.finditer(r"@\w+\{([^,\s]+).*?(?=\n@|\Z)", bib_text, flags=re.DOTALL):
-        entries[match.group(1)] = match.group(0).strip()
+    start = None
+    depth = 0
+    for index, char in enumerate(bib_text):
+        if start is None:
+            if char == "@":
+                # Only treat an '@' at line start (with optional preceding
+                # whitespace) as a new entry marker.
+                line_start = bib_text.rfind("\n", 0, index) + 1
+                if bib_text[line_start:index].strip() == "":
+                    start = index
+            continue
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                block = bib_text[start : index + 1]
+                key = _entry_key(block)
+                if key:
+                    entries[key] = block
+                start = None
+                depth = 0
     return entries
 
 
-def _field(entry: str, name: str) -> str:
-    pattern = rf"^\s*{re.escape(name)}\s*=\s*[\{{\"](.+?)[\}}\"],?\s*$"
-    match = re.search(pattern, entry, flags=re.MULTILINE)
+def _entry_key(entry: str) -> str:
+    """Return the citekey for a single BibTeX entry block, or ``""`` if absent."""
+    match = re.match(r"@\w+\s*\{\s*([^,}]+),", entry, flags=re.DOTALL)
     return match.group(1).strip() if match else ""
+
+
+def _field(entry: str, name: str) -> str:
+    """Return the value of BibTeX field ``name`` from ``entry`` (brace-aware).
+
+    Returns an empty string if the field is absent. Nested braces inside the
+    value are handled, so ``author = {Smith, {M}. A}`` extracts fully.
+    """
+    header = re.compile(r"^\s*" + re.escape(name) + r"\s*=\s*(\{|\")", flags=re.MULTILINE)
+    marker = header.search(entry)
+    if not marker:
+        return ""
+    opener = marker.group(1)
+    value_start = marker.end()
+    if opener == '"':
+        close = entry.find('"', value_start)
+        return entry[value_start:close].strip() if close != -1 else ""
+    # Brace-delimited: scan to the matching close brace (brace-aware).
+    depth = 1
+    for index in range(value_start, len(entry)):
+        char = entry[index]
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return entry[value_start:index].strip()
+    return ""
 
 
 def _first_field(entry: str, names: tuple[str, ...]) -> str:
@@ -264,7 +330,7 @@ def build_source_verification_records(bib_text: str) -> tuple[SourceVerification
                 citekey=citekey,
                 locator=locator,
                 verification_url=locator,
-                locator_status="matched",
+                locator_status="local_derived",
                 title=_field(entry, "title"),
                 author=_author_or_editor(entry),
                 year=_year_text(entry),
@@ -343,8 +409,8 @@ def source_verification_audit(
         ),
         SourceVerificationCheck(
             "locator_match",
-            "records declare DOI or URL locator match status",
-            all(record.locator_status == "matched" and record.locator == record.verification_url for record in relevant),
+            "records declare a locally-derived DOI or URL locator status",
+            all(record.locator_status == "local_derived" and record.locator == record.verification_url for record in relevant),
             "locator matches verification_url",
         ),
         SourceVerificationCheck(

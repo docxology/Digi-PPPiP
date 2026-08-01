@@ -55,4 +55,36 @@ def test_turn_balance_and_invalid_events():
     with pytest.raises(ValueError):
         validate_events([SessionEvent(-1.0, "a", "stroke", "stylus")])
     with pytest.raises(ValueError):
+        validate_events([SessionEvent(0.0, "  ", "stroke", "stylus")])
+    with pytest.raises(ValueError):
+        validate_events([SessionEvent(0.0, "a", "", "stylus")])
+    with pytest.raises(ValueError):
+        validate_events([SessionEvent(0.0, "a", "stroke", "  ")])
+    with pytest.raises(ValueError):
         classify_temporal_mode(events, synchronous_threshold_s=10, asynchronous_threshold_s=5)
+
+
+def test_turn_balance_ignores_non_partner_actors_when_specified():
+    events = [
+        SessionEvent(0.0, "partner_a", "stroke", "stylus"),
+        SessionEvent(1.0, "partner_a", "stroke", "stylus"),
+        SessionEvent(2.0, "ai_assist", "suggestion", "interface"),
+        SessionEvent(3.0, "ai_assist", "suggestion", "interface"),
+        SessionEvent(4.0, "ai_assist", "suggestion", "interface"),
+    ]
+    # Without partner_actors the AI dominates and balance is skewed.
+    assert turn_balance(events) == 2.0 / 3.0
+    # With partner_actors restricted to the human dyad, the AI is ignored and a
+    # single human actor yields 0.0 (fewer than two dyad members present).
+    assert turn_balance(events, partner_actors={"partner_a", "partner_b"}) == 0.0
+
+
+def test_turn_balance_with_partner_actors_balances_human_dyad():
+    events = [
+        SessionEvent(0.0, "partner_a", "stroke", "stylus"),
+        SessionEvent(1.0, "partner_a", "stroke", "stylus"),
+        SessionEvent(2.0, "partner_b", "stroke", "stylus"),
+        SessionEvent(3.0, "ai_assist", "suggestion", "interface"),
+        SessionEvent(4.0, "ai_assist", "suggestion", "interface"),
+    ]
+    assert turn_balance(events, partner_actors={"partner_a", "partner_b"}) == 0.5

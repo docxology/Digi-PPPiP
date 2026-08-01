@@ -168,3 +168,60 @@ def test_figure_artifact_audit_fails_missing_readability_metadata(tmp_path):
     assert checks["readability_metadata"] is False
     assert checks["long_description_reading_guidance"] is False
     assert audit.score < 1.0
+
+
+def test_sidecar_path_rejects_absolute_paths():
+    from pathlib import Path
+
+    import pytest
+
+    from figure_artifact_audit import _sidecar_path
+
+    with pytest.raises(ValueError):
+        _sidecar_path(Path("output/figures"), "/etc/passwd")
+    # Relative output/figures paths are still accepted.
+    assert _sidecar_path(Path("output/figures"), "output/figures/long_descriptions/demo.md").name == "demo.md"
+
+
+def test_png_parsing_edge_branches(tmp_path):
+    import struct
+    import zlib
+
+    from figure_artifact_audit import _png_dimensions, _png_nonblank
+
+    def make_png(ihdr: bytes, idat: bytes) -> bytes:
+        def chunk(kind: bytes, payload: bytes) -> bytes:
+            crc = zlib.crc32(kind + payload) & 0xFFFFFFFF
+            return struct.pack("!I", len(payload)) + kind + payload + struct.pack("!I", crc)
+
+        return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", idat) + chunk(b"IEND", b"")
+
+    def write(name: str, data: bytes):
+        path = tmp_path / name
+        path.write_bytes(data)
+        return path
+
+    ihdr = struct.pack("!IIBBBBB", 2, 2, 8, 6, 0, 0, 0)
+    good_idat = zlib.compress(b"\x00\xff\x00\x00\xff" * 2)
+
+    # Valid PNG parses to dimensions and nonblank.
+    assert _png_dimensions(write("good.png", make_png(ihdr, good_idat))) == (2, 2)
+    assert _png_nonblank(write("good2.png", make_png(ihdr, good_idat))) is True
+
+    # Missing file / truncated header -> None / False.
+    assert _png_dimensions(tmp_path / "nope.png") is None
+    assert _png_nonblank(write("trunc.png", b"\x89PNG\r\n\x1a\n\x00\x00")) is False
+
+    # Non-8-bit depth and unknown color type -> treated as nonblank (True).
+    deep = struct.pack("!IIBBBBB", 2, 2, 16, 6, 0, 0, 0)
+    assert _png_nonblank(write("deep.png", make_png(deep, good_idat))) is True
+    odd_color = struct.pack("!IIBBBBB", 2, 2, 8, 7, 0, 0, 0)
+    assert _png_nonblank(write("odd.png", make_png(odd_color, good_idat))) is True
+
+    # Missing IDAT -> not nonblank; corrupt zlib -> not nonblank.
+    assert _png_nonblank(write("noidat.png", make_png(ihdr, b""))) is False
+    assert _png_nonblank(write("corrupt.png", make_png(ihdr, b"not-zlib-data"))) is False
+
+    # All-blank pixels -> not nonblank.
+    blank_idat = zlib.compress(b"\x00\x00\x00\x00\x00" * 2)
+    assert _png_nonblank(write("blank.png", make_png(ihdr, blank_idat))) is False

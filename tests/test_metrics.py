@@ -1,6 +1,8 @@
 from figure_catalog import figure_count
 from metrics import compute_all_metrics
 
+import pytest
+
 
 def test_metrics_pin_closed_form_counts_and_directional_controls():
     metrics = compute_all_metrics()
@@ -42,3 +44,22 @@ def test_metrics_pin_closed_form_counts_and_directional_controls():
 def test_metrics_are_deterministic_for_fixed_config():
     config = {"random_seed": 2, "session_steps": 40, "dyadic_steps": 20}
     assert compute_all_metrics(config) == compute_all_metrics(config)
+
+
+def test_metrics_reject_invalid_config_values():
+    with pytest.raises(ValueError):
+        compute_all_metrics({"random_seed": -1})
+    with pytest.raises(ValueError):
+        compute_all_metrics({"dyadic_steps": 0})
+    with pytest.raises(ValueError):
+        compute_all_metrics({"network_nodes": 1})
+    with pytest.raises(ValueError):
+        compute_all_metrics({"likelihood_precision": 0.0})
+
+
+def test_metrics_specs_point_to_real_primitive_sources():
+    from metrics import METRIC_SPECS
+
+    assert METRIC_SPECS["NUM_FIGURES"] == "figure_catalog"
+    assert METRIC_SPECS["COUPLED_FE_FINAL"] == "active_inference"
+    assert METRIC_SPECS["SYSTEM_GOVERNANCE_SCORE"] == "systems_governance"

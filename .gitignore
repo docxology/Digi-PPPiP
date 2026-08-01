@@ -3,6 +3,18 @@
 output/
 **/output/
 
+# Web app build artifacts / third-party dependencies
+node_modules/
+**/node_modules/
+web-app/client/dist/
+web-app/client/dist-ssr/
+
+# Stray local deliverable copies (duplicate of the root-level combined PDF)
+helpful/
+
+# Agent scratch / review plans (not project content)
+.hermes/
+
 # Python caches / build artifacts
 __pycache__/
 *.py[cod]

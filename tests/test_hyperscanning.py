@@ -43,3 +43,15 @@ def test_inter_brain_network_feeds_curvature_entropy():
     assert adj.shape == (8, 8)
     np.testing.assert_allclose(adj, adj.T)
     assert curvature_entropy(forman_ricci_curvature(adj)) >= 0.0
+
+
+def test_hyperscanning_edge_cases_raise_or_short_circuit():
+    with pytest.raises(ValueError):
+        simulate_ibs_phases(steps=0)
+    with pytest.raises(ValueError):
+        inter_brain_network(1, n=1)
+    with pytest.raises(ValueError):
+        detect_phase_transitions(np.ones(3), threshold=-1)
+    # Empty curvature vector -> 0.0 bits; short series -> no transitions.
+    assert curvature_entropy(np.asarray([])) == 0.0
+    assert detect_phase_transitions(np.ones(1), 0.1).size == 0

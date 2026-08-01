@@ -75,7 +75,7 @@ def test_source_verification_records_cover_governed_citekeys():
     assert all(record.author for record in records)
     assert all(record.year for record in records)
     assert all(record.venue for record in records)
-    assert all(record.locator_status == "matched" for record in records)
+    assert all(record.locator_status == "local_derived" for record in records)
     assert all(record.metadata_source == "local_bibtex" for record in records)
     assert all(record.source_tier for record in records)
     assert all(record.claim_family for record in records)
@@ -193,3 +193,38 @@ def test_source_verification_summary_supports_readiness_figure_contract():
     assert summary.reporting_records >= 4
     assert summary.tier_counts["official_primary"] >= len(OFFICIAL_SOURCE_KEYS)
     assert summary.recheck_trigger_counts["before_submission_or_annual_refresh"] >= 1
+
+
+def test_parse_bib_entries_is_brace_aware_and_handles_at_in_fields():
+    from source_verification import _field, parse_bib_entries
+
+    bib = (
+        "@article{nested,\n"
+        "  author = {Smith, {J}. A. and Doe, Jane},\n"
+        "  title = {A {Structured} Study},\n"
+        "  note = {Correspondence at @example.com and {grouped} tokens},\n"
+        "  year = {2020}\n"
+        "}\n"
+        "@book{second,\n"
+        "  author = {Public, John},\n"
+        "  title = {Another Book},\n"
+        "  publisher = {ACME Press}\n"
+        "}\n"
+    )
+    parsed = parse_bib_entries(bib)
+    # The @ in the note field must not truncate the first entry.
+    assert set(parsed) == {"nested", "second"}
+    assert "Correspondence at @example.com" in parsed["nested"]
+    assert _field(parsed["nested"], "author") == "Smith, {J}. A. and Doe, Jane"
+    assert _field(parsed["nested"], "title") == "A {Structured} Study"
+    assert _field(parsed["nested"], "note") == "Correspondence at @example.com and {grouped} tokens"
+    assert _field(parsed["second"], "publisher") == "ACME Press"
+
+
+def test_field_handles_quoted_and_absent_fields():
+    from source_verification import _field
+
+    entry = '@article{key,\n  title   = "A quoted title",\n  year    = {2021},\n}\n'
+    assert _field(entry, "title") == "A quoted title"
+    assert _field(entry, "year") == "2021"
+    assert _field(entry, "absent_field") == ""

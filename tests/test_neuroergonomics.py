@@ -33,6 +33,12 @@ def test_invalid_inputs_raise():
     with pytest.raises(ValueError):
         technoference_cost(-1)
     with pytest.raises(ValueError):
+        technoference_cost(0, lambda_=0)
+    with pytest.raises(ValueError):
         intentional_enclosure_gain(1.5)
     with pytest.raises(ValueError):
+        intentional_enclosure_gain(0.5, k=0)
+    with pytest.raises(ValueError):
         attention_allocation([0, 0, 0])
+    with pytest.raises(ValueError):
+        attention_allocation([1.0, -1.0, 0.0])

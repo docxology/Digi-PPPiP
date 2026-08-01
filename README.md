@@ -14,9 +14,9 @@ which this project plugs into as a **sidecar** (place it at
 `template/projects/Digi-PPPiP`, then run the template's render). Full,
 copy-paste sidecar instructions are in **[`RENDERING.md`](RENDERING.md)**.
 
-Validation baseline (re-verified 2026-07-20, standalone): **35 registered
-figures, 116 tests, ≥95% line+branch coverage** on the non-omitted `src/`
-primitives (95.44% with the pinned dev toolchain), with a green template
+Validation baseline (re-verified 2026-07-31, standalone): **35 registered
+figures, 126 tests, ≥95% line+branch coverage** on the non-omitted `src/`
+primitives (97.45% with the pinned dev toolchain), with a green template
 prerender and a successful template PDF/HTML render.
 
 > All computational illustrations are **deterministic conceptual models**, not
@@ -103,9 +103,12 @@ project's content.
 
 Every number that reaches the manuscript is computed by `src/metrics.py`
 (tested, coverage-enforced) and serialized to
-`output/data/digippppip_metrics.json`. `src/figures.py` renders only and never
-computes a manuscript-bound metric. `tests/test_integration_consistency.py`
-enforces figure/token/citation cross-artifact integrity.
+`output/data/digippppip_metrics.json`. `src/figures.py` renders only; the only
+place it touches manuscript-bound metrics is to invoke the covered
+`metrics.compute_all_metrics()` authority and write its result to the metrics
+JSON — it never computes a scalar itself.
+`tests/test_integration_consistency.py` enforces figure/token/citation
+cross-artifact integrity.
 
 ## Scholarship and claims
 

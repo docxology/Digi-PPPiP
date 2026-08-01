@@ -4,8 +4,8 @@ This is a self-contained research project that renders via the
 [`docxology/template`](https://github.com/docxology/template) pipeline as a
 **sidecar** (placed at `template/projects/Digi-PPPiP`; see
 [`RENDERING.md`](RENDERING.md)). It is developed and tested standalone. Validation
-baseline (re-verified 2026-07-20, standalone): 35 registered figures, 116 tests,
-≥95% line+branch coverage (95.44% with the pinned dev toolchain), green template
+baseline (re-verified 2026-07-31, standalone): 35 registered figures, 126 tests,
+≥95% line+branch coverage (97.45% with the pinned dev toolchain), green template
 prerender, and a successful template PDF/HTML render.
 
 ## Read Order

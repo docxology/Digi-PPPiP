@@ -1,0 +1,120 @@
+# Deferred work
+
+This file tracks only open work. Completed windows are logged at the bottom;
+the project's quality gates (pytest, ruff, mypy, coverage) define what the
+manuscript may claim regardless of anything listed here.
+
+## Status / Owner / Last reviewed
+
+- Status: Open
+- Owner: @digi-pppip-authors
+- Last reviewed: 2026-07-31
+
+## Open — outside the current instrument boundary
+
+- The shared witness register (cross-line co-registration of report envelopes)
+  is a separate DAF project by design; this project ships the figure generation
+  and manuscript and stops.
+- No external attestation or independent observation provenance is claimed.
+  Adding an independently authored observation ledger needs its own testable
+  provenance contract.
+- Clinical/physiology deployment is out of scope until a reviewed protocol,
+  intervention description, adverse-event route, and prespecified outcomes are
+  in place.
+
+## Open — from the 2026-07-31 red-team deep-review window, deferred with a stated reason
+
+### Medium
+
+1. **`source_verification.py` still does not perform live external DOI/URL
+   resolution** — `locator_status` was honestly relabelled to `local_derived`
+   (it no longer overclaims external verification), but the module still does
+   not query a resolver at generation time.
+   - Why it matters: the ledger proves locators + metadata exist locally; it
+     does not prove a DOI resolves or a title/author pair matches a publisher
+     page. Per AGENTS.md that is a manual, reviewed step before new scholarship
+     is added.
+   - Suggested fix: keep the manual gate (do NOT add network calls to a
+     deterministic, offline pipeline). If live resolution is ever wanted, it
+     must be an opt-in, seeded/recorded separate step — not part of the default
+     figure/test path.
+
+2. **`manuscript/SYNTAX.md`-driven figure/section/equation registries are
+   asserted only by `test_integration_consistency.py`** — the single source of
+   truth for which labels may be used lives in prose, not a machine-enforced
+   schema.
+   - Why it matters: adding a figure/section/equation label requires updating
+     prose in two places; a mismatch fails only when the integration test runs.
+   - Suggested fix: acceptable as-is (integration test guards it); optionally
+     generate SYNTAX.md rows from the typed catalogs to remove the duplication.
+
+### Minor
+
+1. **`src/evidence.py` `is_acyclic()` is only exercised through the acyclic
+   construction, never with a cycle** — a regression that introduces a cycle
+   would be caught by `domain_dimension_edges` (edge validation) but not by the
+   cycle check itself.
+   - Suggested fix: add a unit test that feeds a synthetic cyclic edge list to
+     confirm `is_acyclic()` returns False (it currently reads a module-level
+     constant, so this needs a small refactor to accept an edge argument).
+2. **`src/manuscript_variables.py` `_stringify` uses `%g` float formatting** —
+   lossy for very small/large manuscript-bound scalars.
+   - Why it matters: manuscript prose shows `0.0001` where `0.000100` was
+     intended; low practical risk given the current value ranges.
+   - Suggested fix: keep `%g` but document the intentional lossiness in the
+     docstring (marked as accepted behaviour).
+3. **`web-app/server/` has no automated test suite** — the Python pytest suite
+   covers `src/`, but the Socket.IO relay has no tests.
+   - Why it matters: a refactor of `index.js` could break relay behaviour with
+     no gate catching it.
+   - Suggested fix: add a minimal Node test (e.g. `node:test` + socket.io-client)
+     asserting connect/broadcast/disconnect, plus payload-cap and CORS behaviour.
+
+## Completed / Closed (from the 2026-07-31 red-team pass)
+
+- **Git hygiene**: `web-app/server/node_modules/` (845 files) removed from
+  tracking; `node_modules/`, `**/node_modules/`, `web-app/client/dist*`, and
+  `helpful/` added to `.gitignore`; the stray 9.3 MB
+  `helpful/Digi-PPPiP_combined.pdf` duplicate removed from tracking. Tracked
+  file count dropped 950 → 104.
+- **Web-app server hardened** (`web-app/server/index.js`): CORS origin is now
+  env-configurable (`CORS_ORIGIN`) with a conservative local default instead of
+  `"*"`; per-event payload size cap (64 KiB) on `draw_path`/`undo_stroke`/
+  `cursor_move`; connection cap (`MAX_CONNECTIONS`) with a `server_full` event;
+  connection counter replaced with a Set (cannot drift negative on reconnect);
+  graceful SIGTERM/SIGINT shutdown added.
+- **`src/metrics.py`**: `METRIC_SPECS["NUM_FIGURES"]` corrected from `"figures"`
+  (a coverage-omitted module) to `"figure_catalog"` (the real covered source).
+  `compute_all_metrics` now validates config (non-negative seed, positive
+  steps/nodes/precisions) at the boundary instead of failing deeper.
+- **`src/session_events.py`**: `turn_balance` gained an optional
+  `partner_actors` set so AI/facilitator/third actors can be excluded from the
+  dyadic balance denominator as the docstring promised (legacy behaviour
+  preserved when omitted).
+- **`src/source_verification.py`**: overclaiming `locator_status="matched"`
+  relabelled to the honest `"local_derived"` with a transparency note in the
+  module docstring; BibTeX entry splitting and field extraction are now
+  brace-aware (nested braces and `@` in field values no longer truncate
+  entries). Audit check label updated accordingly.
+- **`src/systems_governance.py`**: `governance_score` now checks fields by name
+  (excluding `key`) instead of filtering by value comparison, so a field whose
+  value equals the record key is no longer skipped.
+- **`src/figure_artifact_audit.py`**: `_sidecar_path` rejects absolute paths
+  (raises `ValueError`) instead of silently returning them, preventing reads
+  outside the figure output tree.
+- **Docs truth**: README/AGENTS/RENDERING baseline updated to 126 tests /
+  97.45% coverage / 2026-07-31; README numeric-authority rule clarified that
+  `figures.py` only invokes the covered `metrics.compute_all_metrics()` and
+  never computes a scalar; `active_inference.py` decoupled-mode docstring
+  corrected ("constant from the first update onward"); ISA progress/updated
+  headers bumped.
+- **Tests + coverage**: 10 new tests added (turn_balance partner filtering,
+  metrics config validation + spec-source audit, brace-aware BibTeX parsing,
+  quoted/absent fields, governance field-by-name score, absolute-sidecar
+  rejection, PNG parsing edge branches, hyperscanning/neuroergonomics edge
+  cases, session-event field validation). Coverage rose 95.56% → **97.45%**,
+  test count 116 → **126**. Every src/ module is now ≥ 90% individually
+  (was: `figure_artifact_audit` 85.71%, `hyperscanning` 88.51%,
+  `neuroergonomics` 87.76%, `session_events` 88.76%).
+- **Gates green**: 126 passed, 0 failed; ruff clean; mypy clean; figure + token
+  regeneration scripts run clean.

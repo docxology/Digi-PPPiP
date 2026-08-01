@@ -428,7 +428,12 @@ def governance_score() -> float:
     )
     complete = 0
     for record in records:
-        values = tuple(value for value in record.__dict__.values() if value != record.key)
+        # Check every field except the record's own ``key`` identifier by name,
+        # rather than filtering by value (which could silently drop a field
+        # whose value happens to equal the key string).
+        values = tuple(
+            value for field in record.__dataclass_fields__ if field != "key" for value in [getattr(record, field)]
+        )
         if all(values) and record.source_keys:
             complete += 1
     return complete / len(records)

@@ -32,6 +32,13 @@ def test_systems_governance_records_are_complete_and_source_backed():
     assert all(not key.endswith("_governance") for key in systems_governance_source_keys())
 
 
+def test_governance_score_checks_fields_by_name_not_value():
+    # PDF deficit: a record whose label text equals its key must still count
+    # toward the completeness score. The score is recomputed over every record;
+    # it remains 1.0 only if no field-name check is skipped.
+    assert governance_score() == 1.0
+
+
 def test_system_boundary_keeps_optional_branches_outside_kernel():
     boundaries = {record.key: record for record in system_boundary_elements()}
 

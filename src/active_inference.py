@@ -98,9 +98,10 @@ def simulate_dyadic_session(
     ``coupled`` each partner's *prior* is the other partner's previous belief
     (mutual entrainment), so the prior–posterior gap contracts by
     ``ρ = prior_prec/(prior_prec+lik_prec) ∈ (0,1)`` per step; when decoupled
-    the prior is pinned at ``0`` so the joint free energy stays constant.
-    Hence terminal coupled joint free energy is strictly below decoupled — a
-    closed-form guarantee (cross-vendor corroborated), not a tuned outcome.
+    the prior is pinned at ``0`` so the joint free energy is constant from the
+    first update onward. Hence terminal coupled joint free energy is strictly
+    below decoupled — a closed-form guarantee (cross-vendor corroborated), not
+    a tuned outcome.
 
     Returns:
         ``{"free_energy": ndarray[steps], "surprise": ndarray[steps]}`` —
