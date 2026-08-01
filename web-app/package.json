@@ -1,0 +1,13 @@
+{
+  "name": "digi-pppip-web-app",
+  "version": "1.0.0",
+  "description": "Screenshot reproduction tooling for the Digi-PPPiP React/Socket.IO demo. Run 'node screenshot.js' with the Vite client and Socket.IO server running to refresh the screenshots in screenshots/.",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "screenshot": "node screenshot.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}

@@ -264,6 +264,8 @@ const Canvas = forwardRef(({ socket, userId, nickname, color, brushStyle, canvas
   return (
     <canvas
       ref={canvasRef}
+      aria-label="Shared drawing canvas. Click and drag to draw."
+      role="img"
       onMouseDown={startDrawing}
       onMouseUp={finishDrawing}
       onMouseOut={finishDrawing}

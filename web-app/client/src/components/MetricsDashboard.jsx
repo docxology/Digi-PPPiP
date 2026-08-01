@@ -14,8 +14,9 @@ const MetricsDashboard = ({ freeEnergy, ibs, entropy }) => {
   const entropyPercent = Math.min(100, Math.max(0, (entropy / 5) * 100));
 
   return (
-    <div className="glass-panel metrics-dashboard">
+    <div className="glass-panel metrics-dashboard" role="region" aria-label="Coupled dynamics metrics (illustrative simulation)">
       <div className="metrics-header">Coupled Dynamics</div>
+      <p className="metrics-disclaimer">Simulated illustrative values — not measured clinical data.</p>
       
       <div className="metric-item">
         <div className="metric-header">

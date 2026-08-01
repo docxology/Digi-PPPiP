@@ -66,3 +66,38 @@ npm run dev
 Open `http://localhost:5173` in multiple browser windows (or different devices on the same local network). You will immediately be assigned a fruit nickname, and your cursors will become visible to each other. 
 
 Begin drawing to observe the live effects on the Coupled Dynamics dashboard!
+
+> **Note on the Socket.IO server**: by default the server allows the Vite dev origin
+> (`http://localhost:5173`). If you run the client on a different port or host, pass the
+> client origin(s) explicitly:
+> ```bash
+> CORS_ORIGIN="http://localhost:5173,http://localhost:3000" node index.js
+> ```
+
+---
+
+## 📸 Screenshots
+
+The app running against the local Socket.IO server (captured with Playwright headless Chromium):
+
+| Main canvas (dark theme) | Coupled Dynamics dashboard |
+|---|---|
+| ![Main canvas](screenshots/01-main-canvas.png) | ![Metrics dashboard](screenshots/02-metrics-dashboard.png) |
+
+| Light theme | Themes & settings (light + white canvas) |
+|---|---|
+| ![Light theme](screenshots/03-theme-light.png) | ![Themes and settings](screenshots/04-themes-settings.png) |
+
+Screenshots live under [`screenshots/`](screenshots/) and were captured from the running
+dev stack — they reflect actual rendering, not a mockup. A small Playwright script
+(`screenshot.js`) reproduces them; install it with `npm install` at the `web-app/` root and
+run `node screenshot.js` with both servers started.
+
+---
+
+## ⚠️ Scope & disclaimer
+
+This is a **conceptual, illustrative demo** of coupled active-inference ideas. The metrics
+shown live (Variational Free Energy, Inter-Brain Synchrony, Narrative Entropy) are
+**simulated values for demonstration** — they are not measured clinical or diagnostic data,
+and the app is not a medical or clinical tool.

@@ -21,7 +21,10 @@ const cors = require('cors');
 
 // Conservative default: same-machine dev. Override with CORS_ORIGIN for other
 // deployments (e.g. the explicit Vite client origin), comma-separated.
-const ALLOWED_ORIGINS = (process.env.CORS_ORIGIN || 'http://localhost:3000')
+// The default allows both the classic Vite port (5173) and the documented
+// default (3000) so the client connects out of the box.
+const DEFAULT_ORIGINS = 'http://localhost:5173,http://localhost:3000';
+const ALLOWED_ORIGINS = (process.env.CORS_ORIGIN || DEFAULT_ORIGINS)
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);
@@ -50,6 +53,8 @@ const io = new Server(server, {
 
 // Set of live socket ids (more robust than a raw int counter).
 const sockets = new Set();
+// Total connections served since server start (for observability).
+let connectionsServed = 0;
 // Per-socket rate-limit buckets: socket.id -> { tokens, refillAt }.
 const rateBuckets = new Map();
 
@@ -103,6 +108,8 @@ function guardedBroadcast(socket, event, data) {
 
 io.on('connection', (socket) => {
   sockets.add(socket.id);
+  connectionsServed += 1;
+  console.log(`[connection] ${socket.id} (total served: ${connectionsServed}, live: ${sockets.size})`);
 
   // Enforce a hard cap on concurrent connections.
   if (sockets.size > MAX_CONNECTIONS) {

@@ -4,6 +4,10 @@ import Canvas from './components/Canvas';
 import MetricsDashboard from './components/MetricsDashboard';
 import './index.css';
 
+// Socket server URL: override with VITE_SERVER_URL, otherwise fall back to the
+// same host that serves the client on port 3001 (keeps local dev working).
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || `http://${window.location.hostname || 'localhost'}:3001`;
+
 const COLORS = ['#00f0ff', '#8b5cf6', '#f43f5e', '#10b981', '#f59e0b'];
 const THEMES = ['dark', 'light', 'comfort'];
 const BRUSHES = ['solid', 'dotted', 'neon'];
@@ -31,6 +35,7 @@ function App() {
   const [canvasBg, setCanvasBg] = useState(CANVAS_BGS[0]);
   const [isRecording, setIsRecording] = useState(false);
   const [remoteCursors, setRemoteCursors] = useState({});
+  const [connectionStatus, setConnectionStatus] = useState('connecting');
   const canvasRef = useRef(null);
   
   const [userId] = useState(() => Math.random().toString(36).substring(2, 15));
@@ -46,9 +51,13 @@ function App() {
   const [entropy, setEntropy] = useState(2.0);
 
   useEffect(() => {
-    // Connect to local Node server
-    const newSocket = io('http://localhost:3001');
+    // Connect to the local Socket.IO signaling server
+    const newSocket = io(SERVER_URL, { reconnectionAttempts: 10 });
     setSocket(newSocket);
+
+    newSocket.on('connect', () => setConnectionStatus('connected'));
+    newSocket.on('disconnect', () => setConnectionStatus('disconnected'));
+    newSocket.on('connect_error', () => setConnectionStatus('disconnected'));
 
     newSocket.on('partner_status', (data) => {
       setPartnerCount(data.partnerCount);
@@ -178,10 +187,21 @@ function App() {
             <p>Digital Partner Pen Play in Parallel</p>
           </div>
           
-          <div className={`glass-panel status-badge ${partnerCount > 0 ? 'connected' : 'waiting'}`}>
+          <div className="glass-panel status-badge" data-status={connectionStatus}>
             <div className="dot"></div>
-            {partnerCount > 0 ? 'Dyad Coupled' : 'Waiting for Partner...'}
+            {connectionStatus === 'connected'
+              ? (partnerCount > 0 ? 'Dyad Coupled' : 'Waiting for Partner...')
+              : (connectionStatus === 'connecting' ? 'Connecting to server…' : 'Server offline')}
           </div>
+        </div>
+
+        <div className="glass-panel demo-note">
+          <strong>Conceptual demo</strong> — illustrative visuals only; not a clinical or diagnostic tool.
+        </div>
+
+        <div className="glass-panel onboarding-hint">
+          Click &amp; drag on the canvas to draw. Pick a color, brush, canvas background and theme below.
+          Your session is identified as <strong className="nick">{nickname}</strong>.
         </div>
 
         <MetricsDashboard 
@@ -191,10 +211,12 @@ function App() {
         />
 
         <div className="glass-panel controls-panel" style={{ flexWrap: 'wrap', maxWidth: '800px' }}>
-          <div className="color-picker">
+          <div className="color-picker" role="group" aria-label="Brush color">
             {COLORS.map(c => (
               <button
                 key={c}
+                aria-label={`Brush color ${c}`}
+                aria-pressed={myColor === c}
                 className={`color-btn ${myColor === c ? 'active' : ''}`}
                 style={{ backgroundColor: c }}
                 onClick={() => setMyColor(c)}
@@ -202,31 +224,31 @@ function App() {
             ))}
           </div>
           
-          <button className="action-btn" onClick={toggleBrush}>
+          <button className="action-btn" onClick={toggleBrush} aria-label={`Brush style. Current: ${brushStyle}`}>
             Brush: {brushStyle.charAt(0).toUpperCase() + brushStyle.slice(1)}
           </button>
           
-          <button className="action-btn" onClick={toggleCanvasBg}>
+          <button className="action-btn" onClick={toggleCanvasBg} aria-label={`Canvas background. Current: ${canvasBg.name}`}>
             Canvas: {canvasBg.name}
           </button>
           
-          <button className="action-btn" onClick={toggleTheme}>
+          <button className="action-btn" onClick={toggleTheme} aria-label={`Theme. Current: ${theme}`}>
             Theme: {theme.charAt(0).toUpperCase() + theme.slice(1)}
           </button>
           
-          <button className="action-btn" onClick={handleExportPNG}>
+          <button className="action-btn" onClick={handleExportPNG} aria-label="Save canvas as PNG">
             Save PNG
           </button>
           
-          <button className={`action-btn ${isRecording ? 'recording' : ''}`} onClick={toggleRecording} style={isRecording ? {backgroundColor: 'var(--accent-pink)'} : {}}>
+          <button className={`action-btn ${isRecording ? 'recording' : ''}`} onClick={toggleRecording} style={isRecording ? {backgroundColor: 'var(--accent-pink)'} : {}} aria-label={isRecording ? 'Stop recording' : 'Start recording video'}>
             {isRecording ? 'Stop Recording' : 'Record Video'}
           </button>
 
-          <button className="action-btn" onClick={handleUndo}>
+          <button className="action-btn" onClick={handleUndo} aria-label="Undo last stroke">
             Undo
           </button>
 
-          <button className="action-btn" onClick={handleClear}>
+          <button className="action-btn" onClick={handleClear} aria-label="Clear the canvas">
             Clear
           </button>
         </div>
