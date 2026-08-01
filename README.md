@@ -15,7 +15,7 @@ which this project plugs into as a **sidecar** (place it at
 copy-paste sidecar instructions are in **[`RENDERING.md`](RENDERING.md)**.
 
 Validation baseline (re-verified 2026-07-31, standalone): **35 registered
-figures, 126 tests, ≥95% line+branch coverage** on the non-omitted `src/`
+figures, 128 tests, ≥95% line+branch coverage** on the non-omitted `src/`
 primitives (97.45% with the pinned dev toolchain), with a green template
 prerender and a successful template PDF/HTML render.
 
@@ -42,7 +42,7 @@ src/                 pure tested primitives (90% coverage gate)
   accessibility.py     access criteria, accommodations, and audit scoring
   source_quality.py    source classification + overclaim warnings
   claim_ledger.py      source-to-claim ledger + upgrade gates
-  source_verification.py  checked DOI/stable-URL ledger + refresh triggers
+  source_verification.py  DOI/URL locator + metadata ledger + recheck triggers
   study_readiness.py   dyadic consent, archive-control, and AI-branch gates
   systems_governance.py  boundary, feedback, causal, ethics, and reversal gates
   figure_methods.py    figure-generation stages, visual grammar, audit criteria
@@ -56,10 +56,15 @@ src/                 pure tested primitives (90% coverage gate)
 scripts/             thin orchestrators
 manuscript/          modular Pandoc sections + config/preamble/SYNTAX/bib
 tests/               no-mocks pytest suite
+docs/                factored technical docs (architecture / figures / testing / scholarship)
 ISA.md               system of record (Ideal State Artifact)
 AGENTS.md            local assistant/project rules
 RENDERING.md         how to render the paper via the docxology/template sidecar
 ```
+
+Additional, factored documentation lives in [`docs/`](docs/INDEX.md):
+architecture, the figure system, the test suite, and scholarship/source
+governance — see [`docs/INDEX.md`](docs/INDEX.md) for the reading order.
 
 The project preamble sets compact `0.65in` PDF margins and red hyperlink,
 URL, citation, anchor, and file-link colors. Keep those choices in the project

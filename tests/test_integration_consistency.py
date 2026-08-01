@@ -416,3 +416,33 @@ def test_no_infrastructure_imports_in_src_primitives():
         text = path.read_text()
         assert not re.search(r"^\s*import\s+infrastructure\b", text, re.MULTILINE)
         assert not re.search(r"^\s*from\s+infrastructure\b", text, re.MULTILINE)
+
+
+def test_docs_folder_is_factored_and_referenced():
+    """The root docs remain canonical; docs/ holds factored technical docs that
+    the root README and AGENTS point to, and the index's table matches the
+    files that actually exist (no drift, no orphaned index rows)."""
+    index = PROJECT_ROOT / "docs" / "INDEX.md"
+    assert index.exists(), "docs/INDEX.md is the documented entry point"
+    index_text = index.read_text()
+
+    # Every paper doc the index advertises must exist.
+    for name in ("ARCHITECTURE.md", "FIGURES.md", "TESTING.md", "SCHOLARSHIP.md"):
+        assert (PROJECT_ROOT / "docs" / name).exists(), f"docs/{name} is advertised but missing"
+        assert name in index_text, f"docs/INDEX.md does not reference docs/{name}"
+
+    # The root README and AGENTS must point readers at docs/INDEX.md.
+    readme = (PROJECT_ROOT / "README.md").read_text()
+    agents = (PROJECT_ROOT / "AGENTS.md").read_text()
+    assert "docs/INDEX.md" in readme
+    assert "docs/INDEX.md" in agents and "docs/" in agents
+
+    # Docs must not break the hardcoded-numbered-reference or sidecar-contract
+    # guards: no raw LaTeX refs, no absolute local paths, and they must mention
+    # the template sidecar relationship.
+    for path in sorted((PROJECT_ROOT / "docs").glob("*.md")):
+        text = path.read_text()
+        assert "/Users/" not in text
+        assert "\\\\cite{" not in text and "\\\\ref{" not in text
+        if path.name in {"ARCHITECTURE.md", "FIGURES.md", "SCHOLARSHIP.md", "TESTING.md"}:
+            assert "template" in text.lower() or "docxology" in text.lower()

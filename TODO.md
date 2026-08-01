@@ -57,6 +57,15 @@ manuscript may claim regardless of anything listed here.
    Verified: zero old keys remain; every in-prose citation still resolves to a
    bib entry.
 
+- Update `README.md`, `AGENTS.md`, and `RENDERING.md` baseline to reflect the
+  current on-disk state whenever a test or coverage figure changes (they are
+  the published validation baseline). A stale number here silently reports the
+  wrong state. (Docs now tagged 2026-07-31 / 128 tests / 97.45%.)
+- Keep the factored docs in `docs/` (INDEX, ARCHITECTURE, FIGURES, TESTING,
+  SCHOLARSHIP) in sync with source: `tests/test_integration_consistency.py::test_docs_folder_is_factored_and_referenced`
+  guards that the index's advertised files exist and the root README/AGENTS link
+  to them. Add any new top-level doc to INDEX's table and that test's allow-list.
+
 ### Minor
 
 1. **`src/evidence.py` `is_acyclic()` cycle-detection** — **RESOLVED 2026-07-31.**
@@ -146,3 +155,10 @@ manuscript may claim regardless of anything listed here.
   exact counts so it is no longer tautological.
 - **Gates green**: 127 passed, 0 failed; ruff clean; mypy clean; figure + token
   regeneration scripts run clean.
+- **Docs factored into `docs/`**: added `docs/INDEX.md` (entry point + layout),
+  `ARCHITECTURE.md`, `FIGURES.md`, `TESTING.md`, and `SCHOLARSHIP.md`; linked
+  them from `README.md` (layout + a Documentation section), updated `AGENTS.md`
+  read order, and added a guard test
+  `test_docs_folder_is_factored_and_referenced` that verifies INDEX's advertised
+  files exist and that root docs link to `docs/INDEX.md`. Baseline numbers in
+  README/AGENTS/RENDERING/docs corrected to 128 tests. (128 tests now pass.)

@@ -4,7 +4,7 @@ This is a self-contained research project that renders via the
 [`docxology/template`](https://github.com/docxology/template) pipeline as a
 **sidecar** (placed at `template/projects/Digi-PPPiP`; see
 [`RENDERING.md`](RENDERING.md)). It is developed and tested standalone. Validation
-baseline (re-verified 2026-07-31, standalone): 35 registered figures, 126 tests,
+baseline (re-verified 2026-07-31, standalone): 35 registered figures, 128 tests,
 ≥95% line+branch coverage (97.45% with the pinned dev toolchain), green template
 prerender, and a successful template PDF/HTML render.
 
@@ -12,8 +12,10 @@ prerender, and a successful template PDF/HTML render.
 
 1. `README.md`
 2. `RENDERING.md` (how the paper is rendered via the template sidecar)
-3. `ISA.md`
-4. `manuscript/SYNTAX.md`
+3. `docs/INDEX.md` (factored technical documentation: architecture, figures,
+   testing, scholarship)
+4. `ISA.md`
+5. `manuscript/SYNTAX.md`
 
 ## Architecture Rules
 

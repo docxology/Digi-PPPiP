@@ -121,7 +121,7 @@ uv run ruff check src tests scripts
 uv run mypy src tests scripts
 ```
 
-Baseline (re-verified 2026-07-31): **35 registered figures, 126 tests, ≥95%
+Baseline (re-verified 2026-07-31): **35 registered figures, 128 tests, ≥95%
 line+branch coverage** (97.45% with the pinned dev toolchain), ruff + mypy clean.
 All dev tools (pytest, ruff, mypy) are pinned in `uv.lock` under the `dev`
 dependency group, so the commands above work in a fresh clone with no global
