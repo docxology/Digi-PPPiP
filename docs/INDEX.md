@@ -23,7 +23,7 @@ Validating a change: `TESTING.md` (gates) → run the commands listed there.
 
 ## Quick orientation
 
-- **35 registered figure generators**, each with a typed spec in
+- **39 registered figure generators**, each with a typed spec in
   `src/figure_catalog.py` and a render function in `src/figures.py`.
 - **128 tests**, ≥90% branch-coverage gate on `src/` (currently ~97.45%).
 - **138 governed BibTeX citekeys** with source-verification records.

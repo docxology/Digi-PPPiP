@@ -19,7 +19,7 @@ require, and how `figure_artifact_audit.py` verifies the produced artifacts.
 5. **Audited** — `figure_artifact_audit.py` verifies artifact integrity.
 6. **Referenced** — the manuscript cites the figure by Pandoc label.
 
-There are 35 registered figures. `scripts/digippppip_figures.py` regenerates
+There are 39 registered figures. `scripts/digippppip_figures.py` regenerates
 all of them deterministically. The rendered PNGs are consumed by the
 `docxology/template` sidecar pipeline at PDF/HTML render time (see
 [`../RENDERING.md`](../RENDERING.md)).

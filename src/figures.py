@@ -2469,6 +2469,79 @@ def generate_figure_method_audit(out_dir: Path) -> Path:
     )
 
 
+def _copy_screenshot(
+    out_dir: Path,
+    src_filename: str,
+    dst_filename: str,
+    label: str,
+    callsite: str,
+    description: str,
+) -> Path:
+    """Copy one captured web-app screenshot into the figure output tree."""
+    project_root = out_dir.parent.parent
+    src = project_root / "web-app" / "screenshots" / src_filename
+    if not src.exists():
+        raise FileNotFoundError(
+            f"missing web-app screenshot {src}; capture it with web-app/screenshot.js "
+            "after starting the Socket.IO server and Vite client"
+        )
+    out_dir.mkdir(parents=True, exist_ok=True)
+    dst = out_dir / dst_filename
+    dst.write_bytes(src.read_bytes())
+    register_figure(label, f"output/figures/{dst_filename}", callsite, description)
+    return dst
+
+
+def generate_webapp_main_canvas(out_dir: Path) -> Path:
+    """Copy the main-canvas screenshot from the running web app."""
+    return _copy_screenshot(
+        out_dir,
+        "01-main-canvas.png",
+        "webapp_main_canvas.png",
+        "fig:webapp_main_canvas",
+        "generate_webapp_main_canvas",
+        "Main interactive web canvas in dark theme with freehand strokes, active user moniker, partner-waiting "
+        "status, tool palette, and the simulated coupled-dynamics panel.",
+    )
+
+
+def generate_webapp_metrics_dashboard(out_dir: Path) -> Path:
+    """Copy the Coupled Dynamics dashboard screenshot from the running web app."""
+    return _copy_screenshot(
+        out_dir,
+        "02-metrics-dashboard.png",
+        "webapp_metrics_dashboard.png",
+        "fig:webapp_metrics_dashboard",
+        "generate_webapp_metrics_dashboard",
+        "Coupled Dynamics dashboard with simulated Variational Free Energy, Inter-Brain Synchrony, and Narrative "
+        "Entropy values and a not-measured-clinical-data disclaimer.",
+    )
+
+
+def generate_webapp_light_theme(out_dir: Path) -> Path:
+    """Copy the light-theme screenshot from the running web app."""
+    return _copy_screenshot(
+        out_dir,
+        "03-theme-light.png",
+        "webapp_light_theme.png",
+        "fig:webapp_light_theme",
+        "generate_webapp_light_theme",
+        "The interactive web canvas switched to the light theme.",
+    )
+
+
+def generate_webapp_theme_settings(out_dir: Path) -> Path:
+    """Copy the theme-and-settings screenshot from the running web app."""
+    return _copy_screenshot(
+        out_dir,
+        "04-themes-settings.png",
+        "webapp_theme_settings.png",
+        "fig:webapp_theme_settings",
+        "generate_webapp_theme_settings",
+        "Theme and canvas-background settings in the light theme with a plain white canvas.",
+    )
+
+
 GENERATORS: tuple[FigureGenerator, ...] = (
     generate_evolution_timeline,
     generate_conceptual_ecology,
@@ -2505,6 +2578,10 @@ GENERATORS: tuple[FigureGenerator, ...] = (
     generate_figure_method_audit,
     generate_validation_ladder,
     generate_research_agenda_plot,
+    generate_webapp_main_canvas,
+    generate_webapp_metrics_dashboard,
+    generate_webapp_light_theme,
+    generate_webapp_theme_settings,
 )
 
 

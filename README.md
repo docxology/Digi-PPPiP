@@ -14,7 +14,7 @@ which this project plugs into as a **sidecar** (place it at
 `template/projects/Digi-PPPiP`, then run the template's render). Full,
 copy-paste sidecar instructions are in **[`RENDERING.md`](RENDERING.md)**.
 
-Validation baseline (re-verified 2026-07-31, standalone): **35 registered
+Validation baseline (re-verified 2026-07-31, standalone): **39 registered
 figures, 128 tests, ≥95% line+branch coverage** on the non-omitted `src/`
 primitives (97.45% with the pinned dev toolchain), with a green template
 prerender and a successful template PDF/HTML render.

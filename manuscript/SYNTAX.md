@@ -79,6 +79,10 @@ sidecars under `output/figures/long_descriptions/`.
 | `{#fig:figure_method_audit}` | `output/figures/figure_method_audit.png` | `generate_figure_method_audit()` |
 | `{#fig:validation_ladder}` | `output/figures/validation_ladder.png` | `generate_validation_ladder()` |
 | `{#fig:research_agenda}` | `output/figures/research_agenda.png` | `generate_research_agenda_plot()` |
+| `{#fig:webapp_main_canvas}` | `output/figures/webapp_main_canvas.png` | `generate_webapp_main_canvas()` |
+| `{#fig:webapp_metrics_dashboard}` | `output/figures/webapp_metrics_dashboard.png` | `generate_webapp_metrics_dashboard()` |
+| `{#fig:webapp_light_theme}` | `output/figures/webapp_light_theme.png` | `generate_webapp_light_theme()` |
+| `{#fig:webapp_theme_settings}` | `output/figures/webapp_theme_settings.png` | `generate_webapp_theme_settings()` |
 
 ## Section label registry
 

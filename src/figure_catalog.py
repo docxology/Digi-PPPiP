@@ -381,6 +381,47 @@ FIGURE_SPECS: tuple[FigureSpec, ...] = (
         "Research-priority map comparing conceptual feasibility and research value across staged DigiPPPiP agenda "
         "items.",
     ),
+    FigureSpec(
+        "fig:webapp_main_canvas",
+        "webapp_main_canvas.png",
+        "generate_webapp_main_canvas",
+        "methods_protocol",
+        "conceptual",
+        "shared_workspace",
+        "Screenshot of the running DigiPPPiP web canvas in dark theme showing freehand strokes, the active user "
+        "moniker, partner-waiting status, tool palette, and the simulated coupled-dynamics panel.",
+    ),
+    FigureSpec(
+        "fig:webapp_metrics_dashboard",
+        "webapp_metrics_dashboard.png",
+        "generate_webapp_metrics_dashboard",
+        "methods_protocol",
+        "conceptual",
+        "research_through_design",
+        "Close-up of the Coupled Dynamics dashboard showing simulated Variational Free Energy, Inter-Brain "
+        "Synchrony, and Narrative Entropy values with progress bars and a disclaimer that values are not measured "
+        "clinical data.",
+    ),
+    FigureSpec(
+        "fig:webapp_light_theme",
+        "webapp_light_theme.png",
+        "generate_webapp_light_theme",
+        "methods_protocol",
+        "conceptual",
+        "accessible_visual_media",
+        "Screenshot of the DigiPPPiP web canvas in the light theme, showing the same collaborative drawing layout "
+        "with visible strokes and controls on a light background.",
+    ),
+    FigureSpec(
+        "fig:webapp_theme_settings",
+        "webapp_theme_settings.png",
+        "generate_webapp_theme_settings",
+        "methods_protocol",
+        "conceptual",
+        "accessible_visual_media",
+        "Screenshot of the DigiPPPiP theme and canvas-background settings in the light theme with a plain white "
+        "canvas, illustrating configurable visual contrast and accessibility options.",
+    ),
 )
 
 

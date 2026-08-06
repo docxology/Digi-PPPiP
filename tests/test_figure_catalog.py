@@ -19,7 +19,7 @@ def test_figure_specs_cover_all_generators_with_typed_contracts():
     specs = figure_specs()
     generators = figure_generator_names()
 
-    assert figure_count() == 35
+    assert figure_count() == 39
     assert len(specs) == figure_count()
     assert all(isinstance(spec, FigureSpec) for spec in specs)
     assert tuple(spec.generator for spec in specs) == generators
