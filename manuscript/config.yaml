@@ -8,6 +8,8 @@ paper:
   subtitle: "A Cyberphysical, Temporal, Active-Inference, and Place-Based Successor to PPPiP (2018)"
   version: "1.0"
   date: ""
+  cover:
+    image: cover.png
 
 authors:
   - name: "Siddhant Shrivastava"
@@ -30,12 +32,14 @@ authors:
     orcid: "0000-0001-6232-9096"
 
 publication:
-  # Leave blank until a real archive or journal DOI is minted.
-  doi: ""
+  # Real DOI reserved via Zenodo draft deposit (unpublished); public record pending final release.
+  doi: "10.5281/zenodo.21815704"
   journal: ""
   volume: ""
   pages: ""
   year: "2026"
+  version_doi: "10.5281/zenodo.21815705"
+  version_record: "https://zenodo.org/records/21815705"
 
 keywords:
   - "partner pen play in parallel"
@@ -47,6 +51,10 @@ keywords:
   - "digital placemaking"
   - "relational technology"
   - "reproducible research"
+
+rendering:
+  # Keep title, authors, DOI, and cover art on a single title page.
+  cover_height_fraction: 0.32
 
 metadata:
   license: "MIT"
