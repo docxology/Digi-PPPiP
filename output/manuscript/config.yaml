@@ -1,0 +1,92 @@
+# Digi-PPPiP Manuscript Configuration
+# Structurally compliant with projects/template_code_project/manuscript/config.yaml.
+# Consumed by infrastructure rendering/publishing and by
+# src/manuscript_variables.py (experiment parameters + paper metadata).
+
+paper:
+  title: "DigiPPPiP: Digital Partner Pen Play in Parallel"
+  subtitle: "A Cyberphysical, Temporal, Active-Inference, and Place-Based Successor to PPPiP (2018)"
+  version: "1.0"
+  date: ""
+  cover:
+    image: cover.png
+
+authors:
+  - name: "Siddhant Shrivastava"
+    affiliation: "PhD Student (AI and Robotics), Singapore University of Technology and Design, Singapore"
+    email: "siddhant_shrivastava@mymail.sutd.edu.sg"
+    orcid: "0000-0002-9688-4730"
+    corresponding: true
+  - name: "Evelyn C. Goh"
+    affiliations:
+      - "PhD Student, Biomedical Engineering, National University of Singapore College of Design and Engineering"
+      - "National University of Singapore Saw Swee Hock School of Public Health"
+    email: "e0983111@u.nus.edu"
+    orcid: "0000-0001-7182-3950"
+  - name: "Alexandra Mikhailova"
+    affiliation: "Active Inference Institute"
+    email: "alexandra@activeinference.institute"
+  - name: "Daniel Ari Friedman"
+    affiliation: "Active Inference Institute"
+    email: "daniel@activeinference.institute"
+    orcid: "0000-0001-6232-9096"
+
+publication:
+  # Real DOI reserved via Zenodo draft deposit (unpublished); public record pending final release.
+  doi: "10.5281/zenodo.21815704"
+  journal: ""
+  volume: ""
+  pages: ""
+  year: "2026"
+  version_doi: "10.5281/zenodo.21815705"
+  version_record: "https://zenodo.org/records/21815705"
+
+keywords:
+  - "partner pen play in parallel"
+  - "active inference"
+  - "inter-brain synchrony"
+  - "geometric hyperscanning"
+  - "narrative information theory"
+  - "neuroergonomics"
+  - "digital placemaking"
+  - "relational technology"
+  - "reproducible research"
+
+rendering:
+  # Keep title, authors, DOI, and cover art on a single title page.
+  cover_height_fraction: 0.32
+
+metadata:
+  license: "MIT"
+  language: "en"
+
+llm:
+  reviews:
+    enabled: false
+  translations:
+    enabled: false
+
+# ZERO-MOCK TOLERANCE: any failure blocks manuscript rendering.
+testing:
+  max_test_failures: 0
+  max_infra_test_failures: 0
+  max_project_test_failures: 0
+
+# Simulation parameters — read by src/metrics.py and src/manuscript_variables.py.
+# All simulations are deterministic conceptual models, NOT empirical data.
+experiment:
+  random_seed: 0
+  session_steps: 120              # steps in a modeled DigiPPPiP session
+  dyadic_steps: 60                # steps in the coupled active-inference sim
+  prior_precision: 1.0
+  likelihood_precision: 2.0
+  ibs_phases: ["initiation", "elaboration", "convergence", "completion"]
+  network_nodes: 8                # nodes in the modeled inter-brain network
+  curvature_transition_threshold: 0.15
+  narrative_alphabet_size: 6      # distinct stroke classes
+  epistemic_curiosity: 1.0
+  epistemic_precision: 0.6
+  flow_grid: [0.0, 0.25, 0.5, 0.75, 1.0]
+  technoference_lambda: 0.35
+  temporal_modes: ["synchronous", "semisynchronous", "asynchronous"]
+  spatial_configs: ["co_located_physical", "remote_digital", "cyberphysical_hybrid"]

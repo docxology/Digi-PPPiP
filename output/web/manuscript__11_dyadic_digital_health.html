@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>11_dyadic_digital_health.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:health">Dyadic Digital Health: Consent, Relationship
+Boundaries, and AI Separation</h1>
+<p>Dyadic digital health research is important because DigiPPPiP
+addresses two interdependent people rather than an isolated user.
+Scoping work on dyadic digital health interventions shows that digital
+systems can be designed around partner interdependence, shared goals,
+and reciprocal support [shaffer2022dyadic]. Dyadic health science also
+sets a stronger methodological bar: high-quality work should include
+both dyad members, focus on a meaningful relationship, and ground the
+dyadic rationale in theory rather than convenience sampling
+[wilson2024dyadichealth]. Recent dyadic digital-health design work shows
+how shared-care modules can expose live reports, care roles, messaging,
+timelines, and resources for patient-caregiver pairs
+[benmessaoud2023dyadicmodule]. Digital interventions for relationship
+quality show why low-barrier formats matter: cost, stigma, geography,
+and scheduling can prevent couples from accessing formal services
+[kernova2025relationship]. Qualitative work on remote Dyadic
+Developmental Psychotherapy sharpens the remote-care boundary: online
+delivery can widen access, but families differ in engagement, nonverbal
+communication, decompression, and preference, so remote format must be
+tailored rather than presumed equivalent [blair2024remoteddp]. At the
+same time, DigiPPPiP should not borrow clinical authority from adjacent
+literatures without clinical evidence of its own.</p>
+<p>DigiPPPiP should be positioned as a non-clinical relational practice
+unless tested otherwise. It may support intimacy, novelty,
+communication, and emotional co-regulation, but the manuscript does not
+claim clinical efficacy. That distinction matters for ethics and study
+design. Art-making, digital-art-therapy, tele-art-therapy, phygital
+art-therapy, and remote dyadic-therapy sources motivate plausible
+constructs such as reflection, stress change, expressive engagement,
+remote delivery constraints, and therapeutic-relationship cautions
+[kaimal2016cortisol; zubala2021digitalarttherapy; potash2020pandemics;
+miller2020onlinearttherapy; datlen2020whatsapp; haywood2022hexagonal;
+yoon2025phygital; blair2024remoteddp], but they do not show that
+DigiPPPiP treats distress or improves relationships. The appropriate
+next step is to compare DigiPPPiP against matched shared activities, not
+to assume it outperforms them. The planned outcome structure in <span
+class="citation"
+data-cites="fig:multilevel_outcome_model">[@fig:multilevel_outcome_model]</span>
+is included to make that comparison explicit.</p>
+<p>The boundary condition is equally important. DigiPPPiP should not be
+used as a substitute for crisis support, couple therapy, medical
+treatment, or safeguarding procedures. A digital canvas can invite
+disclosure, conflict, dependency, or unwanted archiving; any study or
+deployment must define escalation paths, deletion rights, and exclusion
+criteria before recruiting participants. The health framing is
+legitimate only when it makes risk and referral responsibilities
+clearer.</p>
+<p>The minimum health-adjacent protocol should include a plain-language
+non-treatment statement, eligibility and stop rules, contact paths for
+discomfort or conflict, referral information appropriate to the study
+setting, and a distinction between facilitator, researcher, therapist,
+and platform roles. It should also specify whether any clinical,
+physiological, or mental-health data are collected; if not, the protocol
+should say so explicitly. If those data are collected, they belong under
+separate consent, retention, access, and analysis rules rather than
+under the ordinary shared-canvas archive.</p>
+<p>The privacy boundary is dyadic, not individual. Contextual privacy
+and communication-privacy scholarship make clear that sharing depends on
+actors, purposes, transmission rules, and negotiated ownership of
+disclosed information [nissenbaum2011contextualprivacy;
+petronio2020cpm]. Human-computer interaction (HCI) privacy research
+sharpens that point by treating privacy and security as social and
+cultural practices rather than only policy toggles
+[dourish2006collectiveprivacy]. Values-in-design work adds a method
+requirement: privacy, consent, access, and authorship need design levers
+that bring tensions into the design process before deployment
+[shilton2012values]. Digital-health consent reviews add a practical
+constraint: people often want transparency about who accesses health
+information, for what purpose, and under what oversight
+[kassam2023digitalconsent]. Consent-forward digital mental-health
+scholarship pushes the same issue toward design practice by arguing that
+users should have meaningful choices over how sensitive data are
+collected, shared, and reused [pendse2024consentforward]. For DigiPPPiP
+this means a study cannot treat export consent as a one-person checkbox
+when the artifact records a joint interaction. The minimum safeguard is
+pair-level governance: consent before saving, visible persistence state
+during drawing, mutually understandable deletion and redaction paths,
+and separate rules for research logs, personal keepsakes, therapist
+access, and public exhibition.</p>
+<p>The difficult cases should be written into the protocol before
+recruitment. Deletion, export, replay, redaction, withdrawal,
+adverse-event reporting, data retention, and one-partner-disagrees
+scenarios are not edge decorations; they define whether a persistent
+dyadic archive is consentful. When partners disagree about saving,
+replay, export, exhibition, or secondary analysis, DigiPPPiP should
+default to the less-disclosing option unless both partners explicitly
+approve the more disclosing one. That rule protects the human-human
+default claim: the shared artifact is valuable only while both partners
+retain agency over how it persists.</p>
+<p>The digital intimacy and relationship-technology literature supports
+a broader claim: online relational practices can be meaningful when they
+are intentional, reciprocal, and norm-governed [kernova2025relationship;
+hassenzahl2012love; vetere2005mediating]. Studies of long-distance video
+chat show that mediated presence can become part of everyday
+relationship maintenance [neustaedter2012intimacy], and
+minimal-communication work shows that small signals can carry relational
+meaning when they are embedded in a strong-tie routine
+[kaye2006clicked]. Qualitative work on the Couple app is especially
+close to DigiPPPiP because partners used a pair-bounded platform with
+asynchronous posts, live sketching, and lightweight haptic signaling
+while inventing their own relational norms [mcveighschultz2015couple].
+Recent relatedness-technology reviews and long-distance textile
+prototypes sharpen the evidence boundary: the design space is rich, but
+empirical effects, theory grounding, and ethics often remain
+underdeveloped, so DigiPPPiP should compare against simpler relational
+technologies rather than assume superiority [wenhart2025relatedness;
+jiang2025ipillowpal]. Companion-AI scholarship adds the negative
+boundary: if automation is designed or received as a relationship
+substitute, it may alter social motivation, expectations, or human
+relationship investment, so DigiPPPiP’s optional AI branch must be
+governed as mediation rather than companionship
+[malfacini2025companionai]. DigiPPPiP adds a distinctive visual and
+gestural channel to that landscape. It is not just messaging with
+pictures; it is a shared surface where each partner sees the other’s
+decisions become part of a common artifact.</p>
+</main>
+</body>
+</html>

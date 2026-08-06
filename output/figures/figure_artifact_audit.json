@@ -1,0 +1,108 @@
+{
+  "checks": [
+    {
+      "detail": "39 registry row(s)",
+      "key": "registry_nonempty",
+      "label": "registry is nonempty",
+      "passed": true
+    },
+    {
+      "detail": "accessibility_description,caption_contract,claim_status,description,generator,label,long_description,method_source_family,placement,png,section",
+      "key": "required_fields",
+      "label": "registry rows contain required fields",
+      "passed": true
+    },
+    {
+      "detail": "label/png/generator uniqueness",
+      "key": "registry_uniqueness",
+      "label": "labels, files, and generators are unique",
+      "passed": true
+    },
+    {
+      "detail": "39/39 present",
+      "key": "files_present",
+      "label": "registered PNG files exist",
+      "passed": true
+    },
+    {
+      "detail": "39/39 matching PNG stem(s)",
+      "key": "orphan_pngs_absent",
+      "label": "output directory has no orphan or stale PNGs",
+      "passed": true
+    },
+    {
+      "detail": "PNG signature check",
+      "key": "png_headers",
+      "label": "registered files have PNG signatures",
+      "passed": true
+    },
+    {
+      "detail": "IHDR width and height",
+      "key": "dimensions_positive",
+      "label": "registered PNG files expose positive dimensions",
+      "passed": true
+    },
+    {
+      "detail": "decompressed IDAT pixel check",
+      "key": "nonblank_pixels",
+      "label": "registered PNG files contain nonblank pixel payloads",
+      "passed": true
+    },
+    {
+      "detail": "39/39 matching label(s)",
+      "key": "labels_match_manuscript",
+      "label": "registry labels match manuscript figure references",
+      "passed": true
+    },
+    {
+      "detail": "caption_contract field is populated",
+      "key": "caption_contracts",
+      "label": "registry rows carry caption contracts",
+      "passed": true
+    },
+    {
+      "detail": "generator names appear in manuscript captions/prose",
+      "key": "caption_prose_parity",
+      "label": "manuscript prose names registered generators",
+      "passed": true
+    },
+    {
+      "detail": "analytic_simulation,audit,conceptual,empirical_placeholder,protocol",
+      "key": "claim_status_valid",
+      "label": "claim statuses are explicit and valid",
+      "passed": true
+    },
+    {
+      "detail": "main,supplemental",
+      "key": "placement_valid",
+      "label": "figure placements are explicit and valid",
+      "passed": true
+    },
+    {
+      "detail": "39/39 present",
+      "key": "long_descriptions_present",
+      "label": "long-description sidecars exist and are nonempty",
+      "passed": true
+    },
+    {
+      "detail": "description/method/accessibility/caption metadata populated",
+      "key": "readability_metadata",
+      "label": "registry rows carry figure readability metadata",
+      "passed": true
+    },
+    {
+      "detail": "required long-description guidance markers",
+      "key": "long_description_reading_guidance",
+      "label": "long descriptions include reading order, caveat, and evidence boundary",
+      "passed": true
+    },
+    {
+      "detail": "section-specific label lookup",
+      "key": "section_alignment",
+      "label": "figure labels appear in their declared manuscript sections",
+      "passed": true
+    }
+  ],
+  "score": 1.0,
+  "total_figures": 39
+}

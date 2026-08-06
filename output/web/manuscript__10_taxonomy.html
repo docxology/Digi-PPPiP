@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>10_taxonomy.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:taxonomy">Temporal-Spatial Taxonomy for Study Design</h1>
+<p>DigiPPPiP is organized by two primary axes: temporal structure and
+spatial configuration. The configured project has 3 temporal modes, 3
+spatial configurations, and 9 total modality cells. <span
+class="citation"
+data-cites="fig:taxonomy_matrix">[@fig:taxonomy_matrix]</span> is the
+central map of that design space. The axes intentionally separate
+relation from infrastructure: two partners can be relationally engaged
+while co-present, remote, delayed, or hybrid, but each cell changes what
+can be perceived, logged, repaired, and revisited.</p>
+<figure id="fig:taxonomy_matrix">
+<img src="../figures/taxonomy_matrix.png" style="width:90.0%"
+alt="Three-by-three temporal-spatial taxonomy for DigiPPPiP." />
+<figcaption>Three-by-three temporal-spatial taxonomy
+for DigiPPPiP. The matrix is generated by
+<code>generate_taxonomy_matrix()</code> from
+<code>src/taxonomy.py</code>; read rows as temporal structures, columns
+as spatial configurations, cell labels as modality names, numeric labels
+as conceptual neural-synchrony affordance scores, and hatching as
+high-affordance cells. It supports decision-making about study
+conditions rather than product ranking. The scores are design variables,
+and measured synchrony would require participant physiology and
+controls.</figcaption>
+</figure>
+<p>The taxonomy is not a typology for naming products. It is a decision
+procedure for matching relational need to temporal-spatial form. A study
+should first identify the hard constraint: co-presence, distance,
+disability access, uneven schedules, privacy risk, or place memory. It
+should then choose the simplest cell that satisfies that constraint
+while preserving agency and mutual interpretability. This prevents the
+framework from treating the most instrumented cell as the most advanced
+one.</p>
+<table id="tbl:taxonomy_modes">
+<caption>Temporal-spatial DigiPPPiP modality grid. The renderer numbers
+this table from the label rather than from prose.</caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Temporal structure</th>
+<th>Co-located physical</th>
+<th>Remote digital</th>
+<th>Cyberphysical hybrid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Synchronous</td>
+<td>Original PPPiP</td>
+<td>Video-call plus shared canvas</td>
+<td>AR overlay on paper</td>
+</tr>
+<tr>
+<td>Semisynchronous</td>
+<td>Turn-taking in the same room</td>
+<td>Turn-taking shared canvas</td>
+<td>Smart paper plus live mirror</td>
+</tr>
+<tr>
+<td>Asynchronous</td>
+<td>Sequential physical artifact</td>
+<td>Persistent shared canvas</td>
+<td>Photographed or printed exchange</td>
+</tr>
+</tbody>
+</table>
+<p><span class="citation"
+data-cites="tbl:taxonomy_modes">[@tbl:taxonomy_modes]</span> should be
+read as a decision aid. A couple seeking immediate mutual attunement may
+choose synchronous co-presence. A long-distance couple with uneven
+schedules may choose asynchronous remote drawing. A pair interested in
+place memory may choose a cyberphysical hybrid that links physical marks
+with a persistent digital archive. The highest conceptual
+neural-synchrony score in the configured taxonomy is 0.95, but no single
+cell is universally best. The appropriate cell depends on access needs,
+privacy constraints, device availability, emotional goals, and the
+amount of persistence a dyad actually wants.</p>
+</main>
+</body>
+</html>

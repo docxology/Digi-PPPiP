@@ -1,0 +1,16 @@
+{
+  "releases": [
+    {
+      "doi": "10.5281/zenodo.21815704",
+      "dry_run": true,
+      "github_release_url": null,
+      "github_repo": "docxology/digi-pppip",
+      "pairing_valid": false,
+      "pdf_sha256": "f5ca95ce77c7c5367c0a0e68d5b4a640f0865b4c2b0827fa78ff1babbcbd986d",
+      "sandbox": false,
+      "tag": "v1.0.0",
+      "timestamp": "2026-08-06T01:13:44.827479+00:00"
+    }
+  ],
+  "schema": "template-publication-ledger-v1"
+}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>03_temporal_architecture.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:temporal">Temporal Coordination: Turns, Overlap, and
+Persistence</h1>
+<p>The original PPPiP form is synchronous: both partners mark the
+surface at the same time. DigiPPPiP separates synchrony from
+relationality. Synchronous sessions still matter because joint action
+requires partners to coordinate bodies, intentions, and timing, and
+because active interaction is a strong candidate context for inter-brain
+synchrony in cooperative and naturalistic tasks [sebanz2006joint;
+czeszumski2020hyperscanning; czeszumski2022cooperative]. Emerging work
+on online group interaction suggests that neural alignment can also
+appear under virtual conditions when participants remain actively
+engaged [azhari2025online]. Yet synchrony is not the only temporal form
+that can support intimacy, play, or shared meaning.</p>
+<p>Remote and delayed modes should not be described as if distance has
+been solved. Distance changes the cost of coordination, common ground,
+informal repair, and collaboration readiness [olson2000distance].
+Grounding theory adds a finer vocabulary: partners need evidence that a
+mark, gesture, or prompt has been perceived and understood well enough
+for the next contribution [clark1991grounding]. Recent video-mediated
+collaborative-drawing work makes that requirement concrete: proposal
+sequences depend on verbal, embodied, and screen-based actions, and the
+person controlling the drawing tool can become pivotal in coordinating
+joint decisions [oittinen2025videodrawing]. DigiPPPiP’s temporal design
+should therefore measure not only whether users were online together,
+but how the canvas supported acknowledgement, repair, turn completion,
+tool-control transfer, and later re-entry into the same shared
+artifact.</p>
+<p>Semisynchronous DigiPPPiP introduces alternation. Partners are
+present in the same session but take turns or contribute in bursts. That
+mode preserves mutual responsiveness while creating short prediction
+intervals: each mark becomes a cue for anticipating the partner’s next
+action. It also makes repair visible: an undo, hesitation, or spoken
+clarification can become part of the event stream rather than an
+invisible failure. This is a natural bridge between the modeling lens in
+<span class="citation"
+data-cites="sec:active_inference">[@sec:active_inference]</span> and the
+formal narrative account in <span class="citation"
+data-cites="sec:formalisms_appendix">[@sec:formalisms_appendix]</span>.</p>
+<p>Asynchronous DigiPPPiP changes the practice more radically. Partners
+contribute at separate times, making the canvas a persistent relational
+object. Asynchronous mental-health technologies show that clinical or
+supportive exchange need not always be real-time to be meaningful
+[lagera2023asynchronous]. For DigiPPPiP, absence becomes part of the
+form: waiting, revisiting, and responding create a slower temporal arc
+of curiosity and resolution. Digital-intimacy research is relevant here
+because many strong-tie technologies rely on awareness, traces, rituals,
+and low-pressure presence rather than continuous conversation
+[hassenzahl2012love; vetere2005mediating].</p>
+<p>The temporal primitives are overlap, order, delay, persistence, and
+repair. Overlap supports co-action; order supports anticipation; delay
+supports reflection; persistence supports return; repair supports trust
+after confusion. These primitives are more fundamental than labels such
+as live, remote, or asynchronous because the same interface can
+instantiate them differently for different dyads. A study that logs only
+a session label loses the very structure that may explain relational
+meaning.</p>
+<p><span class="citation"
+data-cites="fig:dyadic_task_matrix">[@fig:dyadic_task_matrix]</span>
+translates these distinctions into a staged study matrix. The matrix
+separates peer, mentor, and AI-assisted roles from co-located, remote,
+turn-taking, and persistent temporal-spatial conditions. It is a
+protocol-planning figure, not a claim that any one condition is
+universally superior.</p>
+<figure id="fig:dyadic_task_matrix">
+<img src="../figures/dyadic_task_matrix.png" style="width:90.0%"
+alt="Dyadic task matrix for staged DigiPPPiP studies." />
+<figcaption>Dyadic task matrix for staged DigiPPPiP
+studies. Values generated by <code>generate_dyadic_task_matrix()</code>
+encode conceptual mutual-responsiveness demand across role structures
+and temporal-spatial conditions; read rows as partner-role arrangements,
+columns as session modes, numeric labels as planning scores, and
+patterned cells as high-coordination conditions. The matrix supports the
+temporal architecture’s sampling argument rather than ranking modes as
+universally better. Empirical calibration would require observed timing
+logs, participant reports, and matched-condition
+comparisons.</figcaption>
+</figure>
+<p><span class="citation"
+data-cites="fig:interaction_timeline">[@fig:interaction_timeline]</span>
+shows how the temporal distinction becomes measurable. Strokes,
+utterances, repairs, and synchrony windows occupy separate tracks so
+future studies can distinguish overlap, alternation, latency, and
+delayed response without collapsing all of them into a single session
+label.</p>
+<figure id="fig:interaction_timeline">
+<img src="../figures/interaction_timeline.png" style="width:90.0%"
+alt="Instrumented dyadic timeline linking partner actions, awareness cues, repair events, replay windows, and analysis windows." />
+<figcaption>Instrumented dyadic timeline linking
+partner actions, awareness cues, repair events, replay windows, and
+analysis windows. The figure is generated by
+<code>generate_interaction_timeline()</code>; read labelled bars as
+partner strokes, patterned spans as coordination windows, markers as
+utterances, tool-control changes, and repairs, and bottom bands as
+candidate analysis intervals. It supports the claim that temporal mode
+must be logged rather than asserted. The plot is a protocol schematic;
+participant data would replace the simulated intervals.</figcaption>
+</figure>
+<p><span class="citation"
+data-cites="fig:parallel_sequential_patterns">[@fig:parallel_sequential_patterns]</span>
+complements the timeline with three canonical event patterns. The point
+is design clarity: parallel marks, turn-taking marks, and long-delay
+marks invite different hypotheses about attention, anticipation, and
+narrative continuity.</p>
+<figure id="fig:parallel_sequential_patterns">
+<img src="../figures/parallel_sequential_patterns.png"
+style="width:90.0%"
+alt="Event-pattern comparison for parallel, turn-taking, and asynchronous DigiPPPiP sessions." />
+<figcaption>Event-pattern comparison for parallel,
+turn-taking, and asynchronous DigiPPPiP sessions. The conceptual raster
+plots generated by <code>generate_parallel_sequential_patterns()</code>
+use blue and orange event ticks to show overlap ratio, alternation, and
+long-delay response structure. The figure supports the temporal taxonomy
+by showing why synchrony, alternation, and persistence are different
+hypotheses. It is schematic; empirical use would require timestamped
+session logs.</figcaption>
+</figure>
+<p><span class="citation"
+data-cites="fig:ibs_phases">[@fig:ibs_phases]</span> gives a conceptual
+phase model for synchronous sessions. It should not be read as empirical
+functional near-infrared spectroscopy (fNIRS) output. Its role is to
+make explicit the hypothesis that initiation, elaboration, convergence,
+and completion may differ in inter-brain-synchrony profiles and should
+be tested directly.</p>
+<figure id="fig:ibs_phases">
+<img src="../figures/ibs_phases.png" style="width:90.0%"
+alt="Conceptual inter-brain-synchrony phase profile across initiation, elaboration, convergence, and completion." />
+<figcaption>Conceptual inter-brain-synchrony phase
+profile across initiation, elaboration, convergence, and completion.
+Values are generated by <code>generate_ibs_phase_plot()</code> from
+<code>src/hyperscanning.py</code>; read the line as an illustrative
+synchrony proxy and shaded bands as session phases. The figure supports
+hypothesis formation for synchronous sessions, not neural evidence. Real
+fNIRS or electroencephalography (EEG) analyses would need artifact
+correction, controls, and preregistered phase definitions.</figcaption>
+</figure>
+</main>
+</body>
+</html>

@@ -1,0 +1,133 @@
+{
+  "algorithm": "web-renderer-combine-v1",
+  "binding_sha256": "ebfbc8e41533b8a9c775eb80337c6db9f9c6d3f5313020f3a245084c094ff04b",
+  "combined_path": "output/web/_combined_manuscript.md",
+  "combined_sha256": "89071ad7a43e282cd7768814569c49a2b32940753f1993d4697757e9d54e128b",
+  "combined_size_bytes": 124268,
+  "input_root_kind": "hydrated",
+  "ordered_inputs": [
+    {
+      "ordinal": 1,
+      "path": "output/manuscript/00_abstract.md",
+      "sha256": "52386ead7aab34afc3ce62899f81aa6f9af3670b83524e94ed0a25111d07c7d0",
+      "size_bytes": 2317
+    },
+    {
+      "ordinal": 2,
+      "path": "output/manuscript/01_introduction.md",
+      "sha256": "39c2e66ddefbbde767b76f9dfa7fdb7d6a552ebb698f80077a0b205c59be42a1",
+      "size_bytes": 6947
+    },
+    {
+      "ordinal": 3,
+      "path": "output/manuscript/02_cyberphysical_expansion.md",
+      "sha256": "baa386a49d57a13d4b33622cfef4a91a3d7f97794e0d980d525e372ac30af5a3",
+      "size_bytes": 6727
+    },
+    {
+      "ordinal": 4,
+      "path": "output/manuscript/03_temporal_architecture.md",
+      "sha256": "a30b5e4e4ace7bcbf67a3f99f235406760746f50c660299870bd5c6d86316250",
+      "size_bytes": 7127
+    },
+    {
+      "ordinal": 5,
+      "path": "output/manuscript/04_active_inference.md",
+      "sha256": "dd0da6d389d3c1ef34eba2bc9cd392c7a7bc83a3a3a411fd8decdca7a7cc0ff0",
+      "size_bytes": 3253
+    },
+    {
+      "ordinal": 6,
+      "path": "output/manuscript/05_neuroergonomics.md",
+      "sha256": "34c43276fe8d99c6cd862da709c4ec16eba68e168e61f0024a1ccadbd3b4937a",
+      "size_bytes": 3563
+    },
+    {
+      "ordinal": 7,
+      "path": "output/manuscript/06_cyber_phenomenology.md",
+      "sha256": "64822a3b1bb05efaaa7a7c2fc3e8258cad2fdd5a63b186364150bd5eb8d8bab0",
+      "size_bytes": 3674
+    },
+    {
+      "ordinal": 8,
+      "path": "output/manuscript/07_accessibility.md",
+      "sha256": "beaff51823590a4dda7282403b726c02c00c6d0f9f51834faab34855d3240035",
+      "size_bytes": 5841
+    },
+    {
+      "ordinal": 9,
+      "path": "output/manuscript/08_relational_aesthetics.md",
+      "sha256": "6baefbe2ebcd7c3a0fce9257c6f443459b3097c82bfed57f3e22a5261f917a8a",
+      "size_bytes": 3761
+    },
+    {
+      "ordinal": 10,
+      "path": "output/manuscript/09_place_based.md",
+      "sha256": "eed5cf661ebc92a1065f0c4b36de291f17866c095f434a0e82fc6704ef3e2606",
+      "size_bytes": 3727
+    },
+    {
+      "ordinal": 11,
+      "path": "output/manuscript/10_taxonomy.md",
+      "sha256": "8c9b412ba1feb6140a6fddf426a71adf5ff0f82e4395d70f712560e5432f7c53",
+      "size_bytes": 2821
+    },
+    {
+      "ordinal": 12,
+      "path": "output/manuscript/11_dyadic_digital_health.md",
+      "sha256": "0c04986ce8e837b954b91858379bb459546878beef3fef1a5cb33a5a783aca5c",
+      "size_bytes": 7503
+    },
+    {
+      "ordinal": 13,
+      "path": "output/manuscript/12_methods_protocol.md",
+      "sha256": "750f922dffc3e3bcad1556bbf9cd61d2e17f3286515d4582f06235256a003456",
+      "size_bytes": 32424
+    },
+    {
+      "ordinal": 14,
+      "path": "output/manuscript/13_research_agenda.md",
+      "sha256": "da14b6b8a29b4ffe5ca082abbdb8c6ce738ec5e6b77d6a279175447ea6f5f646",
+      "size_bytes": 6291
+    },
+    {
+      "ordinal": 15,
+      "path": "output/manuscript/14_integrative_model.md",
+      "sha256": "0e4b4ebab7b1d8b9f67cb3a1e2a0e4b22d0e04385d3416d6614040637788c226",
+      "size_bytes": 3968
+    },
+    {
+      "ordinal": 16,
+      "path": "output/manuscript/15_discussion.md",
+      "sha256": "2f477221b8468eda248a7d3909ea89a3b18994f9ca1dbd7438940e8ebfdeb288",
+      "size_bytes": 6310
+    },
+    {
+      "ordinal": 17,
+      "path": "output/manuscript/16_casestudies.md",
+      "sha256": "91c51f8acd2a40c9288514b917597f3e0163a50a6efc64bdb5dac72fd11589b9",
+      "size_bytes": 6113
+    },
+    {
+      "ordinal": 18,
+      "path": "output/manuscript/17_conclusions.md",
+      "sha256": "52ae64caf61bfba678db16ea2a3d75463fe015aff11f1d18487dd2ed524d5b53",
+      "size_bytes": 1698
+    },
+    {
+      "ordinal": 19,
+      "path": "output/manuscript/18_formalisms_appendix.md",
+      "sha256": "f4f8ff21a255a3f1fbcb371c86e0e0b583bea4520b36f97d28ac516ce5ec7437",
+      "size_bytes": 9691
+    },
+    {
+      "ordinal": 20,
+      "path": "output/manuscript/99_references.md",
+      "sha256": "f95fbf36322fdb5df31e81d047d3627a8a0be4d9adddf2cf0236f9e08062d253",
+      "size_bytes": 599
+    }
+  ],
+  "ordered_inputs_sha256": "eb619a2069f447e2bc7a702e29aee72d765e9d9574bf9bf7e6b2eb42b13ff36a",
+  "project": "digi-pppip",
+  "schema_version": "template-manuscript-composition-v1"
+}

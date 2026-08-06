@@ -1,7 +1,15 @@
-# Generated, disposable outputs (regeneratable by figures/variables scripts and
-# the docxology/template render pipeline)
-output/
-**/output/
+# LaTeX / build intermediates (generated inside output/, not content)
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
 
 # Web app build artifacts / third-party dependencies
 node_modules/

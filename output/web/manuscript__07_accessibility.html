@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>07_accessibility.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:accessibility">Accessible Shared Drawing: Capability Before
+Claim</h1>
+<p>The original PPPiP emphasized low cost, but DigiPPPiP must treat
+disability access as a first-order constraint rather than an
+accommodation afterthought. Digital art therapy and telehealth
+arts-therapy research show that online and digital modalities can expand
+participation for people whose access needs make conventional studio or
+clinic settings difficult, while also introducing pragmatic and ethical
+constraints [zubala2021digitalarttherapy; reitere2024telehealth;
+potash2020pandemics]. Online art-therapy work with learning-disabled
+young adults also shows why the platform, group norms, and communication
+channel are part of access rather than neutral delivery infrastructure
+[datlen2020whatsapp]. Reframing digital art therapy for digitally
+mediated practice adds the same structural warning: technology changes
+the therapeutic and relational triangle rather than simply transporting
+a studio session online [haywood2022hexagonal]. Accessibility here is
+not merely compliance; it changes what kinds of relational drawing
+become possible. Ability-based design and World Wide Web Consortium
+(W3C) accessibility guidance support this shift from generic interface
+polish toward capability-specific accommodation, including the Web
+Content Accessibility Guidelines (WCAG) and the Cognitive and Learning
+Disabilities Accessibility Task Force guidance (COGA)
+[wobbrock2011ability; w3c2023wcag22; w3c2021coga]. Participatory design
+work with children with special needs shows why access claims should be
+made with the people affected rather than inferred from designer intent
+[frauenberger2011participatory]. Social accessibility research on
+assistive technology also shows that access is shaped by
+self-presentation, confidence, stigma, and the social meaning of visible
+supports [shinohara2016socialaccess].</p>
+<p>Inclusive DigiPPPiP should support multiple input channels: stylus,
+touch, mouse, eye gaze, switch control, voice, assisted drawing, and
+partner-mediated contribution. It should support multiple feedback
+channels: visual stroke changes, haptic cues, audio descriptions,
+high-contrast modes, and replayable action histories.
+Accessible-visualization research adds an implementation lesson for the
+figures and the drawing interface: nonvisual access needs navigable
+structure, multimodal input, semantic rendering, and customizable text
+tokens rather than a static image label [elavsky2024datanavigator;
+jones2024customization]. Plain-language controls matter because the
+original practice made artistic skill non-essential; the digital
+successor should also make technical skill non-essential. The audit
+protocol in <span class="citation"
+data-cites="sec:methods_protocol">[@sec:methods_protocol]</span> keeps
+these claims bounded to visible capabilities instead of claiming
+universal access.</p>
+<p>In protocol terms, access should be documented before the session,
+during the session, and after the session. Before drawing, participants
+should be able to state preferred input methods, perceptual feedback,
+pacing, break needs, plain-language prompts, and partner-assistance
+boundaries without having to disclose a diagnosis. During drawing, the
+interface should log which accommodations were available and which were
+actually used, because a capability advertised but unavailable in the
+session cannot support an access claim. After drawing, participants
+should be able to review whether the accommodation preserved agency,
+privacy, and relational comfort rather than merely allowing task
+completion.</p>
+<p>The access requirement is deeper than device compatibility. A
+participant must be able to initiate a mark, perceive the partner’s
+contribution, understand the session state, control persistence, and
+remain socially comfortable with the accommodation used. Image-heavy
+social systems can exclude blind users when visual content is not made
+semantically available [morris2016pictures]. At the same time,
+accessibility is often co-produced among disabled and nondisabled
+companions in concrete settings rather than solved by a single feature
+[branham2015collaborativeaccess]. If any of those conditions fails, the
+system may be technically accessible while relationally exclusionary.
+This is why the manuscript treats social accessibility as part of the
+design problem rather than a secondary usability issue.</p>
+<p><span class="citation"
+data-cites="fig:accessibility_features_overview">[@fig:accessibility_features_overview]</span>
+translates those domains into implementation-facing commitments. The
+central point is not that the current framework is accessible for every
+user; it is that each access feature should be traceable to a partner
+need, a logged capability, and a participatory validation plan.</p>
+<figure id="fig:accessibility_features_overview">
+<img src="../figures/accessibility_features_overview.png"
+style="width:90.0%"
+alt="Accessibility feature map linking input flexibility, perceptual feedback, cognitive-load control, and privacy agency to participatory validation." />
+<figcaption>Accessibility feature map linking input
+flexibility, perceptual feedback, cognitive-load control, and privacy
+agency to participatory validation. The figure is generated by
+<code>generate_accessibility_features_overview()</code>; read each box
+as an implementation commitment that must point toward the central
+validation requirement with disabled partners, with accessible
+visualization scholarship motivating structured descriptions and
+customizable reading order. It supports the accessibility section’s
+distinction between capability documentation and access claims. The
+diagram is conceptual and does not certify compliance or universal
+usability.</figcaption>
+</figure>
+<p>Accessibility also includes relational safety. Partners need control
+over saving, sharing, replaying, exporting, deleting, and annotating a
+canvas. The persistent archive that makes asynchronous DigiPPPiP
+powerful can become invasive if consent and privacy are weak. The
+research agenda in <span class="citation"
+data-cites="sec:agenda">[@sec:agenda]</span> therefore treats
+participatory design with disabled partners as a core empirical priority
+rather than a platform feature request.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>12_methods_protocol.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:methods_protocol">Methods Protocol: Governance, Provenance,
+and Validation</h1>
+<h2 id="event-logging-and-participant-facing-governance">Event Logging
+and Participant-Facing Governance</h2>
+<p>DigiPPPiP is presented as a framework manuscript, so its method layer
+is a protocol specification rather than a participant dataset. The
+protocol requires timestamped events with actor, action, and channel
+fields; the example trace in <span class="citation"
+data-cites="fig:event_logging_schema">[@fig:event_logging_schema]</span>
+has 6 summary fields, a mean interval of 4 seconds, and a turn-balance
+score of 1. This makes the distinction among synchronous,
+semisynchronous, and asynchronous sessions auditable instead of
+rhetorical. The same event stream supports replay, accessibility
+auditing, outcome modeling, and synchronization with optional
+physiological channels, but those uses must stay visibly downstream from
+the partner-facing mark.</p>
+<p>Digital pen and paper research in observational settings gives a
+practical precedent for treating pen traces as analyzable field records
+rather than merely as drawings [weibel2012digitalpen]. DigiPPPiP extends
+that idea to a dyadic protocol: the stroke is simultaneously a mark for
+the partner, an event for replay, and a data row for later audit. That
+dual role is why the manuscript separates the visible canvas from the
+event log, source ledger, and generated figure registry.</p>
+<p><span class="citation"
+data-cites="fig:event_logging_schema">[@fig:event_logging_schema]</span>
+now treats the method layer as an end-to-end data-flow contract. Raw
+partner actions are captured as consented event rows, separated from the
+visible canvas and replay record, transformed into summaries, optionally
+modeled, rendered as figures and variables, governed by
+claim/source/readiness audits, and finally published through the
+template pipeline. The important architectural rule is separation:
+human-authored marks, optional AI outputs, computed diagnostics, and
+publication artifacts should remain distinguishable in both the protocol
+and the figures.</p>
+<figure id="fig:event_logging_schema">
+<img src="../figures/event_logging_schema.png" style="width:95.0%"
+alt="Event schema, data-flow path, and example DigiPPPiP session trace." />
+<figcaption>Event schema, data-flow path, and example
+DigiPPPiP session trace. The figure is generated by
+<code>generate_event_logging_schema()</code> from
+<code>src/session_events.py</code> and
+<code>src/systems_governance.py</code>; read the top row as the
+capture-to-publication path, the lower-left list as minimum event-row
+fields, and the timeline as an illustrative actor/action sequence with
+temporal summary metrics. It supports the protocol claim that synchrony
+categories, model diagnostics, generated figures, and publication
+artifacts must remain auditable. The trace is illustrative, and
+participant studies would replace it with consented logs while keeping
+optional AI and physiology logs separable.</figcaption>
+</figure>
+<p>Before human-subjects work, the protocol needs a participant-facing
+layer as well as an analysis layer. The Common Rule and the Declaration
+of Helsinki require consent, review, privacy, protocol clarity,
+withdrawal, and risk handling to be explicit rather than inferred from
+good intentions [hhs2025cfr46; wma2024helsinki]. Digital-health consent
+scholarship adds that participant understanding depends on concrete
+information about access, purpose, privacy protection, and oversight
+[kassam2023digitalconsent]. The plain-language brief should say that two
+partners are invited to draw on a shared surface; that the study records
+timing, tool, archive-control, and optional replay events; that the
+activity is not treatment or a relationship test; and that participants
+can pause, stop, withdraw, ask questions, report discomfort, request
+redaction, and ask about save, replay, export, and delete options before
+analysis lock. If one partner wants more sharing and the other wants
+less, the stricter privacy choice governs. This participant-facing
+appendix is generated as a protocol artifact by
+<code>src/study_readiness.py</code> rather than left as informal
+prose.</p>
+<p><span class="citation"
+data-cites="fig:study_readiness_matrix">[@fig:study_readiness_matrix]</span>
+converts that ethics prose into a protocol matrix. The rows are not
+optional decorations: they make dyadic consent, deletion, export,
+replay, redaction, withdrawal, adverse-event reporting, retention,
+disagreement handling, intervention description, and optional AI-branch
+governance visible before recruitment. Consent-forward digital
+mental-health work supports this placement because archive controls need
+to be designed as user-facing choices rather than hidden back-office
+data policy [pendse2024consentforward].</p>
+<figure id="fig:study_readiness_matrix">
+<img src="../figures/study_readiness_matrix.png" style="width:95.0%"
+alt="Study-readiness governance matrix for DigiPPPiP." />
+<figcaption>Study-readiness governance matrix for
+DigiPPPiP. The figure is generated by
+<code>generate_study_readiness_matrix()</code> from
+<code>src/study_readiness.py</code>; read rows as protocol edge cases,
+green cells as text-labelled readiness commitments, source counts as
+anchor depth, blue outlines as shared-archive controls, purple hatching
+as optional AI governance, and the right panel as routing for deletion,
+export, replay, disagreement, and optional AI separation. It supports
+participant-facing readiness rather than study results. Empty cells mark
+controls that are not applicable to a given row, not missing
+duties.</figcaption>
+</figure>
+<h2 id="source-and-claim-governance">Source and Claim Governance</h2>
+<p>The study protocol separates source quality from claim strength.
+Peer-reviewed empirical and review articles can support scoped design
+and measurement claims; books support theoretical framing; preprints and
+reports are treated as provisional. <span class="citation"
+data-cites="fig:source_quality_map">[@fig:source_quality_map]</span>
+encodes those rules so speculative additions, including geometric
+hyperscanning and narrative-information proposals, are not used as
+settled evidence. This is why digital object identifier (DOI)
+verification matters: a search-result citation is not added unless
+title, authors, venue, and DOI or stable uniform resource locator (URL)
+match the intended claim. The stricter rule is claim-domain specific:
+therapy, neural synchrony, active inference, accessibility, placemaking,
+digital intimacy, AI mediation, and privacy persistence each have a
+different maximum defensible claim strength before new evidence is
+collected.</p>
+<figure id="fig:source_quality_map">
+<img src="../figures/source_quality_map.png" style="width:90.0%"
+alt="Source-quality map for DigiPPPiP claim discipline." />
+<figcaption>Source-quality map for DigiPPPiP claim
+discipline. The figure is generated by
+<code>generate_source_quality_map()</code> from
+<code>src/source_quality.py</code>; read the horizontal bars as
+conservative maximum claim strength by source class, the embedded labels
+as source-tier roles, and the right-hand text as warnings for manuscript
+use. It supports the protocol rule that bibliography type constrains
+prose strength. The map is an audit device, not a judgment of individual
+papers, and claims can strengthen only with domain-appropriate empirical
+evidence.</figcaption>
+</figure>
+<p><span class="citation"
+data-cites="fig:claim_boundary_matrix">[@fig:claim_boundary_matrix]</span>
+makes that red-team layer explicit across 14 recurring claim domains.
+The point is not to prohibit ambitious studies; it is to keep the
+manuscript from borrowing strength across domains. A valid
+shared-workspace source can motivate the interface, but it cannot
+establish relationship improvement. A hyperscanning method source can
+motivate instrumentation, but it cannot establish causality or
+therapeutic benefit. A digital-art-therapy review can motivate caution
+and study design, but it cannot turn DigiPPPiP into treatment without
+direct evidence.</p>
+<figure id="fig:claim_boundary_matrix">
+<img src="../figures/claim_boundary_matrix.png" style="width:90.0%"
+alt="Claim-strength and evidence-boundary matrix for DigiPPPiP." />
+<figcaption>Claim-strength and evidence-boundary
+matrix for DigiPPPiP. The matrix is generated by
+<code>generate_claim_boundary_matrix()</code> from
+<code>src/source_quality.py</code>; read rows as reviewer-risk domains,
+labelled green cells and blue rule marks as currently defensible claim
+levels, and the right panel as the evidence gate required for stronger
+language. It supports adversarial validity checking. The matrix is
+conceptual, and a domain can move only after direct study evidence is
+added.</figcaption>
+</figure>
+<p>The boundary matrix is paired with a claim ledger rather than left as
+an abstract warning. <code>src/claim_ledger.py</code> records recurring
+manuscript claim families, their section, citekeys, present maximum
+strength, and the evidence needed to upgrade them. <span
+class="citation"
+data-cites="fig:claim_ledger_matrix">[@fig:claim_ledger_matrix]</span>
+makes the ledger visible. This also documents the role of Perplexity and
+web search in the workflow: discovery tools may nominate sources, but a
+citekey enters the ledger only after the title, venue, year, and DOI or
+stable URL have been checked against Crossref, a publisher page, an
+official standard, or an archival record.</p>
+<figure id="fig:claim_ledger_matrix">
+<img src="../figures/claim_ledger_matrix.png" style="width:90.0%"
+alt="Claim-ledger matrix linking manuscript claim families to evidence ceilings and upgrade gates." />
+<figcaption>Claim-ledger matrix linking manuscript
+claim families to evidence ceilings and upgrade gates. The figure is
+generated by <code>generate_claim_ledger_matrix()</code> from
+<code>src/claim_ledger.py</code>; read each row as a stable claim
+family, each bar as the current maximum claim strength, the blue
+numbered marker as evidence-key count, and the right-hand text as the
+next evidence gate. It supports source-to-claim governance rather than
+an empirical result. A stronger bar requires direct study evidence, not
+a more adjacent citation.</figcaption>
+</figure>
+<p><code>src/source_verification.py</code> makes that rule executable.
+Each governed citekey receives a locator, verification URL,
+checked-as-of date, source tier, claim family, manuscript location, and
+recheck trigger. The audit prioritizes 2024–2026 sources, preprints, AI
+claims, digital-health claims, governance sources, and reporting
+standards for refresh before submission. <span class="citation"
+data-cites="fig:source_verification_readiness">[@fig:source_verification_readiness]</span>
+renders the current source-verification state from the same governed
+citekey surfaces used by tests: claim ledger, evidence graph,
+figure-method source bridge, and study-readiness cases. The ledger is
+intentionally stricter than a bibliography because it asks what claim
+family a source is allowed to support and when it must be rechecked.</p>
+<figure id="fig:source_verification_readiness">
+<img src="../figures/source_verification_readiness.png"
+style="width:95.0%"
+alt="Source-verification readiness profile for governed DigiPPPiP citekeys." />
+<figcaption>Source-verification readiness profile for
+governed DigiPPPiP citekeys. The figure is generated by
+<code>generate_source_verification_readiness()</code> from
+<code>src/source_verification.py</code>; read the left panel as labelled
+citekey coverage and priority-refresh pressure, and the right panel as
+source-tier and recheck-trigger counts in audit cards. It supports
+provenance auditing rather than literature synthesis. A zero
+missing-record count means the ledger has locators and metadata, not
+that every source independently validates DigiPPPiP.</figcaption>
+</figure>
+<h2 id="systems-boundary-and-feedback-governance">Systems Boundary and
+Feedback Governance</h2>
+<p>A first-principles pass reduces DigiPPPiP to a small hard kernel: two
+human partners, perceivable marks, temporal structure, response
+opportunity, and accountable persistence.
+<code>src/systems_governance.py</code> makes the rest explicit as
+governed branches rather than implicit scope creep. The current systems
+layer records 6 boundary elements, 5 feedback loops, 5 causal
+assumptions, and 5 ethics gates, with a completeness score of 1.
+Active-inference and enactive accounts support the action-perception
+framing and Markov-blanket caution, while contextual privacy,
+values-in-design, and human-subjects governance anchor the
+participant-facing side of the boundary [ramstead2020two;
+nissenbaum2011contextualprivacy; shilton2012values; hhs2025cfr46;
+wma2024helsinki].</p>
+<p>The boundary table keeps the human-human drawing loop inside the
+kernel and marks event logs, place context, physiology, AI assistance,
+and clinical translation as support structures or optional branches.
+Each branch has a reversal gate: place prompts can be declined or
+coarsened; physiology requires separate consent and artifact controls;
+AI suggestions must be labelled, rejectable, undoable, and separable
+from partner authorship; clinical translation stays out of scope until a
+reviewed intervention protocol exists. This is a systems-governance
+claim, not an efficacy claim. It says that the framework can name its
+boundaries and stop conditions before it asks participants or reviewers
+to trust them.</p>
+<p>The feedback layer is deliberately adversarial. Action-perception
+loops should preserve mutual agency; privacy loops should default to the
+stricter dyadic archive choice; access loops should respond to fatigue,
+sensory mismatch, and assistance needs; AI loops should detect
+authorship confusion or partner substitution; evidence-escalation loops
+should downgrade language when controls or participant reports do not
+support a stronger claim. This makes falsification operational: if
+matched controls explain the same relatedness reports, if place prompts
+do not change situated memory, if replay feels like surveillance, if AI
+reduces co-authorship, or if physiological linkage disappears after
+artifact correction, the corresponding claim boundary narrows rather
+than hardens.</p>
+<h2 id="evidence-scope-and-non-claims">Evidence Scope and
+Non-Claims</h2>
+<p>The present manuscript implements a design and governance
+architecture, not a completed empirical evaluation. It demonstrates that
+DigiPPPiP concepts can be expressed as manuscript sections, tested
+primitives, generated figures, source ledgers, claim boundaries,
+protocol gates, and render artifacts. It does not demonstrate
+therapeutic efficacy, relationship improvement, neural coupling,
+universal accessibility, or AI benefit. Active inference, geometric
+hyperscanning, narrative information, and outcome modeling are used as
+modeling and measurement lenses; they become mechanisms only if future
+studies fit them to observed sessions, compare them with plausible
+alternatives, and survive the falsifiers named in the protocol.</p>
+<p>This scope statement also governs visual interpretation. Architecture
+figures show boundaries, not deployed software. Data-flow figures show
+what a study should record, not what participants have already produced.
+Simulation plots show toy diagnostics, not human behavior. Audit figures
+show that the manuscript has local governance machinery, not that
+DigiPPPiP is externally validated. Those distinctions are intentionally
+repetitive because they are the main defense against attractive diagrams
+becoming overclaims.</p>
+<h2 id="interactive-web-instantiation-conceptual-demo">Interactive Web
+Instantiation (Conceptual Demo)</h2>
+<p>DigiPPPiP is also implemented as a small, self-contained interactive
+web canvas so that the cyberphysical argument in <span class="citation"
+data-cites="sec:cyberphysical">[@sec:cyberphysical]</span> is concrete
+rather than diagrammatic only. The application pairs people on a shared,
+low-latency drawing surface and relays strokes, undos, and cursor
+positions through a Socket.IO server; each participant is identified by
+a lightweight Adjective-Fruit moniker that follows their cursor across
+the shared field. Its design kernel is deliberately the minimum viable
+kernel described in <span class="citation"
+data-cites="sec:cyberphysical">[@sec:cyberphysical]</span>: partners, a
+shared mark field, perceptible traces of agency, and consentful control
+over persistence. The running tool is therefore a working instantiation
+of the architecture in <span class="citation"
+data-cites="fig:cpss_architecture">[@fig:cpss_architecture]</span>
+rather than a clinical instrument.</p>
+<figure id="fig:webapp_main_canvas">
+<img src="../figures/webapp_main_canvas.png" style="width:95.0%"
+alt="The running Digi-PPPiP web canvas in its default dark theme, showing freehand strokes, the active-user moniker (Cozy Kiwi), the waiting-for-partner status, the drawing palette, and the simulated Coupled Dynamics panel." />
+<figcaption>The running Digi-PPPiP web canvas in its
+default dark theme, showing freehand strokes, the active-user moniker
+(Cozy Kiwi), the waiting-for-partner status, the drawing palette, and
+the simulated Coupled Dynamics panel. Captured from the running
+Vite/Socket.IO demo stack by <code>generate_webapp_main_canvas()</code>;
+read the canvas as the shared mark field, the top bar as session state,
+and the bottom-right panel as the computed modeling lens. It supports
+the methods argument that the cyberphysical substrate in <span
+class="citation"
+data-cites="fig:cpss_architecture">[@fig:cpss_architecture]</span> is
+implementable. The screenshot is conceptual; assessed usability and
+relational effects would require the study protocol in <span
+class="citation"
+data-cites="sec:methods_protocol">[@sec:methods_protocol]</span>.</figcaption>
+</figure>
+<p>The screen captures deliberately confine the relational claim. <span
+class="citation"
+data-cites="fig:webapp_main_canvas">[@fig:webapp_main_canvas]</span>
+shows a single-user session; the paired dynamics the framework theorizes
+are rendered only as simulated values. <span class="citation"
+data-cites="fig:webapp_metrics_dashboard">[@fig:webapp_metrics_dashboard]</span>
+isolates the live dashboard, where Variational Free Energy, Inter-Brain
+Synchrony, and Narrative Entropy are displayed with an explicit
+simulated-illustrative-values disclaimer. These numbers are generated
+client-side as a demonstration of the modeling lens; they are not
+experimental measurements and must not be read as evidence of neural
+coupling or therapeutic effect.</p>
+<figure id="fig:webapp_metrics_dashboard">
+<img src="../figures/webapp_metrics_dashboard.png" style="width:60.0%"
+alt="The Coupled Dynamics dashboard as rendered in the live app, isolating the simulated Variational Free Energy, Inter-Brain Synchrony, and Narrative Entropy readouts and their progress bars." />
+<figcaption>The Coupled Dynamics dashboard as
+rendered in the live app, isolating the simulated Variational Free
+Energy, Inter-Brain Synchrony, and Narrative Entropy readouts and their
+progress bars. Captured by
+<code>generate_webapp_metrics_dashboard()</code>; read each row as
+metric label, value, and relative magnitude. It supports the protocol
+distinction between a computed modeling lens and an outcome measurement.
+The values are simulated and illustrative; real values would require
+physiological instrumentation and the consent and logging gates in <span
+class="citation"
+data-cites="sec:methods_protocol">[@sec:methods_protocol]</span>.</figcaption>
+</figure>
+<p>The interface also exposes configuration choices that matter for the
+accessibility and privacy commitments in <span class="citation"
+data-cites="sec:accessibility">[@sec:accessibility]</span>. <span
+class="citation"
+data-cites="fig:webapp_light_theme">[@fig:webapp_light_theme]</span>
+shows the same canvas in a light theme, and <span class="citation"
+data-cites="fig:webapp_theme_settings">[@fig:webapp_theme_settings]</span>
+shows the theme and canvas-background settings against a plain white
+canvas. These options are not cosmetic polish; they operationalize the
+ability-based and WCAG-informed design commitments of the framework by
+letting a pair choose contrast and background settings that fit their
+access needs, while session and archive controls remain distinct from
+the visible drawing surface.</p>
+<figure id="fig:webapp_light_theme">
+<img src="../figures/webapp_light_theme.png" style="width:90.0%"
+alt="The same Digi-PPPiP canvas switched to the light theme." />
+<figcaption>The same Digi-PPPiP canvas switched to
+the light theme. Captured by <code>generate_webapp_light_theme()</code>;
+read it as the tool’s visual-contrast alternative to <span
+class="citation"
+data-cites="fig:webapp_main_canvas">[@fig:webapp_main_canvas]</span>. It
+supports the accessibility commitment that theme and contrast are
+user-selectable. The screenshot is conceptual; demonstrated
+accessibility benefit would require an accessibility audit such as <span
+class="citation"
+data-cites="fig:accessibility_audit_radar">[@fig:accessibility_audit_radar]</span>.</figcaption>
+</figure>
+<figure id="fig:webapp_theme_settings">
+<img src="../figures/webapp_theme_settings.png" style="width:90.0%"
+alt="Theme and canvas-background settings shown in the light theme against a plain white canvas." />
+<figcaption>Theme and canvas-background settings
+shown in the light theme against a plain white canvas. Captured by
+<code>generate_webapp_theme_settings()</code>; read the control row as
+the selectable theme, brush, and background configuration. It supports
+the design-commitment argument that visual-contrast and background
+choices are first-order, user-facing settings. The screenshot is
+conceptual and shows interface configuration, not measured accessibility
+outcomes.</figcaption>
+</figure>
+<h2 id="reproducible-figure-methods">Reproducible Figure Methods</h2>
+<p>The figure-generation method is also part of the research protocol
+rather than a cosmetic afterthought. Visualization grammars clarify how
+data, marks, scales, and layers compose [wilkinson2005grammar;
+wickham2010layered; bostock2011d3; satyanarayan2017vegalite], while
+graphical-perception, color-use, and validation work shows that
+scientific figures need perceptual, task, and design justification
+rather than merely attractive styling [cleveland1984graphical;
+munzner2009nested; crameri2020colour]. DigiPPPiP therefore treats each
+generated figure as a small reproducible claim object: a scoped
+argument, a method-lineage warrant, a tested primitive or explicitly
+conceptual source, a visual encoding grammar, an aesthetic/accessibility
+rule, a deterministic render, a registry entry, a caption contract, an
+accessibility description, and a render validation gate. <span
+class="citation"
+data-cites="fig:figure_generation_pipeline">[@fig:figure_generation_pipeline]</span>
+encodes that artifact chain. The implemented method has 9 generation
+stages, 7 semantic encoding roles, 5 source-method families, 13 audit
+criteria, 8 required caption elements, and a method-contract score of 1.
+The relevant scholarship supports this restraint: effective figures need
+explicit design choices and accessible description, visualization
+provenance should preserve why analytic artifacts were produced,
+remote-health-monitoring visualization studies should account for
+clinician comprehension and stakeholder-specific granularity,
+interactive visual systems need inspectable operations, accessible
+visualizations need navigable structure and custom reading sequences,
+image-alt decisions need context-specific text alternatives, and
+reproducible computational work needs organized, regenerable artifacts
+[kelleher2011guidelines; rougier2014figures; ragan2016provenance;
+lebaron2025remoteviz; heer2012interactive; elavsky2024datanavigator;
+jones2024customization; w3c2024altdecisiontree; wilson2017goodenough;
+rule2019jupyter; stodden2014reproducible; lundgard2022accessible].</p>
+<figure id="fig:figure_generation_pipeline">
+<img src="../figures/figure_generation_pipeline.png" style="width:95.0%"
+alt="Reproducible figure-generation method for DigiPPPiP." />
+<figcaption>Reproducible figure-generation method for
+DigiPPPiP. The pipeline is generated by
+<code>generate_figure_generation_pipeline()</code> from
+<code>src/figure_methods.py</code>; read the upper row as artifacts, the
+lower row as quality gates, and the colored lanes as the governed
+movement from scoped claim through accessibility description and render
+validation. It supports the methods argument that figures are
+reproducible claim objects. The pipeline is analytic, and future
+empirical figures should inherit the same gates.</figcaption>
+</figure>
+<p>Research-through-design scholarship explains why this workflow is not
+merely a publishing convenience. HCI research-through-design treats
+artifact making as a legitimate way to produce interaction-design
+knowledge when the artifact, process, and contribution are made legible
+[zimmerman2007rtd; gaver2012expectrtd]. Annotated portfolios and
+reflective design documentation make the same requirement more concrete:
+design artifacts need comparative framing, annotations, and traces of
+decision-making if they are to function as research outputs rather than
+illustrations [gaver2012annotated; dalsgaard2012documentation].
+DigiPPPiP applies that discipline to generated figures. <span
+class="citation"
+data-cites="fig:method_source_bridge">[@fig:method_source_bridge]</span>
+renders the source-to-method bridge. A diagram is allowed to contribute
+conceptual structure only when its method lineage, code path, registry
+row, caption, and claim boundary are visible.</p>
+<figure id="fig:method_source_bridge">
+<img src="../figures/method_source_bridge.png" style="width:95.0%"
+alt="Source-to-method bridge for generated DigiPPPiP figures." />
+<figcaption>Source-to-method bridge for generated
+DigiPPPiP figures. The figure is generated by
+<code>generate_method_source_bridge()</code> from
+<code>src/figure_methods.py</code>; read each row as a verified
+scholarly family, its composition archetype, the citekeys used by the
+project, source-count badges, and the gate it imposes on generated
+figures. It supports the methods claim that diagrams are research
+artifacts only when their warrant is traceable. The bridge is an audit
+device and does not turn conceptual figures into empirical
+evidence.</figcaption>
+</figure>
+<p><span class="citation"
+data-cites="fig:visual_encoding_matrix">[@fig:visual_encoding_matrix]</span>
+makes the visual grammar explicit. Actors, artifacts, signals, contexts,
+evidence, models, and caveats are assigned stable palette keys,
+non-color channels, hierarchy rules, and accessibility constraints so
+that repeated figures can be interpreted as a family without depending
+on hue alone. The grammar is intentionally conservative: it separates
+human actors from software assistance, shared artifacts from outcomes,
+signal traces from interpretation, and placemaking contexts from
+universal community-scale claims. This makes captions more auditable
+because the reader can compare the figure’s visual roles with the claim
+boundary that the prose asserts.</p>
+<figure id="fig:visual_encoding_matrix">
+<img src="../figures/visual_encoding_matrix.png" style="width:95.0%"
+alt="Visual encoding matrix for generated DigiPPPiP figures." />
+<figcaption>Visual encoding matrix for generated
+DigiPPPiP figures. The matrix is generated by
+<code>generate_visual_encoding_matrix()</code> from
+<code>src/figure_methods.py</code>; read each row as a semantic role
+with its target, palette key, non-color channel, hierarchy rule,
+contrast cue, and interpretation guardrail. It supports the methods
+argument that repeated colors, labels, positions, marks, and text
+equivalents form a reusable grammar. The matrix is conceptual, and
+empirical data would add measured scales without removing the
+guardrails.</figcaption>
+</figure>
+<p><span class="citation"
+data-cites="fig:figure_method_audit">[@fig:figure_method_audit]</span>
+then turns the caption and rendering expectations into a checklist. The
+audit is not a guarantee that every reader will understand every figure
+in the same way. It is a reproducibility guard: a figure must name what
+it encodes, identify the source or generator, state its method lineage
+and manuscript role, explain how to read marks or axes, declare whether
+it is conceptual, protocol, audit, analytic simulation, or empirical
+placeholder material, preserve the caveat that limits interpretation,
+and identify what future evidence would upgrade the claim. That
+requirement also improves accessibility because natural-language
+descriptions can convey marks, statistics, perceptual relations, and
+domain meaning for readers who cannot rely on the image alone
+[lundgard2022accessible]. Current accessible-visualization work extends
+the requirement from alt text toward navigable structure, customizable
+token order, and reader-controlled verbosity [elavsky2024datanavigator;
+jones2024customization]. The code now writes long-description sidecars
+for every generated figure and emits
+<code>../figures/figure_artifact_audit.json</code>, an artifact-level
+audit that checks registry uniqueness, orphan PNGs, dimensions, nonblank
+pixels, manuscript references, caption/prose parity, claim-status
+validity, long-description presence, readability metadata,
+long-description reading guidance, and section alignment after the
+figure set is rendered.</p>
+<figure id="fig:figure_method_audit">
+<img src="../figures/figure_method_audit.png" style="width:90.0%"
+alt="Figure-method audit for DigiPPPiP generated figures." />
+<figcaption>Figure-method audit for DigiPPPiP
+generated figures. Bars are generated by
+<code>generate_figure_method_audit()</code> from
+<code>src/figure_methods.py</code>; read each row as a required gate
+covering deterministic inputs, registry metadata, captions, claim
+boundaries, source alignment, accessibility text, legend/axis integrity,
+render resolution, auto-numbered references, and visible claim status.
+It supports workflow verification, not participant inference. Failed
+gates would require code or caption repair.</figcaption>
+</figure>
+<h2 id="study-package-access-place-and-outcomes">Study Package, Access,
+Place, and Outcomes</h2>
+<p>The minimum reproducibility package for a DigiPPPiP study should
+include the protocol version, temporal-spatial condition, interface
+capabilities, event schema, exclusion windows, consent and persistence
+settings, accessibility accommodations, outcome measures, and analysis
+code. Without that package, readers cannot tell whether an observed
+result belongs to the dyad, the task, the technology, the access
+arrangement, or the analysis pipeline. This is a first-principles
+requirement: if the causal candidates cannot be separated, the
+interpretation cannot be audited.</p>
+<p>The protocol appendix should also separate three participant-facing
+surfaces that are easy to collapse. The access surface records supported
+input channels, feedback channels, partner-mediated assistance,
+cognitive-load settings, communication preferences, and accommodation
+changes during the session. The place surface records only the situated
+cues that participants consent to share, such as room type, local
+prompt, mobility context, or remembered place, and it should not require
+precise geolocation for a place-responsive claim. The health surface
+states that DigiPPPiP is non-clinical unless a reviewed intervention
+protocol says otherwise, names stop and referral procedures, and
+separates personal keepsakes from research logs before any export or
+replay.</p>
+<p>Reporting guidance supplies the study-readiness bridge. The Template
+for Intervention Description and Replication (TIDieR) requires enough
+intervention detail for replication, and the Consolidated Standards of
+Reporting Trials for eHealth (CONSORT-EHEALTH) names web and mobile
+health reporting elements that are easy to miss when an online
+intervention feels self-explanatory [hoffmann2014tidier;
+eysenbach2011consortehealth]. For DigiPPPiP that means the protocol must
+define session dose, materials, platform settings, tailoring, fidelity,
+archive-control states, and changes made during the study. The Preferred
+Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) is not
+activated here because the evidence graph is a bounded narrative
+synthesis rather than a systematic review claim; it should be added only
+if the review question, search strategy, screening, extraction, and flow
+diagram become systematic.</p>
+<p>Accessibility is handled as a protocol requirement. The current audit
+has 5 criteria and an illustrative implementation score of 1. The radar
+in <span class="citation"
+data-cites="fig:accessibility_audit_radar">[@fig:accessibility_audit_radar]</span>
+is not a compliance certificate; it is a reproducible way to document
+which input, feedback, privacy, cognitive-load, and partner-mediation
+capabilities a study or tool actually supports.</p>
+<figure id="fig:accessibility_audit_radar">
+<img src="../figures/accessibility_audit_radar.png" style="width:75.0%"
+alt="Accessibility audit radar generated from explicit implementation capabilities." />
+<figcaption>Accessibility audit radar generated from
+explicit implementation capabilities. The figure is generated by
+<code>generate_accessibility_audit_radar()</code> from
+<code>src/accessibility.py</code>; read each spoke as a capability
+domain and radial distance as documented support in the illustrative
+configuration. It supports reproducible access auditing, not compliance
+certification. Empirical accessibility claims would require
+participatory validation with disabled users and accommodation
+logs.</figcaption>
+</figure>
+<p>Outcomes are organized as a multilevel design rather than a single
+success metric. The project defines 6 measures across 6 domains, with a
+default design-strength score of 4 for a randomized longitudinal study.
+<span class="citation"
+data-cites="fig:multilevel_outcome_model">[@fig:multilevel_outcome_model]</span>
+shows how temporal mode, spatial configuration, phase, and access
+condition can be modeled with dyad and participant random effects. This
+structure separates implementation outcomes, such as latency and logging
+completeness, from relational outcomes, such as perceived connection and
+shared meaning.</p>
+<figure id="fig:multilevel_outcome_model">
+<img src="../figures/multilevel_outcome_model.png" style="width:90.0%"
+alt="Multilevel outcome model for DigiPPPiP studies." />
+<figcaption>Multilevel outcome model for DigiPPPiP
+studies. The figure is generated by
+<code>generate_multilevel_outcome_model()</code> from
+<code>src/outcomes.py</code>; read left components as fixed effects, the
+center as the dyad-level mixed model, and the right component as outcome
+domains. It supports planned-analysis specification rather than
+reporting results. Validation would require real dyadic observations,
+random effects diagnostics, and matched shared-activity
+controls.</figcaption>
+</figure>
+<h2 id="falsification-and-claim-boundaries">Falsification and Claim
+Boundaries</h2>
+<p>Falsification should be designed in. The framework would be weakened
+if matched controls produce the same relational outcomes, if
+accessibility accommodations reduce rather than expand agency, if
+synchrony measures vanish after artifact correction, if AI suggestions
+displace rather than support human agency, or if participants describe
+persistent archives as surveillance rather than shared memory. Those
+outcomes would not invalidate shared drawing as a practice; they would
+delimit which mechanisms, contexts, or claims the framework can
+support.</p>
+<p><span class="citation"
+data-cites="fig:validation_ladder">[@fig:validation_ladder]</span>
+expresses this as 5 staged gates. Feasibility and relational meaning
+come before access claims, matched outcome comparisons, and optional
+physiology. This ordering is adversarial by design: neural or
+computational sophistication cannot rescue a practice that is not
+understood, consentful, accessible to the stated population, or
+meaningfully different from simpler shared activities.</p>
+<figure id="fig:validation_ladder">
+<img src="../figures/validation_ladder.png" style="width:90.0%"
+alt="Staged empirical validation ladder for DigiPPPiP." />
+<figcaption>Staged empirical validation ladder for
+DigiPPPiP. The figure is generated by
+<code>generate_validation_ladder()</code> from
+<code>src/source_quality.py</code>; read the left column as claims
+unlocked by each stage and the right column as minimum controls before
+escalation. It supports the protocol’s adversarial ordering from
+feasibility and meaning through access, matched outcomes, and optional
+physiology. The ladder is conceptual, and stronger claims require
+completed studies at the relevant stage.</figcaption>
+</figure>
+<p>This protocol prevents the main evidentiary errors. Active inference
+is used as a modeling language, not proof of mechanism. Hyperscanning
+synchrony is treated as a correlate until causal designs justify more
+[cui2012nirs; czeszumski2020hyperscanning; hamilton2021hyperscanning;
+zimmermann2024methodological]. Art-therapy and digital-health
+literatures motivate possible applications and cautions, but DigiPPPiP
+is not described as treatment without controlled clinical evidence
+[zubala2021digitalarttherapy]. Accessibility and placemaking claims stay
+bounded to the capabilities and populations actually tested.</p>
+</main>
+</body>
+</html>

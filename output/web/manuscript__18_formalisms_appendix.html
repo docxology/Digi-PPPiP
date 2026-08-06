@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>18_formalisms_appendix.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script data-template-mathjax-config>
+window.MathJax = window.MathJax || {};
+window.MathJax.chtml = Object.assign({}, window.MathJax.chtml, {
+  fontURL: "https://cdn.jsdelivr.net/npm/@mathjax/mathjax-newcm-font@4.0.0/chtml/woff2",
+  dynamicPrefix: "https://cdn.jsdelivr.net/npm/@mathjax/mathjax-newcm-font@4.0.0/chtml/dynamic"
+});
+window.normalizeTemplateMathJaxAria = function () {
+  document.querySelectorAll("mjx-speech[aria-roledescription]").forEach(function (node) {
+    var roleDescription = node.getAttribute("aria-roledescription") || "";
+    if (/[-]/.test(roleDescription)) {
+      node.setAttribute("aria-roledescription", "mathematical expression");
+    }
+  });
+};
+window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
+  ready: function () {
+    window.MathJax.startup.defaultReady();
+    window.MathJax.startup.promise.then(window.normalizeTemplateMathJaxAria);
+  }
+});
+</script>
+<script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js"
+  type="text/javascript" integrity="sha384-2BWc4dVaHADUocwKrUrK9u3iDwHxVMKXWEcoRmUkXYSFKhAsgVAYClu9ydNuo5Oz" crossorigin="anonymous"></script>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:formalisms_appendix">Appendix: Free-Energy and
+Active-Inference Formalisms</h1>
+<p>This appendix holds the mathematical and diagnostic primitives used
+by the main manuscript. The consolidation is deliberate: active
+inference remains a modeling lens in the main line, while the formal
+details sit here where readers can inspect assumptions, generators,
+labels, and evidence boundaries together. The appendix draws on
+established active-inference and free-energy treatments [friston2010fep;
+friston2017process; parr2022activeinference; friston2023simpler],
+discrete-state synthesis work [dacosta2020discrete], and interactional
+accounts of communication and second-person modeling
+[vasil2020communication; schilbach2013secondperson;
+redcay2019secondperson; bolis2024secondperson].</p>
+<h2 id="event-to-model-mapping">Event-to-Model Mapping</h2>
+<p><span class="citation"
+data-cites="fig:active_inference_mapping">[@fig:active_inference_mapping]</span>
+maps DigiPPPiP’s theoretical terms to observable design elements. Latent
+states are partner intentions, narrative states, and shared affect.
+Observations are strokes, pauses, utterances, and interface events.
+Policies are drawing, waiting, responding, and revising. The figure is
+included to prevent active inference from becoming decorative
+terminology: every model term has to be tied to a protocol event or
+dropped.</p>
+<figure id="fig:active_inference_mapping">
+<img src="../figures/active_inference_mapping.png" style="width:90.0%"
+alt="Mapping from DigiPPPiP events to active-inference model components." />
+<figcaption>Mapping from DigiPPPiP events to
+active-inference model components. The figure is generated by
+<code>generate_active_inference_mapping()</code>; read the columns as
+latent states, observations, and policies, with arrows showing how
+partner-conditioned beliefs can update through visible marks. It
+supports the active-inference appendix by tying terms to measurable
+protocol events. The mapping is conceptual; fitted parameters and
+failed-baseline checks would be needed for mechanism
+claims.</figcaption>
+</figure>
+<h2 id="minimal-free-energy-primitive">Minimal Free-Energy
+Primitive</h2>
+<p>The project uses a Gaussian point-belief model as a minimal
+conceptual primitive. Variational free energy is:</p>
+<p><span class="math display">\[
+F(\mu)=\frac{1}{2}\pi_p(\mu-\mu_p)^2+\frac{1}{2}\pi_l(o-\mu)^2-\frac{1}{2}\log
+\pi_p-\frac{1}{2}\log \pi_l
+\]</span> {#eq:vfe}</p>
+<p>The expression in <span class="citation"
+data-cites="eq:vfe">[@eq:vfe]</span> defines <span
+class="math inline">\(\mu\)</span> as the current belief, <span
+class="math inline">\(\mu_p\)</span> as the prior mean, <span
+class="math inline">\(o\)</span> as the canvas observation, and <span
+class="math inline">\(\pi_p,\pi_l\)</span> as the prior and likelihood
+precisions. The analytic posterior mean used by
+<code>src/active_inference.py</code> is:</p>
+<p><span class="math display">\[
+\mu^\ast=\frac{\pi_p\mu_p+\pi_l o}{\pi_p+\pi_l}
+\]</span> {#eq:posterior}</p>
+<p>In a coupled dyad, each partner’s previous posterior becomes part of
+the other’s next prior. <span class="citation"
+data-cites="fig:active_inference_loop">[@fig:active_inference_loop]</span>
+contrasts that coupled case with a decoupled baseline. The terminal
+free-energy values from the deterministic conceptual run are -0.693147
+and 0.061153, respectively; the absolute reduction is 0.7543. These are
+model outputs, not human-subject measurements.</p>
+<figure id="fig:active_inference_loop">
+<img src="../figures/active_inference_loop.png" style="width:90.0%"
+alt="Coupled and decoupled conceptual free-energy trajectories generated by generate_active_inference_loop() from simulate_dyadic_session() ." />
+<figcaption>Coupled and decoupled conceptual
+free-energy trajectories generated by
+<code>generate_active_inference_loop()</code> from
+<code>simulate_dyadic_session()</code>. Read the solid and dashed lines
+as toy-model baselines for reciprocal versus non-reciprocal prior
+updating across mark steps. The plot supports the modeling argument that
+coupling can be formalized, not that couples improve. Empirical
+validation would require observed behavior and model-comparison
+evidence.</figcaption>
+</figure>
+<h2 id="hyperscanning-and-network-geometry">Hyperscanning and Network
+Geometry</h2>
+<p>Geometric hyperscanning is a candidate measurement vocabulary for
+empirical studies, not a shortcut to interpreting synchrony.
+Near-infrared spectroscopy (NIRS)-based cooperation studies and
+hyperscanning reviews motivate dyadic measurement [cui2012nirs;
+czeszumski2020hyperscanning; czeszumski2022cooperative;
+nam2020hyperscanningreview], yet shared stimulus timing, motion
+artifacts, physiology, task structure, preprocessing choices, and
+analytic windows can all inflate apparent coupling. Methodological
+cautions in fNIRS and hyperscanning warn against interpreting
+cross-brain coherence as direct evidence of shared minds, empathy, or
+relationship improvement [tachtsidis2016fnirs;
+hamilton2021hyperscanning; zimmermann2024methodological]. Translational
+hyperscanning arguments are valuable only when they remain close to
+applied contexts and family or dyadic care questions rather than
+treating synchrony as a generic marker of social quality
+[provenzi2022translational]. <span class="citation"
+data-cites="fig:network_analysis_pipeline">[@fig:network_analysis_pipeline]</span>
+therefore separates acquisition, cleaning, windowing, synchrony
+estimation, graph construction, and curvature analysis before
+interpretation.</p>
+<figure id="fig:network_analysis_pipeline">
+<img src="../figures/network_analysis_pipeline.png" style="width:90.0%"
+alt="Reproducible pipeline from raw dyadic signals to interaction-network diagnostics." />
+<figcaption>Reproducible pipeline from raw dyadic
+signals to interaction-network diagnostics. The figure is generated by
+<code>generate_network_analysis_pipeline()</code>; read the boxes left
+to right as acquisition, cleaning, windowing, synchrony estimation,
+graph construction, and curvature analysis. It supports the methods
+guardrail that signal processing precedes interpretation. The pipeline
+is analytic scaffolding; actual studies must report exclusion windows,
+preprocessing choices, and permutation controls.</figcaption>
+</figure>
+<p><span class="citation"
+data-cites="fig:hyperscanning_alignment">[@fig:hyperscanning_alignment]</span>
+makes the alignment problem more concrete. Behavioral events,
+physiological channels, and exclusion windows must be synchronized
+before a study can ask whether a neural measure tracks co-drawing,
+repair, rupture, or co-regulation. The figure deliberately includes a
+shared artifact window to show how apparent coupling can arise from
+non-social signal contamination.</p>
+<figure id="fig:hyperscanning_alignment">
+<img src="../figures/hyperscanning_alignment.png" style="width:90.0%"
+alt="Alignment schematic for behavior, physiology, artifact rejection, and cautious interpretation." />
+<figcaption>Alignment schematic for behavior,
+physiology, artifact rejection, and cautious interpretation. The three
+tracks generated by <code>generate_hyperscanning_alignment()</code>
+should be read vertically: behavioral event windows, raw physiological
+channels with shared artifacts, and cleaned channels after exclusion. It
+supports the caution that synchrony claims require co-registration and
+artifact handling. The signals are simulated; measured analyses would
+need device-specific quality metrics and null models.</figcaption>
+</figure>
+<p>For a simple unweighted inter-brain graph, the Forman-Ricci curvature
+used here is:</p>
+<p><span class="math display">\[
+\mathrm{Fr}(uv)=4-\deg(u)-\deg(v)
+\]</span> {#eq:forman_ricci}</p>
+<p>The implementation uses Forman’s cell-complex curvature vocabulary
+and dynamic-network change-detection applications as method antecedents
+[forman2003bochner; weber2016forman]. The curvature-entropy diagnostic
+in <span class="citation"
+data-cites="fig:geometric_hyperscanning">[@fig:geometric_hyperscanning]</span>
+follows recent proposals to treat topological reconfiguration in
+inter-brain networks as a marker of affective phase transitions
+[hinrichs2025geometric]. The conceptual run has maximum curvature
+entropy 2.4087 and detects 48 transition events under the configured
+threshold.</p>
+<figure id="fig:geometric_hyperscanning">
+<img src="../figures/geometric_hyperscanning.png" style="width:90.0%"
+alt="Conceptual curvature entropy over a modeled inter-brain network sequence." />
+<figcaption>Conceptual curvature entropy over a
+modeled inter-brain network sequence. The plot is generated by
+<code>generate_geometric_hyperscanning_plot()</code> from synthetic
+network snapshots; read the red curve as curvature entropy and blue
+points as candidate transitions. It supports the proposal that graph
+diagnostics could mark rupture or repair windows. The figure is not
+participant hyperscanning, and empirical use would require
+artifact-robust network estimation.</figcaption>
+</figure>
+<h2 id="narrative-information-and-aesthetic-discovery">Narrative
+Information and Aesthetic Discovery</h2>
+<p>Narrative also fits the active-inference vocabulary. Narratives guide
+event segmentation, identity coherence, and policy selection
+[bouizegarene2024narrative; veisserie2020thinking]. In DigiPPPiP, a mark
+sequence can be treated as a symbolic trajectory with Shannon entropy
+and surprisal [shannon1948mathematical]:</p>
+<p><span class="math display">\[
+H(X)=-\sum_i p(x_i)\log_2 p(x_i)
+\]</span> {#eq:shannon}</p>
+<p>The expected-information-gain arc used for aesthetic co-discovery
+is:</p>
+<p><span class="math display">\[
+\mathrm{EIG}(t)=c\,t\,e^{-\lambda t}
+\]</span> {#eq:epistemic_arc}</p>
+<p><span class="citation"
+data-cites="fig:narrative_information">[@fig:narrative_information]</span>
+and <span class="citation"
+data-cites="fig:epistemic_arc">[@fig:epistemic_arc]</span> translate
+those commitments into inspectable conceptual plots. The configured
+alphabet supports a maximum entropy of 2.585 bits, and the epistemic arc
+peaks at model step 2.</p>
+<figure id="fig:narrative_information">
+<img src="../figures/narrative_information.png" style="width:90.0%"
+alt="Narrative-information diagnostics for a conceptual stroke sequence." />
+<figcaption>Narrative-information diagnostics for a
+conceptual stroke sequence. The figure is generated by
+<code>generate_narrative_information_plot()</code> from
+<code>src/narrative.py</code>; read the upper panel as surprisal with
+pivotal-moment markers and the lower panel as convergence toward a
+repeated motif. It supports the narrative-information appendix by making
+the entropy primitive inspectable. The sequence is synthetic, and
+participant claims would require coded stroke alphabets and inter-rater
+checks.</figcaption>
+</figure>
+<figure id="fig:epistemic_arc">
+<img src="../figures/epistemic_arc.png" style="width:90.0%"
+alt="Expected-information-gain and order-change balance in a conceptual DigiPPPiP session." />
+<figcaption>Expected-information-gain and
+order-change balance in a conceptual DigiPPPiP session. The figure is
+generated by <code>generate_epistemic_arc_plot()</code> from
+<code>src/aesthetics.py</code>; read the normalized curves as an
+illustrative relation between curiosity, order, change, and the marked
+“aha” peak. It supports the appendix’s modeling vocabulary. The plot is
+conceptual, and validation would require event-aligned experience
+reports or behavioral measures.</figcaption>
+</figure>
+<p>Together, these equations function as a falsifiable grammar for
+future studies. They succeed only if they help specify what should be
+measured, what comparison would matter, and what result would count
+against the interpretation. A free-energy curve that improves only
+because of parameter choices, a synchrony measure that disappears after
+artifact controls, or an entropy score unrelated to participant reports
+would all narrow the framework rather than embarrass it.</p>
+</main>
+</body>
+</html>

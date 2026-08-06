@@ -1,0 +1,191 @@
+{
+  "audit": {
+    "checks": [
+      {
+        "detail": "10/10 covered",
+        "key": "required_cases",
+        "label": "all required study-readiness cases are present",
+        "passed": true
+      },
+      {
+        "detail": "deletion/export/replay/redaction/disagreement",
+        "key": "dyadic_edge_cases",
+        "label": "dyadic archive-control edge cases are explicit",
+        "passed": true
+      },
+      {
+        "detail": "participant_right populated",
+        "key": "participant_rights",
+        "label": "active cases state participant-facing rights",
+        "passed": true
+      },
+      {
+        "detail": "protocol_requirement populated",
+        "key": "protocol_requirements",
+        "label": "active cases state protocol requirements",
+        "passed": true
+      },
+      {
+        "detail": "source_keys populated",
+        "key": "source_anchors",
+        "label": "active cases cite source anchors",
+        "passed": true
+      },
+      {
+        "detail": "cruzrivera2020spiritai,europeanunion2024aiact,hancock2020aimediatedcommunication,liu2020consortai,malfacini2025companionai,nist2023airmf,tang2023medicalaiethics",
+        "key": "ai_branch_governance",
+        "label": "optional AI branch cites reporting and risk-governance anchors",
+        "passed": true
+      }
+    ],
+    "missing_cases": [],
+    "score": 1.0
+  },
+  "cases": [
+    {
+      "applicability": "default_human_human",
+      "key": "dyadic_consent",
+      "label": "dyadic consent",
+      "participant_right": "Both partners consent separately; one partner's agreement never stands in for the other.",
+      "protocol_requirement": "Consent form and intake script record partner-specific consent, archive permission, and contact limits.",
+      "source_keys": [
+        "hhs2025cfr46",
+        "wma2024helsinki",
+        "kassam2023digitalconsent"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "deletion",
+      "label": "deletion control",
+      "participant_right": "Each partner can request deletion of identifiable archive material before analysis lock.",
+      "protocol_requirement": "Protocol names who can delete, what is deleted, when deletion closes, and how derived data are handled.",
+      "source_keys": [
+        "hhs2025cfr46",
+        "nissenbaum2011contextualprivacy",
+        "petronio2020cpm",
+        "pendse2024consentforward"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "export",
+      "label": "export control",
+      "participant_right": "Participants can receive their own drawings and approved shared artifacts in a usable format.",
+      "protocol_requirement": "Export workflow separates personal copies, shared copies, de-identified research data, and public examples.",
+      "source_keys": [
+        "hhs2025cfr46",
+        "dourish2006collectiveprivacy",
+        "shilton2012values",
+        "kassam2023digitalconsent"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "replay",
+      "label": "replay control",
+      "participant_right": "Participants are told when stroke replay exists and can decline replay use beyond the session.",
+      "protocol_requirement": "Replay logs require explicit permission, purpose limits, access logs, and redaction before presentation.",
+      "source_keys": [
+        "hhs2025cfr46",
+        "nissenbaum2011contextualprivacy",
+        "dourish2006collectiveprivacy",
+        "lebaron2025remoteviz"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "redaction",
+      "label": "redaction",
+      "participant_right": "Participants can flag names, symbols, locations, or sensitive marks for masking before sharing.",
+      "protocol_requirement": "Redaction procedure preserves audit trails while removing identifying or partner-sensitive content.",
+      "source_keys": [
+        "hhs2025cfr46",
+        "petronio2020cpm",
+        "wma2024helsinki"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "withdrawal",
+      "label": "withdrawal",
+      "participant_right": "Either partner can withdraw from future participation without penalty or partner permission.",
+      "protocol_requirement": "Withdrawal script explains what happens to collected, de-identified, exported, and jointly authored data.",
+      "source_keys": [
+        "hhs2025cfr46",
+        "wma2024helsinki"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "adverse_event",
+      "label": "adverse event",
+      "participant_right": "Participants know how to pause, stop, or report distress, conflict, or privacy discomfort.",
+      "protocol_requirement": "Protocol defines adverse-event triage, escalation contacts, stopping rules, and follow-up documentation.",
+      "source_keys": [
+        "hhs2025cfr46",
+        "wma2024helsinki"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "data_retention",
+      "label": "data retention",
+      "participant_right": "Participants are told how long raw marks, replay logs, exports, and analysis tables are retained.",
+      "protocol_requirement": "Retention schedule distinguishes raw identifiable files, de-identified tables, derived metrics, and figures.",
+      "source_keys": [
+        "hhs2025cfr46",
+        "hoffmann2014tidier"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "one_partner_disagrees",
+      "label": "one partner disagrees",
+      "participant_right": "If partners disagree about saving, replay, export, or publication, the stricter privacy choice governs.",
+      "protocol_requirement": "Dyadic conflict rule defaults to non-retention or de-identification unless both partners approve sharing.",
+      "source_keys": [
+        "dourish2006collectiveprivacy",
+        "petronio2020cpm",
+        "shilton2012values"
+      ]
+    },
+    {
+      "applicability": "default_human_human",
+      "key": "intervention_description",
+      "label": "intervention description",
+      "participant_right": "Participants and reviewers can see what the drawing activity asks people to do.",
+      "protocol_requirement": "TIDieR-style description records materials, procedures, session dose, tailoring, modifications, and fidelity.",
+      "source_keys": [
+        "hoffmann2014tidier",
+        "eysenbach2011consortehealth",
+        "benmessaoud2023dyadicmodule"
+      ]
+    },
+    {
+      "applicability": "optional_ai_branch",
+      "key": "ai_branch_governance",
+      "label": "AI branch governance",
+      "participant_right": "AI support is optional, disclosed, rejectable, reversible, and never described as a partner.",
+      "protocol_requirement": "Optional AI studies require a separate arm, risk-management log, CONSORT-AI/SPIRIT-AI fields, and EU AI Act check.",
+      "source_keys": [
+        "liu2020consortai",
+        "cruzrivera2020spiritai",
+        "nist2023airmf",
+        "europeanunion2024aiact",
+        "hancock2020aimediatedcommunication",
+        "malfacini2025companionai",
+        "tang2023medicalaiethics"
+      ]
+    },
+    {
+      "applicability": "conditional_not_active",
+      "key": "prisma_boundary",
+      "label": "PRISMA boundary",
+      "participant_right": "Participants are not affected because the current manuscript does not make a systematic-review claim.",
+      "protocol_requirement": "Activate PRISMA only if the evidence synthesis is redesigned as a systematic review.",
+      "source_keys": []
+    }
+  ],
+  "score": 1.0
+}
