@@ -32,7 +32,7 @@ authors:
     orcid: "0000-0001-6232-9096"
 
 publication:
-  # Real DOI reserved via Zenodo draft deposit (unpublished); public record pending final release.
+  # Real DOI, published on Zenodo (record 21815705, v1.0.0); version_doi below is the version-specific DOI.
   doi: "10.5281/zenodo.21815704"
   journal: ""
   volume: ""
