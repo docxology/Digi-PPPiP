@@ -6,7 +6,7 @@ required).
 
 ## What is tested
 
-22 test files cover every `src/` module. A hard rule (enforced by
+21 test files cover every `src/` module. A hard rule (enforced by
 `tests/test_integration_consistency.py`) is that **no mocks or test doubles are
 allowed** — tests use only deterministic real values. Every test passes an
 explicit seed where randomness is involved, so output is reproducible.

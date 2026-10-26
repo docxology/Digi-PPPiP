@@ -14,7 +14,8 @@ This client is responsible for rendering the shared digital canvas, maintaining 
 ## 🚀 Development
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) v18+
+- [Node.js](https://nodejs.org/) 20.19+ (or ≥22.12) — the floor required by Vite 8 and
+  ESLint 10.
 
 ### Setup
 ```bash

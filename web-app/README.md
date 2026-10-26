@@ -34,7 +34,7 @@ The application features a real-time dashboard that visually simulates these the
 ## 🛠️ Tech Stack & Architecture
 
 This repository is built with a decoupled client/server architecture:
-- **Frontend (`client/`)**: React (18), Vite, standard CSS3 (CSS Variables for theming).
+- **Frontend (`client/`)**: React 19, Vite, standard CSS3 (CSS Variables for theming).
 - **Backend (`server/`)**: Node.js, Express, Socket.IO.
 - **State Management**: The UI is governed by standard React hooks. The canvas rendering bypasses React's virtual DOM, directly utilizing the HTML5 `<canvas>` API via `useRef` for high-performance 60fps rendering, avoiding render bottlenecks during heavy path interpolation.
 

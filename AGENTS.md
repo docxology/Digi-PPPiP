@@ -69,3 +69,8 @@ template root. Full instructions: [`RENDERING.md`](RENDERING.md).
 uv run python -m infrastructure.validation.cli prerender projects/Digi-PPPiP/manuscript --repo-root .
 uv run python scripts/03_render_pdf.py --project Digi-PPPiP
 ```
+
+Those paths are the pinned-revision spelling. On current `docxology/template`
+the numbered stages live in `scripts/pipeline/` and local sidecars live in
+`projects/working/<name>` (`scripts/pipeline/stage_03_render.py --project
+digi-pppip`); see [`RENDERING.md`](RENDERING.md).

@@ -78,9 +78,16 @@ manuscript/          modular Pandoc sections + config/preamble/SYNTAX/bib
 web-app/             React + Socket.IO interactive instantiation + screenshots
 output/              generated figures, PDF, web, slides, data, reports
 tests/               no-mocks pytest suite
-docs/                factored technical docs (architecture/figures/testing/scholarship)
+docs/                factored technical docs — entry point: docs/INDEX.md
 ISA.md, AGENTS.md, RENDERING.md
 ```
+
+## Documentation
+
+[`docs/INDEX.md`](docs/INDEX.md) is the entry point to the factored technical
+docs: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
+[`docs/FIGURES.md`](docs/FIGURES.md), [`docs/TESTING.md`](docs/TESTING.md), and
+[`docs/SCHOLARSHIP.md`](docs/SCHOLARSHIP.md).
 
 ## Validation (standalone quality gate)
 
@@ -100,17 +107,21 @@ audit score 1.0, and a green template prerender. Coverage is enforced at 90%.
 
 This repo has no renderer of its own; it renders as a **sidecar** of the
 [`docxology/template`](https://github.com/docxology/template) research pipeline.
-Place (or symlink) it at `template/projects/working/digi-pppip`, then from the
-template root:
+Place (or symlink) it at `template/projects/Digi-PPPiP`, then from the template
+root:
 
 ```bash
-.venv/bin/python -m infrastructure.validation.cli prerender \
-  projects/working/digi-pppip/manuscript --repo-root .
-.venv/bin/python scripts/pipeline/stage_03_render.py --project working/digi-pppip
+uv run python -m infrastructure.validation.cli prerender \
+  projects/Digi-PPPiP/manuscript --repo-root .
+uv run python scripts/03_render_pdf.py --project Digi-PPPiP
 ```
 
-The combined PDF is written to `output/pdf/digi-pppip_combined.pdf`; a copy is
-also kept at the repo root as `Digi-PPPiP_combined.pdf`. Full two-repo
+The template writes the render into its own `output/Digi-PPPiP/` tree; this repo
+keeps the published copy at `output/pdf/digi-pppip_combined.pdf` and at the repo
+root as `Digi-PPPiP_combined.pdf`. These are the commands at the pinned template
+revision; current `docxology/template` keeps the numbered stages in
+`scripts/pipeline/` and local sidecars under `projects/working/<name>`
+(`scripts/pipeline/stage_03_render.py --project digi-pppip`). Full two-repo
 instructions: **[`RENDERING.md`](RENDERING.md)**.
 
 ## Publication & DOI

@@ -33,7 +33,8 @@ The server binds to port `3001` by default, but it will respect the `PORT` envir
 
 The following environment variables tune the server's hardening knobs:
 
-- `CORS_ORIGIN` — comma-separated allowed origins (default: `http://localhost:3000`). Set this to the explicit origin hosting your Vite client before any non-local deployment.
+- `CORS_ORIGIN` — comma-separated allowed origins (default:
+  `http://localhost:5173,http://localhost:3000`). Set this to the explicit origin hosting your Vite client before any non-local deployment.
 - `MAX_CONNECTIONS` — hard cap on concurrent sockets (default: `100`). When exceeded, new clients receive a `server_full` event and are disconnected.
 - `RATE_LIMIT` — per-socket broadcast allowance per second via a token bucket (default: `240` events/sec). `RATE_LIMIT_ENABLED=false` disables throttling for trusted/private networks.
 - `PORT` — listening port (default: `3001`).
