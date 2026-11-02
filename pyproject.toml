@@ -17,7 +17,7 @@ description = "DigiPPPiP: a composable, fully-tested computational companion to 
 authors = [
     {name = "DigiPPPiP Research Author", email = "digippppip@research-template.org"}
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "numpy>=1.24.0",
     "scipy>=1.10.0",
