@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software
+title: "Digi-PPPiP"
+authors:
+  - family-names: Friedman
+    given-names: Daniel Ari
+    orcid: "https://orcid.org/0000-0001-6232-9096"
+repository-code: "https://github.com/docxology/Digi-PPPiP"
+abstract: "Active inference study of two-person collaborative drawing on shared digital surfaces — a React/Vite plus Socket.IO live drawing app over a typed Python core computing variational free energy, inter-brain synchrony and narrative entropy, with generated figures, a test suite and a Zenodo-archived manuscript."
+license: MIT
