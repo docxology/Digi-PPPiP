@@ -38,7 +38,10 @@ function App() {
   const [connectionStatus, setConnectionStatus] = useState('connecting');
   const canvasRef = useRef(null);
   
-  const [userId] = useState(() => Math.random().toString(36).substring(2, 15));
+  // Session id from the browser CSPRNG (Math.random is predictable).
+  const [userId] = useState(() =>
+    Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, '0')).join('')
+  );
   const [nickname] = useState(() => generateNickname());
 
   useEffect(() => {
