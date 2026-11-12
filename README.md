@@ -1,5 +1,15 @@
 # Digi-PPPiP — Digital Partner Pen Play in Parallel
 
+<p align="center">
+  <a href="https://doi.org/10.5281/zenodo.21815705"><img alt="Digital Object Identifier (DOI), version record: 10.5281/zenodo.21815705" src="https://zenodo.org/badge/DOI/10.5281/zenodo.21815705.svg"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
+  <img alt="Requires Python 3.11 or newer" src="https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white">
+</p>
+
+<p align="center">
+  <img src="manuscript/cover.png" alt="Symbolic cover art: two pen tips face each other across a dark grid, joined by interwoven cyan and amber waveforms." width="640">
+</p>
+
 > **Digital Partner Pen Play in Parallel** — a cyberphysical, temporal,
 > active-inference, neuroergonomic, phenomenological, accessibility, and
 > place-based successor to PPPiP (Mikhailova & Friedman, 2018).
