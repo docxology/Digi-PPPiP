@@ -4,7 +4,6 @@ const path = require('path');
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
-  const client = await page.context().newCDPSession(page);
 
   try {
     await page.goto('http://localhost:5173', { waitUntil: 'networkidle' });
