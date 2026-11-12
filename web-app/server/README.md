@@ -17,7 +17,7 @@ This server acts as a thin, stateless orchestrator. It does not persist drawing 
 ## 🚀 Development
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) v18+
+- [Node.js](https://nodejs.org/) v20+ (Node 18 is end-of-life)
 
 ### Setup
 ```bash
