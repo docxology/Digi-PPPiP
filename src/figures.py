@@ -381,21 +381,6 @@ def _caveat(ax: Axes, text: str) -> None:
     )
 
 
-def _panel_label(ax: Axes, label: str) -> None:
-    ax.text(
-        0.01,
-        0.98,
-        label,
-        transform=ax.transAxes,
-        ha="left",
-        va="top",
-        fontsize=9,
-        weight="bold",
-        color="#0f172a",
-        bbox={"boxstyle": "round,pad=0.18", "fc": "#f8fafc", "ec": "#cbd5e1", "lw": 0.7},
-    )
-
-
 def generate_evolution_timeline(out_dir: Path) -> Path:
     """Render the conceptual evolution from PPPiP to DigiPPPiP."""
     labels = ["paper", "screen", "hybrid", "brain", "story", "place"]
