@@ -37,7 +37,7 @@ const MAX_BUFFER_BYTES = 64 * 1024; // Socket.IO frame cap (also 64 KiB)
 // broadcastable events. Prevents a single client amplifying to all peers.
 const RATE_LIMIT_ENABLED = process.env.RATE_LIMIT_ENABLED !== 'false';
 const RATE_WINDOW_MS = 1000;
-const RATE_LIMIT = Number(process.env.RATE_LIMIT || 240); // ~4 events/sec
+const RATE_LIMIT = Number(process.env.RATE_LIMIT || 240); // 240 events/sec
 
 const app = express();
 app.use(cors({ origin: ALLOWED_ORIGINS }));
