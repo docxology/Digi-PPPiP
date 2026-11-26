@@ -114,7 +114,7 @@ sidecars under `output/figures/long_descriptions/`.
 Every double-brace UPPERCASE variable token used in any section file MUST be a
 key returned by
 `src/manuscript_variables.py::generate_variables`. Tokens are hydrated from
-`manuscript/config.yaml` + `output/data/digippppip_metrics.json` (the latter
+`docs/manuscript/config.yaml` + `output/data/digippppip_metrics.json` (the latter
 produced by the tested `src/metrics.py` primitive — never computed in
 `src/figures.py`). `tests/test_integration_consistency.py` enforces this.
 

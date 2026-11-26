@@ -60,13 +60,13 @@ def write_resolved_manuscript_tree(
 ) -> Path:
     """Write resolved manuscript inputs to ``output/manuscript``."""
     root = Path(project_root)
-    manuscript_dir = root / "manuscript"
+    manuscript_dir = root / "docs" / "manuscript"
     out_dir = output_dir or root / "output" / "manuscript"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     for stale in tuple(out_dir.glob("*.md")) + tuple(out_dir.glob("*.bib")):
         stale.unlink()
-    for stale_name in ("config.yaml", "preamble.md"):
+    for stale_name in ("config.yaml", "preamble.md", "cover.png"):
         stale = out_dir / stale_name
         if stale.exists():
             stale.unlink()
@@ -77,7 +77,11 @@ def write_resolved_manuscript_tree(
         resolved = substitute_manuscript_tokens(path.read_text(), variables)
         (out_dir / path.name).write_text(resolved)
 
-    for name in ("config.yaml",):
+    config = manuscript_dir / "config.yaml"
+    if config.exists():
+        (out_dir / config.name).write_text("# Generated manuscript ordering\n" + config.read_text())
+
+    for name in ("preamble.md", "cover.png"):
         source = manuscript_dir / name
         if source.exists():
             shutil.copy2(source, out_dir / name)
@@ -98,9 +102,9 @@ def write_source_verification_ledger(project_root: Path, output_path: Path | Non
     """Write the executable source-verification ledger JSON."""
     root = Path(project_root)
     path = output_path or root / "output" / "data" / "source_verification_ledger.json"
-    bib_text = (root / "manuscript" / "references.bib").read_text()
+    bib_text = (root / "docs" / "manuscript" / "references.bib").read_text()
     source_records = build_source_verification_records(bib_text)
-    required_source_keys = source_verification_required_keys(root / "manuscript")
+    required_source_keys = source_verification_required_keys(root / "docs" / "manuscript")
     source_audit = source_verification_audit(required_source_keys, source_records)
     return _write_json(
         path,

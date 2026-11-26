@@ -62,13 +62,13 @@ def _output(root: Path, directory: str, pattern: str) -> OutputProvenance:
 def build_provenance_manifest(project_root: Path, *, generated_at: str | None = None) -> ProvenanceManifest:
     """Build the project output provenance manifest."""
     root = Path(project_root)
-    manuscript_files = _files(root / "manuscript", "[0-9][0-9]_*.md") + (
-        root / "manuscript" / "references.bib",
-        root / "manuscript" / "config.yaml",
+    manuscript_files = _files(root / "docs" / "manuscript", "[0-9][0-9]_*.md") + (
+        root / "docs" / "manuscript" / "references.bib",
+        root / "docs" / "manuscript" / "config.yaml",
     )
     return ProvenanceManifest(
         generated_at=generated_at or datetime.now(UTC).isoformat(),
-        config_hash=hash_file(root / "manuscript" / "config.yaml"),
+        config_hash=hash_file(root / "docs" / "manuscript" / "config.yaml"),
         metrics_hash=hash_file(root / "output" / "data" / "digippppip_metrics.json"),
         figure_registry_hash=hash_file(root / "output" / "figures" / "figure_registry.json"),
         manuscript_hash=_hash_many(tuple(path for path in manuscript_files if path.exists())),

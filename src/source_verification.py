@@ -257,7 +257,7 @@ def _location_map() -> dict[str, set[str]]:
     locations: dict[str, set[str]] = defaultdict(set)
     for record in claim_records():
         for key in record.evidence_keys:
-            locations[key].add(f"manuscript/{record.section}")
+            locations[key].add(f"docs/manuscript/{record.section}")
     for dimension, keys in DIMENSIONS.items():
         for key in keys:
             locations[key].add(f"evidence/{dimension}")
@@ -268,7 +268,7 @@ def _location_map() -> dict[str, set[str]]:
         for key in family.source_keys:
             locations[key].add(f"figure_methods/{family.key}")
     for key in OFFICIAL_SOURCE_KEYS | REPORTING_GUIDELINE_KEYS:
-        locations[key].add("manuscript/methods_protocol")
+        locations[key].add("docs/manuscript/methods_protocol")
     for key in systems_governance_source_keys():
         locations[key].add("systems_governance")
     return locations

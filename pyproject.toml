@@ -1,7 +1,7 @@
 # Digi-PPPiP Project Configuration
 # Self-contained: all runtime + dev dependencies are declared below, so the
 # project runs and tests standalone with `uv run` from this directory. The paper
-# is rendered separately by the docxology/template pipeline (see RENDERING.md);
+# is rendered separately by the docxology/template pipeline (see docs/RENDERING.md);
 # the template's root pyproject is only involved at render time, not for the
 # standalone test/figure gates. Structurally mirrors the template_code_project
 # exemplar in docxology/template.

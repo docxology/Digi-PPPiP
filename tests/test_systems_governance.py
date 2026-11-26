@@ -18,7 +18,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _bib_keys() -> set[str]:
-    text = (PROJECT_ROOT / "manuscript" / "references.bib").read_text()
+    text = (PROJECT_ROOT / "docs" / "manuscript" / "references.bib").read_text()
     return set(re.findall(r"@\w+\{([^,]+),", text))
 
 

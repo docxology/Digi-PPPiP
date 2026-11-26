@@ -22,7 +22,7 @@ require, and how `figure_artifact_audit.py` verifies the produced artifacts.
 There are 39 registered figures. `scripts/digippppip_figures.py` regenerates
 all of them deterministically. The rendered PNGs are consumed by the
 `docxology/template` sidecar pipeline at PDF/HTML render time (see
-[`../RENDERING.md`](../RENDERING.md)).
+[`../RENDERING.md`](RENDERING.md)).
 
 ## Claim statuses
 

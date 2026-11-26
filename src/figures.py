@@ -199,6 +199,9 @@ def register_figure(
         {
             "label": label,
             "png": png,
+            "filename": spec.filename,
+            "generated_by": generator,
+            "alt_text": spec.accessibility_description,
             "generator": generator,
             "description": description,
             "claim_status": spec.claim_status,
@@ -238,7 +241,7 @@ def _caller_name() -> str:
 
 
 def _load_experiment(project_root: Path) -> dict[str, object]:
-    config_path = project_root / "manuscript" / "config.yaml"
+    config_path = project_root / "docs" / "manuscript" / "config.yaml"
     if not config_path.exists():
         return {}
     config = yaml.safe_load(config_path.read_text()) or {}
@@ -1358,8 +1361,8 @@ def generate_claim_ledger_matrix(out_dir: Path) -> Path:
 def generate_source_verification_readiness(out_dir: Path) -> Path:
     """Render the executable source-verification readiness profile."""
     root = _project_root_from_out_dir(out_dir)
-    bib_text = (root / "manuscript" / "references.bib").read_text()
-    required = source_verification_required_keys(root / "manuscript")
+    bib_text = (root / "docs" / "manuscript" / "references.bib").read_text()
+    required = source_verification_required_keys(root / "docs" / "manuscript")
     records = build_source_verification_records(bib_text)
     summary = source_verification_summary(required, records, bib_text)
 
@@ -2596,7 +2599,7 @@ def main(project_root: Path | None = None) -> list[Path]:
     paths = [generator(out_dir) for generator in GENERATORS]
     _write_long_description_sidecars(out_dir)
     (out_dir / "figure_registry.json").write_text(json.dumps(FIGURE_REGISTRY, indent=2, sort_keys=True) + "\n")
-    manuscript_text = "\n".join(path.read_text() for path in sorted((root / "manuscript").glob("[0-9][0-9]_*.md")))
+    manuscript_text = "\n".join(path.read_text() for path in sorted((root / "docs" / "manuscript").glob("[0-9][0-9]_*.md")))
     artifact_audit = audit_figure_artifacts(FIGURE_REGISTRY, out_dir, manuscript_text)
     (out_dir / "figure_artifact_audit.json").write_text(
         json.dumps(audit_to_dict(artifact_audit), indent=2, sort_keys=True) + "\n"

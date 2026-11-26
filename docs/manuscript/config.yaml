@@ -10,6 +10,7 @@ paper:
   date: ""
   cover:
     image: cover.png
+    alt: "Two pen tips face one another across a dark grid joined by cyan and amber waveforms."
 
 authors:
   - name: "Siddhant Shrivastava"
@@ -59,6 +60,14 @@ rendering:
 metadata:
   license: "MIT"
   language: "en"
+
+render:
+  formats:
+    pdf: true
+    html: true
+    slides: false
+    docx: false
+    epub: false
 
 llm:
   reviews:

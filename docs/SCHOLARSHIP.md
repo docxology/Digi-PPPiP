@@ -13,13 +13,12 @@ adding a new citation or claim.
    Crossref, DataCite, PubMed, or arXiv before touching `references.bib`.
 2. **Never fabricate locators.** Preprints, theory sources, and conceptual
    simulations are marked as limited evidence. `publication.doi` in
-   `manuscript/config.yaml` stays blank until a real archive or journal DOI
-   exists. The manuscript is rendered as a `docxology/template` sidecar, so the
+   `docs/manuscript/config.yaml` records the deposited DOIs. A new DOI needs its own archive or journal record. The manuscript is rendered as a `docxology/template` sidecar, so the
    governance ledgers generated here are consumed at render time.
 
 ## Source verification ledger (`src/source_verification.py`)
 
-`build_source_verification_records()` reads `manuscript/references.bib` and
+`build_source_verification_records()` reads `docs/manuscript/references.bib` and
 produces one `SourceVerificationRecord` per citekey that has a DOI or stable
 URL locator. Every governed citekey (from the claim ledger, evidence graph,
 figure methods, study readiness, systems governance, and manuscript citations)
@@ -57,7 +56,7 @@ typed records here. `governance_score()` checks every record's fields by name
 ## Adding a citation end to end
 
 1. Fetch the authoritative metadata (DOI/Crossref/arXiv) for the source.
-2. Add a `@type{key, …}` entry to `manuscript/references.bib`.
+2. Add a `@type{key, …}` entry to `docs/manuscript/references.bib`.
 3. Reference it from manuscript prose with `[@key]` and, if it is a recurring
    claim, add it to `src/claim_ledger.py` (or the relevant readiness /
    governance / figure-method list) so source verification tracks it.

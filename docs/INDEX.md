@@ -1,33 +1,12 @@
-# Digi-PPPiP — Documentation Index
+# Digi-PPPiP documentation
 
-This folder holds the project's factored technical documentation. The four
-root-level files remain canonical and are read by the integration gate; the
-documents below go deeper into individual subsystems:
+- [Render and validate the manuscript](RENDERING.md)
+- [Manuscript sources](manuscript/README.md) and [authoring syntax](manuscript/SYNTAX.md)
+- [Software and evidence architecture](ARCHITECTURE.md)
+- [Figure production and registry](FIGURES.md)
+- [Standalone tests and coverage](TESTING.md)
+- [Scholarship and claim boundaries](SCHOLARSHIP.md)
+- [Local drawing demo](web-app.md)
+- [Backlog](backlog.md) and [historical implementation review](history/ISA.md)
 
-| Document | Covers |
-|---|---|
-| [`ARCHITECTURE.md`](ARCHITECTURE.md) | `src/` module map, data-flow, the numeric-authority rule, and governance layers |
-| [`FIGURES.md`](FIGURES.md) | The figure system: catalog, rendering workflow, method contract, caption contract, and artifact audit |
-| [`TESTING.md`](TESTING.md) | The pytest suite: organization, coverage gate, no-mocks discipline, and how to run it |
-| [`SCHOLARSHIP.md`](SCHOLARSHIP.md) | Source verification, the claim ledger, study readiness, and how to add scholarship safely |
-| [`RENDERING.md`](../RENDERING.md) | (root) How the paper is rendered via the `docxology/template` sidecar |
-
-## Suggested reading order
-
-New to the repo: `README.md` → `RENDERING.md` → `ARCHITECTURE.md` →
-`FIGURES.md` → `TESTING.md`.
-
-Working on a manuscript claim: `SCHOLARSHIP.md` + `manuscript/SYNTAX.md`.
-
-Validating a change: `TESTING.md` (gates) → run the commands listed there.
-
-## Quick orientation
-
-- **39 registered figure generators**, each with a typed spec in
-  `src/figure_catalog.py` and a render function in `src/figures.py`.
-- **128 tests**, ≥90% branch-coverage gate on `src/` (currently ~97.45%).
-- **138 governed BibTeX citekeys** with source-verification records.
-- Figures, token values, and manuscript labels are cross-referenced by
-  `tests/test_integration_consistency.py`.
-
-All paths in these documents are relative to the repository root.
+The [published paper](../Digi-PPPiP_combined.pdf) and the tracked `output/` tree retain the edition's original artifacts. Regenerated output belongs in a separate checkout.

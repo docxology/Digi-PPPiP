@@ -2,7 +2,7 @@
 
 Operationalizes the framework's synthesis: the five evidence domains of the
 foundational PPPiP paper extend into the new DigiPPPiP dimensions. Nodes carry
-BibTeX citation keys (all present in ``manuscript/references.bib``); the
+BibTeX citation keys (all present in ``docs/manuscript/references.bib``); the
 domain→dimension layer is a bipartite DAG. Pure (numpy + stdlib).
 """
 
