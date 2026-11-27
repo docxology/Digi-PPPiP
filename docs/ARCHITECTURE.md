@@ -12,7 +12,7 @@ tested primitives into rendered prose, and describes the governance layers.
               └── output/figures/*.png + figure_registry.json + artifact audit
    └── manuscript_outputs.py + manuscript_variables.py   {{TOKEN}} hydration
         └── output/data/*.json
- manuscript/  ← Pandoc chapters reference the generated tokens, figures, sources
+ docs/manuscript/  ← Pandoc chapters reference the generated tokens, figures, sources
 ```
 
 Two hard rules keep this deterministic and auditable:
@@ -67,7 +67,7 @@ src/metrics.py
    src/manuscript_variables.py
    └─ generate_variables(require_metrics=True)
         └─ output/data/manuscript_variables.json
-   manuscript/*.md  {{RESULT_*}} tokens
+   docs/manuscript/*.md  {{RESULT_*}} tokens
         └─ (template render) final PDF/HTML
 ```
 
@@ -81,5 +81,5 @@ The project separates the **human–human drawing kernel** from optional,
 governed branches (instrumentation, modeling, optional AI, physiology, place
 context, clinical translation). Each branch carries an explicit feedback
 signal, causal assumption, ethics gate, and reversal path before manuscript
-language may strengthen. See [`../ISA.md`](../ISA.md) and
+language may strengthen. See [historical implementation review](history/ISA.md) and
 [`SCHOLARSHIP.md`](SCHOLARSHIP.md).

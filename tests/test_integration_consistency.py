@@ -118,17 +118,17 @@ FORMALISM_FIGURE_LABELS = {
 
 
 def _manuscript_text() -> str:
-    section_files = sorted((PROJECT_ROOT / "manuscript").glob("[0-9][0-9]_*.md"))
+    section_files = sorted((PROJECT_ROOT / "docs" / "manuscript").glob("[0-9][0-9]_*.md"))
     return "\n".join(path.read_text() for path in section_files)
 
 
 def _bib_keys() -> set[str]:
-    text = (PROJECT_ROOT / "manuscript" / "references.bib").read_text()
+    text = (PROJECT_ROOT / "docs" / "manuscript" / "references.bib").read_text()
     return set(re.findall(r"@\w+\{([^,]+),", text))
 
 
 def _bib_entries() -> dict[str, str]:
-    text = (PROJECT_ROOT / "manuscript" / "references.bib").read_text()
+    text = (PROJECT_ROOT / "docs" / "manuscript" / "references.bib").read_text()
     return {
         match.group(1): match.group(0)
         for match in re.finditer(r"@\w+\{([^,]+),.*?(?=\n@|\Z)", text, flags=re.DOTALL)
@@ -142,7 +142,7 @@ def _citation_refs() -> set[str]:
 
 def _section_headings() -> dict[str, tuple[str, str]]:
     headings: dict[str, tuple[str, str]] = {}
-    for path in sorted((PROJECT_ROOT / "manuscript").glob("[0-9][0-9]_*.md")):
+    for path in sorted((PROJECT_ROOT / "docs" / "manuscript").glob("[0-9][0-9]_*.md")):
         first_line = path.read_text().splitlines()[0]
         match = re.fullmatch(r"#\s+(.+?)\s+\{#sec:([A-Za-z0-9_]+)\}", first_line)
         assert match is not None
@@ -151,7 +151,7 @@ def _section_headings() -> dict[str, tuple[str, str]]:
 
 
 def _syntax_section_registry() -> dict[str, tuple[str, str]]:
-    syntax_text = (PROJECT_ROOT / "manuscript" / "SYNTAX.md").read_text()
+    syntax_text = (PROJECT_ROOT / "docs" / "manuscript" / "SYNTAX.md").read_text()
     rows: dict[str, tuple[str, str]] = {}
     for match in re.finditer(
         r"^\|\s+`([^`]+[.]md)`\s+\|\s+(.+?)\s+\|\s+`\{#sec:([A-Za-z0-9_]+)\}`\s+\|$",
@@ -163,7 +163,7 @@ def _syntax_section_registry() -> dict[str, tuple[str, str]]:
 
 
 def _syntax_equation_registry() -> dict[str, str]:
-    syntax_text = (PROJECT_ROOT / "manuscript" / "SYNTAX.md").read_text()
+    syntax_text = (PROJECT_ROOT / "docs" / "manuscript" / "SYNTAX.md").read_text()
     rows: dict[str, str] = {}
     for match in re.finditer(
         r"^\|\s+`\{#eq:([A-Za-z0-9_]+)\}`\s+\|.+?\|\s+`([^`]+[.]md)`\s+\|$",
@@ -184,11 +184,11 @@ def test_section_titles_labels_and_syntax_registry_are_consistent():
 
 
 def test_formalisms_appendix_owns_equations_and_model_figures():
-    appendix = (PROJECT_ROOT / "manuscript" / "18_formalisms_appendix.md").read_text()
-    active_inference_main = (PROJECT_ROOT / "manuscript" / "04_active_inference.md").read_text()
+    appendix = (PROJECT_ROOT / "docs" / "manuscript" / "18_formalisms_appendix.md").read_text()
+    active_inference_main = (PROJECT_ROOT / "docs" / "manuscript" / "04_active_inference.md").read_text()
     main_text = "\n".join(
         path.read_text()
-        for path in sorted((PROJECT_ROOT / "manuscript").glob("[0-9][0-9]_*.md"))
+        for path in sorted((PROJECT_ROOT / "docs" / "manuscript").glob("[0-9][0-9]_*.md"))
         if path.name < "18_formalisms_appendix.md"
     )
     syntax_equations = _syntax_equation_registry()
@@ -226,7 +226,7 @@ def test_run_docs_describe_sidecar_render_without_local_paths():
         for path in (
             PROJECT_ROOT / "README.md",
             PROJECT_ROOT / "AGENTS.md",
-            PROJECT_ROOT / "RENDERING.md",
+            PROJECT_ROOT / "docs" / "RENDERING.md",
         )
     }
     joined_run = "\n".join(run_docs.values())
@@ -240,7 +240,7 @@ def test_run_docs_describe_sidecar_render_without_local_paths():
     assert "/Users/" not in joined_run, "a local absolute path leaked into the run/render docs"
 
     # (c) No regression to stale "passive / not rendered" framing across prose docs.
-    guard_text = joined_run + "\n" + (PROJECT_ROOT / "ISA.md").read_text()
+    guard_text = joined_run + "\n" + (PROJECT_ROOT / "docs" / "history" / "ISA.md").read_text()
     assert "private passive project" not in guard_text.lower()
     assert "passive projects are not rendered" not in guard_text.lower()
     assert "optional only after promotion" not in guard_text.lower()
@@ -275,7 +275,7 @@ def test_syntax_figure_registry_matches_generated_registry():
     render_figures(PROJECT_ROOT)
     registry = json.loads((PROJECT_ROOT / "output" / "figures" / "figure_registry.json").read_text())
     generated_labels = {entry["label"].removeprefix("fig:") for entry in registry}
-    syntax_text = (PROJECT_ROOT / "manuscript" / "SYNTAX.md").read_text()
+    syntax_text = (PROJECT_ROOT / "docs" / "manuscript" / "SYNTAX.md").read_text()
     syntax_labels = set(re.findall(r"\{#fig:([A-Za-z0-9_]+)\}", syntax_text))
     figure_refs = set(re.findall(r"@fig:([A-Za-z0-9_]+)", _manuscript_text()))
     assert syntax_labels == generated_labels == figure_refs
@@ -294,8 +294,8 @@ def test_tokens_citations_sections_and_equations_resolve():
     assert claim_source_keys() <= _bib_keys()
     assert figure_method_source_keys() <= _bib_keys()
     assert study_readiness_source_keys() <= _bib_keys()
-    source_records = build_source_verification_records((PROJECT_ROOT / "manuscript" / "references.bib").read_text())
-    required_source_keys = source_verification_required_keys(PROJECT_ROOT / "manuscript")
+    source_records = build_source_verification_records((PROJECT_ROOT / "docs" / "manuscript" / "references.bib").read_text())
+    required_source_keys = source_verification_required_keys(PROJECT_ROOT / "docs" / "manuscript")
     assert required_source_keys <= source_verification_record_keys(source_records)
     assert source_verification_audit(required_source_keys, source_records).score == 1.0
     assert audit_study_readiness(study_readiness_cases()).score == 1.0
@@ -352,7 +352,7 @@ def test_used_bibliography_entries_have_verified_locators_and_named_authors():
 
 
 def test_project_metadata_does_not_publish_placeholder_doi():
-    config_text = (PROJECT_ROOT / "manuscript" / "config.yaml").read_text()
+    config_text = (PROJECT_ROOT / "docs" / "manuscript" / "config.yaml").read_text()
     assert "zenodo.00000000" not in config_text
     doi_match = re.search(r'^\s*doi:\s*"([^"]*)"', config_text, re.MULTILINE)
     assert doi_match is not None
@@ -372,10 +372,10 @@ def test_project_sources_and_docs_avoid_hardcoded_numbered_references():
     paths = [
         PROJECT_ROOT / "README.md",
         PROJECT_ROOT / "AGENTS.md",
-        PROJECT_ROOT / "ISA.md",
+        PROJECT_ROOT / "docs" / "history" / "ISA.md",
         *sorted((PROJECT_ROOT / "src").glob("*.py")),
         *sorted((PROJECT_ROOT / "scripts").glob("*.py")),
-        *sorted((PROJECT_ROOT / "manuscript").glob("*.md")),
+        *sorted((PROJECT_ROOT / "docs" / "manuscript").glob("*.md")),
     ]
     offenders: list[str] = []
     for path in paths:

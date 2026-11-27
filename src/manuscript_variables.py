@@ -1,7 +1,7 @@
 """Manuscript variable generation for DigiPPPiP.
 
 The hydrator returns flat ``UPPERCASE_KEY -> str`` values for the template
-renderer. Configuration-derived values come from ``manuscript/config.yaml``;
+renderer. Configuration-derived values come from ``docs/manuscript/config.yaml``;
 result-derived values come from ``output/data/digippppip_metrics.json`` and use
 ``"N/A"`` only in exploratory draft mode when the figure/metrics pass has not
 run. Render-mode callers should use ``require_metrics=True`` so missing metric
@@ -64,7 +64,7 @@ RESULT_KEYS: tuple[str, ...] = (
 
 
 def _load_config(project_root: Path) -> dict[str, Any]:
-    path = project_root / "manuscript" / "config.yaml"
+    path = project_root / "docs" / "manuscript" / "config.yaml"
     if not path.exists():
         return {}
     return yaml.safe_load(path.read_text()) or {}
@@ -80,7 +80,7 @@ def _load_metrics(project_root: Path, *, required: bool = False) -> dict[str, An
 
 
 def _config_hash(project_root: Path) -> str:
-    path = project_root / "manuscript" / "config.yaml"
+    path = project_root / "docs" / "manuscript" / "config.yaml"
     if not path.exists():
         return "N/A"
     return hashlib.sha256(path.read_bytes()).hexdigest()[:16]

@@ -43,7 +43,7 @@ FORMALISM_SCHOLARSHIP_KEYS = {
 
 
 def _bib_text() -> str:
-    return (PROJECT_ROOT / "manuscript" / "references.bib").read_text()
+    return (PROJECT_ROOT / "docs" / "manuscript" / "references.bib").read_text()
 
 
 def _bib_keys() -> set[str]:
@@ -51,8 +51,8 @@ def _bib_keys() -> set[str]:
 
 
 def test_source_verification_records_cover_governed_citekeys():
-    required = source_verification_required_keys(PROJECT_ROOT / "manuscript")
-    manuscript_only_guarded = manuscript_citation_keys(PROJECT_ROOT / "manuscript") - (
+    required = source_verification_required_keys(PROJECT_ROOT / "docs" / "manuscript")
+    manuscript_only_guarded = manuscript_citation_keys(PROJECT_ROOT / "docs" / "manuscript") - (
         claim_source_keys()
         | citation_keys()
         | figure_method_source_keys()
@@ -84,8 +84,8 @@ def test_source_verification_records_cover_governed_citekeys():
 
 
 def test_source_verification_required_keys_include_fixture_manuscript_citations(tmp_path):
-    manuscript_dir = tmp_path / "manuscript"
-    manuscript_dir.mkdir()
+    manuscript_dir = tmp_path / "docs" / "manuscript"
+    manuscript_dir.mkdir(parents=True)
     (manuscript_dir / "00_fixture.md").write_text(
         "Local citation [@fixtureonly; @mikhailova2018pppip] and cross refs [@fig:skip; @sec:skip]."
     )
@@ -138,7 +138,7 @@ def test_formalism_scholarship_keys_are_bibliographic_verified_and_governed():
 
 
 def test_systems_governance_sources_are_required_and_governed():
-    required = source_verification_required_keys(PROJECT_ROOT / "manuscript")
+    required = source_verification_required_keys(PROJECT_ROOT / "docs" / "manuscript")
     records = build_source_verification_records(_bib_text())
     record_by_key = {record.citekey: record for record in records}
 
@@ -181,7 +181,7 @@ def test_source_verification_audit_fails_required_records_with_incomplete_metada
 
 
 def test_source_verification_summary_supports_readiness_figure_contract():
-    required = source_verification_required_keys(PROJECT_ROOT / "manuscript")
+    required = source_verification_required_keys(PROJECT_ROOT / "docs" / "manuscript")
     records = build_source_verification_records(_bib_text())
     summary = source_verification_summary(required, records, _bib_text())
 

@@ -26,8 +26,8 @@ def test_generate_variables_shape_and_fallbacks():
 
 
 def test_generate_variables_requires_metrics_for_render_mode(tmp_path):
-    manuscript_dir = tmp_path / "manuscript"
-    manuscript_dir.mkdir()
+    manuscript_dir = tmp_path / "docs" / "manuscript"
+    manuscript_dir.mkdir(parents=True)
     (manuscript_dir / "config.yaml").write_text("paper:\n  title: DigiPPPiP\nexperiment: {}\n")
     with pytest.raises(FileNotFoundError):
         generate_variables(tmp_path, require_metrics=True)
@@ -47,8 +47,8 @@ def test_substitute_manuscript_tokens_preserves_unresolved_tokens_visibly():
 
 
 def test_write_resolved_manuscript_tree_copies_render_inputs(tmp_path):
-    manuscript_dir = tmp_path / "manuscript"
-    manuscript_dir.mkdir()
+    manuscript_dir = tmp_path / "docs" / "manuscript"
+    manuscript_dir.mkdir(parents=True)
     output_dir = tmp_path / "output" / "manuscript"
     output_dir.mkdir(parents=True)
     (output_dir / "stale_section.md").write_text("stale\n")
@@ -65,7 +65,7 @@ def test_write_resolved_manuscript_tree_copies_render_inputs(tmp_path):
     out_dir = write_resolved_manuscript_tree(tmp_path, {"TITLE_TOKEN": "Resolved"})
 
     assert (out_dir / "00_abstract.md").read_text() == "Title Resolved\n"
-    assert (out_dir / "config.yaml").read_text() == "paper: {}\n"
+    assert (out_dir / "config.yaml").read_text() == "# Generated manuscript ordering\npaper: {}\n"
     assert (out_dir / "preamble.md").read_text() == "% preamble\n"
     assert (out_dir / "references.bib").read_text() == "@misc{x, title={X}}\n"
     assert not (out_dir / "README.md").exists()
@@ -101,8 +101,8 @@ def test_generate_variables_falls_back_when_config_and_metrics_absent(tmp_path):
 def test_generate_variables_rejects_present_but_incomplete_metrics(tmp_path):
     # Metrics artifact exists but is missing required RESULT_KEYS: render mode must
     # raise KeyError (distinct from the FileNotFoundError raised when it is absent).
-    manuscript_dir = tmp_path / "manuscript"
-    manuscript_dir.mkdir()
+    manuscript_dir = tmp_path / "docs" / "manuscript"
+    manuscript_dir.mkdir(parents=True)
     (manuscript_dir / "config.yaml").write_text("paper:\n  title: DigiPPPiP\nexperiment: {}\n")
     data_dir = tmp_path / "output" / "data"
     data_dir.mkdir(parents=True)

@@ -1,8 +1,8 @@
 # Digi-PPPiP Manuscript
 
-Source of truth for the rendered paper: `manuscript/` holds the SECTION files,
+Source of truth for the rendered paper: `docs/manuscript/` holds the SECTION files,
 configuration, bibliography, and preamble consumed by the
-`docxology/template` sidecar pipeline (see root [`RENDERING.md`](../RENDERING.md)).
+`docxology/template` sidecar pipeline (see [`RENDERING.md`](../RENDERING.md)).
 
 ## Layout
 
